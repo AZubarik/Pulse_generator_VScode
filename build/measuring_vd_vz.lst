@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -26,28 +26,28 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   24              	setConfigADC:
   25              	.LVL0:
   26              	.LFB65:
-  27              		.file 1 "Src/measuring_vd_vz.c"
-   1:Src/measuring_vd_vz.c **** #include "measuring_vd_vz.h"
-   2:Src/measuring_vd_vz.c **** 
-   3:Src/measuring_vd_vz.c **** uint16_t		CFG = 0x39FF << 2,
-   4:Src/measuring_vd_vz.c ****          AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
-   5:Src/measuring_vd_vz.c ****          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
-   6:Src/measuring_vd_vz.c ****          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
-   7:Src/measuring_vd_vz.c ****          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
-   8:Src/measuring_vd_vz.c ****                     
-   9:Src/measuring_vd_vz.c **** float   IDOUT = 0.5,                        //coef usilenia po toky
-  10:Src/measuring_vd_vz.c **** 	    IZOUT = 0.5,  
-  11:Src/measuring_vd_vz.c **** 	    deltaADC = 0.0000625,               //delta ADC
-  12:Src/measuring_vd_vz.c **** 	    Resistor = 0.25;                    //tokovi resistor dla zener diod R = 4 Om
-  13:Src/measuring_vd_vz.c **** 
-  14:Src/measuring_vd_vz.c **** int   UDOUT = 2,
-  15:Src/measuring_vd_vz.c ****       UZOUT = 2;
-  16:Src/measuring_vd_vz.c **** uint16_t out;
-  17:Src/measuring_vd_vz.c **** uint16_t* tmp;
-  18:Src/measuring_vd_vz.c **** float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
-  19:Src/measuring_vd_vz.c **** extern uint16_t usSRegInBuf[];
-  20:Src/measuring_vd_vz.c **** 
-  21:Src/measuring_vd_vz.c **** int setConfigADC(uint16_t value) {
+  27              		.file 1 "Drivers/Middlewares/measuring_vd_vz.c"
+   1:Drivers/Middlewares/measuring_vd_vz.c **** #include "measuring_vd_vz.h"
+   2:Drivers/Middlewares/measuring_vd_vz.c **** 
+   3:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t		CFG = 0x39FF << 2,
+   4:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
+   5:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
+   6:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
+   7:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
+   8:Drivers/Middlewares/measuring_vd_vz.c ****                     
+   9:Drivers/Middlewares/measuring_vd_vz.c **** float   IDOUT = 0.5,                        //coef usilenia po toky
+  10:Drivers/Middlewares/measuring_vd_vz.c **** 	    IZOUT = 0.5,  
+  11:Drivers/Middlewares/measuring_vd_vz.c **** 	    deltaADC = 0.0000625,               //delta ADC
+  12:Drivers/Middlewares/measuring_vd_vz.c **** 	    Resistor = 0.25;                    //tokovi resistor dla zener diod R = 4 Om
+  13:Drivers/Middlewares/measuring_vd_vz.c **** 
+  14:Drivers/Middlewares/measuring_vd_vz.c **** int   UDOUT = 2,
+  15:Drivers/Middlewares/measuring_vd_vz.c ****       UZOUT = 2;
+  16:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t out;
+  17:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t* tmp;
+  18:Drivers/Middlewares/measuring_vd_vz.c **** float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
+  19:Drivers/Middlewares/measuring_vd_vz.c **** extern uint16_t usSRegInBuf[];
+  20:Drivers/Middlewares/measuring_vd_vz.c **** 
+  21:Drivers/Middlewares/measuring_vd_vz.c **** int setConfigADC(uint16_t value) {
   28              		.loc 1 21 34 view -0
   29              		.cfi_startproc
   30              		@ args = 0, pretend = 0, frame = 8
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   35              		.cfi_def_cfa_offset 12
   36              		.cfi_offset 4, -12
   37              		.cfi_offset 5, -8
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 2
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 2
 
 
   38              		.cfi_offset 14, -4
@@ -66,7 +66,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   40              	.LCFI1:
   41              		.cfi_def_cfa_offset 32
   42 0004 ADF80E00 		strh	r0, [sp, #14]	@ movhi
-  22:Src/measuring_vd_vz.c **** 	    for (int i = 0; i <= 15; i++) {
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    for (int i = 0; i <= 15; i++) {
   43              		.loc 1 22 6 is_stmt 1 view .LVU2
   44              	.LBB2:
   45              		.loc 1 22 11 view .LVU3
@@ -79,7 +79,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   52              		.loc 1 22 6 is_stmt 0 discriminator 1 view .LVU6
   53 000a 0F2C     		cmp	r4, #15
   54 000c 1DDC     		bgt	.L5
-  23:Src/measuring_vd_vz.c **** 	    CNV_OFF;
+  23:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   55              		.loc 1 23 6 is_stmt 1 discriminator 3 view .LVU7
   56 000e 114D     		ldr	r5, .L6
   57 0010 0022     		movs	r2, #0
@@ -87,12 +87,12 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   59 0016 2846     		mov	r0, r5
   60 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
   61              	.LVL3:
-  24:Src/measuring_vd_vz.c **** 	    HAL_Delay(2);
+  24:Drivers/Middlewares/measuring_vd_vz.c **** 	    HAL_Delay(2);
   62              		.loc 1 24 6 discriminator 3 view .LVU8
   63 001c 0220     		movs	r0, #2
   64 001e FFF7FEFF 		bl	HAL_Delay
   65              	.LVL4:
-  25:Src/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
+  25:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
   66              		.loc 1 25 9 discriminator 3 view .LVU9
   67 0022 0A23     		movs	r3, #10
   68 0024 0093     		str	r3, [sp]
@@ -102,38 +102,38 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
   72 002e 0B48     		ldr	r0, .L6+8
   73 0030 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
   74              	.LVL5:
-  26:Src/measuring_vd_vz.c ****         HAL_Delay(2);	
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);	
   75              		.loc 1 26 9 discriminator 3 view .LVU10
   76 0034 0220     		movs	r0, #2
   77 0036 FFF7FEFF 		bl	HAL_Delay
   78              	.LVL6:
-  27:Src/measuring_vd_vz.c ****         CNV_ON;
+  27:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
   79              		.loc 1 27 9 discriminator 3 view .LVU11
   80 003a 0122     		movs	r2, #1
   81 003c 4FF48051 		mov	r1, #4096
   82 0040 2846     		mov	r0, r5
   83 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
   84              	.LVL7:
-  22:Src/measuring_vd_vz.c **** 	    CNV_OFF;
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   85              		.loc 1 22 31 discriminator 3 view .LVU12
-  22:Src/measuring_vd_vz.c **** 	    CNV_OFF;
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   86              		.loc 1 22 32 is_stmt 0 discriminator 3 view .LVU13
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 3
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 3
 
 
   87 0046 0134     		adds	r4, r4, #1
   88              	.LVL8:
-  22:Src/measuring_vd_vz.c **** 	    CNV_OFF;
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   89              		.loc 1 22 32 discriminator 3 view .LVU14
   90 0048 DFE7     		b	.L2
   91              	.L5:
-  22:Src/measuring_vd_vz.c **** 	    CNV_OFF;
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   92              		.loc 1 22 32 discriminator 3 view .LVU15
   93              	.LBE2:
-  28:Src/measuring_vd_vz.c ****     }
-  29:Src/measuring_vd_vz.c ****     return out;
+  28:Drivers/Middlewares/measuring_vd_vz.c ****     }
+  29:Drivers/Middlewares/measuring_vd_vz.c ****     return out;
   94              		.loc 1 29 5 is_stmt 1 view .LVU16
-  30:Src/measuring_vd_vz.c **** }
+  30:Drivers/Middlewares/measuring_vd_vz.c **** }
   95              		.loc 1 30 1 is_stmt 0 view .LVU17
   96 004a 034B     		ldr	r3, .L6+4
   97 004c 1888     		ldrh	r0, [r3]
@@ -162,8 +162,8 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  122              	dataTransferADC:
  123              	.LVL10:
  124              	.LFB66:
-  31:Src/measuring_vd_vz.c **** 
-  32:Src/measuring_vd_vz.c **** void dataTransferADC(int registr, float out) {
+  31:Drivers/Middlewares/measuring_vd_vz.c **** 
+  32:Drivers/Middlewares/measuring_vd_vz.c **** void dataTransferADC(int registr, float out) {
  125              		.loc 1 32 46 is_stmt 1 view -0
  126              		.cfi_startproc
  127              		@ args = 0, pretend = 0, frame = 8
@@ -174,23 +174,23 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  132              	.LCFI3:
  133              		.cfi_def_cfa_offset 8
  134 0002 0191     		str	r1, [sp, #4]	@ float
-  33:Src/measuring_vd_vz.c **** 	tmp = (uint16_t*) &out;
+  33:Drivers/Middlewares/measuring_vd_vz.c **** 	tmp = (uint16_t*) &out;
  135              		.loc 1 33 2 is_stmt 1 view .LVU21
  136              		.loc 1 33 6 is_stmt 0 view .LVU22
  137 0004 074B     		ldr	r3, .L10
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 4
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 4
 
 
  138 0006 01AA     		add	r2, sp, #4
  139 0008 1A60     		str	r2, [r3]
-  34:Src/measuring_vd_vz.c ****     usSRegInBuf[registr] = *tmp;
+  34:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr] = *tmp;
  140              		.loc 1 34 5 is_stmt 1 view .LVU23
  141              		.loc 1 34 28 is_stmt 0 view .LVU24
  142 000a BDF80420 		ldrh	r2, [sp, #4]
  143              		.loc 1 34 26 view .LVU25
  144 000e 064B     		ldr	r3, .L10+4
  145 0010 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
-  35:Src/measuring_vd_vz.c ****     usSRegInBuf[registr + 1] = *(tmp + 1);
+  35:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr + 1] = *(tmp + 1);
  146              		.loc 1 35 5 is_stmt 1 view .LVU26
  147              		.loc 1 35 25 is_stmt 0 view .LVU27
  148 0014 0130     		adds	r0, r0, #1
@@ -198,7 +198,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  150              		.loc 1 35 30 view .LVU28
  151 0016 BDF80620 		ldrh	r2, [sp, #6]
  152 001a 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
-  36:Src/measuring_vd_vz.c **** }
+  36:Drivers/Middlewares/measuring_vd_vz.c **** }
  153              		.loc 1 36 1 view .LVU29
  154 001e 02B0     		add	sp, sp, #8
  155              	.LCFI4:
@@ -223,8 +223,8 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  175              		.fpu softvfp
  177              	measuringVD:
  178              	.LFB67:
-  37:Src/measuring_vd_vz.c **** 
-  38:Src/measuring_vd_vz.c **** void measuringVD(void) { 
+  37:Drivers/Middlewares/measuring_vd_vz.c **** 
+  38:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVD(void) { 
  179              		.loc 1 38 24 is_stmt 1 view -0
  180              		.cfi_startproc
  181              		@ args = 0, pretend = 0, frame = 0
@@ -236,16 +236,16 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  187              		.cfi_offset 5, -12
  188              		.cfi_offset 6, -8
  189              		.cfi_offset 14, -4
-  39:Src/measuring_vd_vz.c ****     setConfigADC(AD7682_IN3);
+  39:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN3);
  190              		.loc 1 39 5 view .LVU31
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 5
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 5
 
 
  191 0002 174B     		ldr	r3, .L14
  192 0004 1888     		ldrh	r0, [r3]
  193 0006 FFF7FEFF 		bl	setConfigADC
  194              	.LVL12:
-  40:Src/measuring_vd_vz.c ****     voltageADC_vd = out * deltaADC  * UDOUT ;
+  40:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vd = out * deltaADC  * UDOUT ;
  195              		.loc 1 40 5 view .LVU32
  196              		.loc 1 40 25 is_stmt 0 view .LVU33
  197 000a 164E     		ldr	r6, .L14+4
@@ -269,19 +269,19 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  215              		.loc 1 40 19 view .LVU35
  216 002c 104B     		ldr	r3, .L14+16
  217 002e 1860     		str	r0, [r3]	@ float
-  41:Src/measuring_vd_vz.c ****     dataTransferADC(0, voltageADC_vd);
+  41:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(0, voltageADC_vd);
  218              		.loc 1 41 5 is_stmt 1 view .LVU36
  219 0030 0020     		movs	r0, #0
  220 0032 FFF7FEFF 		bl	dataTransferADC
  221              	.LVL17:
-  42:Src/measuring_vd_vz.c ****     
-  43:Src/measuring_vd_vz.c ****     setConfigADC(AD7682_IN2);  
+  42:Drivers/Middlewares/measuring_vd_vz.c ****     
+  43:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN2);  
  222              		.loc 1 43 5 view .LVU37
  223 0036 0F4B     		ldr	r3, .L14+20
  224 0038 1888     		ldrh	r0, [r3]
  225 003a FFF7FEFF 		bl	setConfigADC
  226              	.LVL18:
-  44:Src/measuring_vd_vz.c ****     currentADC_vd = out * deltaADC * IDOUT; 
+  44:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vd = out * deltaADC * IDOUT; 
  227              		.loc 1 44 5 view .LVU38
  228              		.loc 1 44 25 is_stmt 0 view .LVU39
  229 003e 3088     		ldrh	r0, [r6]
@@ -298,16 +298,16 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  240 0052 0146     		mov	r1, r0
  241              		.loc 1 44 19 view .LVU41
  242 0054 094B     		ldr	r3, .L14+28
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 6
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 6
 
 
  243 0056 1860     		str	r0, [r3]	@ float
-  45:Src/measuring_vd_vz.c ****     dataTransferADC(2, currentADC_vd);
+  45:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(2, currentADC_vd);
  244              		.loc 1 45 5 is_stmt 1 view .LVU42
  245 0058 0220     		movs	r0, #2
  246 005a FFF7FEFF 		bl	dataTransferADC
  247              	.LVL22:
-  46:Src/measuring_vd_vz.c **** }
+  46:Drivers/Middlewares/measuring_vd_vz.c **** }
  248              		.loc 1 46 1 is_stmt 0 view .LVU43
  249 005e 70BD     		pop	{r4, r5, r6, pc}
  250              	.L15:
@@ -332,8 +332,8 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  270              		.fpu softvfp
  272              	measuringVZ:
  273              	.LFB68:
-  47:Src/measuring_vd_vz.c **** 
-  48:Src/measuring_vd_vz.c **** void measuringVZ(void) {
+  47:Drivers/Middlewares/measuring_vd_vz.c **** 
+  48:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVZ(void) {
  274              		.loc 1 48 24 is_stmt 1 view -0
  275              		.cfi_startproc
  276              		@ args = 0, pretend = 0, frame = 0
@@ -345,20 +345,20 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  282              		.cfi_offset 5, -12
  283              		.cfi_offset 6, -8
  284              		.cfi_offset 14, -4
-  49:Src/measuring_vd_vz.c ****     setConfigADC(AD7682_IN1);
+  49:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN1);
  285              		.loc 1 49 5 view .LVU45
  286 0002 194B     		ldr	r3, .L18
  287 0004 1888     		ldrh	r0, [r3]
  288 0006 FFF7FEFF 		bl	setConfigADC
  289              	.LVL23:
-  50:Src/measuring_vd_vz.c ****     voltageADC_vz = out * deltaADC * UZOUT;
+  50:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vz = out * deltaADC * UZOUT;
  290              		.loc 1 50 5 view .LVU46
  291              		.loc 1 50 25 is_stmt 0 view .LVU47
  292 000a 184E     		ldr	r6, .L18+4
  293 000c 3088     		ldrh	r0, [r6]
  294 000e FFF7FEFF 		bl	__aeabi_i2f
  295              	.LVL24:
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 7
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 7
 
 
  296 0012 174D     		ldr	r5, .L18+8
@@ -378,19 +378,19 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  310              		.loc 1 50 19 view .LVU49
  311 002c 124B     		ldr	r3, .L18+16
  312 002e 1860     		str	r0, [r3]	@ float
-  51:Src/measuring_vd_vz.c ****     dataTransferADC(4, voltageADC_vz);
+  51:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(4, voltageADC_vz);
  313              		.loc 1 51 5 is_stmt 1 view .LVU50
  314 0030 0420     		movs	r0, #4
  315 0032 FFF7FEFF 		bl	dataTransferADC
  316              	.LVL28:
-  52:Src/measuring_vd_vz.c **** 
-  53:Src/measuring_vd_vz.c ****     setConfigADC(AD7682_IN0); 
+  52:Drivers/Middlewares/measuring_vd_vz.c **** 
+  53:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN0); 
  317              		.loc 1 53 5 view .LVU51
  318 0036 114B     		ldr	r3, .L18+20
  319 0038 1888     		ldrh	r0, [r3]
  320 003a FFF7FEFF 		bl	setConfigADC
  321              	.LVL29:
-  54:Src/measuring_vd_vz.c ****     currentADC_vz = out * deltaADC * IZOUT * Resistor;  
+  54:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vz = out * deltaADC * IZOUT * Resistor;  
  322              		.loc 1 54 5 view .LVU52
  323              		.loc 1 54 25 is_stmt 0 view .LVU53
  324 003e 3088     		ldrh	r0, [r6]
@@ -413,15 +413,15 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  341              		.loc 1 54 19 view .LVU56
  342 005c 0A4B     		ldr	r3, .L18+32
  343 005e 1860     		str	r0, [r3]	@ float
-  55:Src/measuring_vd_vz.c ****     dataTransferADC(6, currentADC_vz);
+  55:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(6, currentADC_vz);
  344              		.loc 1 55 5 is_stmt 1 view .LVU57
  345 0060 0620     		movs	r0, #6
  346 0062 FFF7FEFF 		bl	dataTransferADC
  347              	.LVL34:
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 8
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 8
 
 
-  56:Src/measuring_vd_vz.c **** }
+  56:Drivers/Middlewares/measuring_vd_vz.c **** }
  348              		.loc 1 56 1 is_stmt 0 view .LVU58
  349 0066 70BD     		pop	{r4, r5, r6, pc}
  350              	.L19:
@@ -447,8 +447,8 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  371              		.fpu softvfp
  373              	configurationADC:
  374              	.LFB69:
-  57:Src/measuring_vd_vz.c **** 
-  58:Src/measuring_vd_vz.c **** void configurationADC(void) {
+  57:Drivers/Middlewares/measuring_vd_vz.c **** 
+  58:Drivers/Middlewares/measuring_vd_vz.c **** void configurationADC(void) {
  375              		.loc 1 58 29 is_stmt 1 view -0
  376              		.cfi_startproc
  377              		@ args = 0, pretend = 0, frame = 0
@@ -462,8 +462,8 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  385 0002 83B0     		sub	sp, sp, #12
  386              	.LCFI8:
  387              		.cfi_def_cfa_offset 24
-  59:Src/measuring_vd_vz.c **** 	
-  60:Src/measuring_vd_vz.c ****     for (int i = 0; i <= 3; i++) {
+  59:Drivers/Middlewares/measuring_vd_vz.c **** 	
+  60:Drivers/Middlewares/measuring_vd_vz.c ****     for (int i = 0; i <= 3; i++) {
  388              		.loc 1 60 5 view .LVU60
  389              	.LBB3:
  390              		.loc 1 60 10 view .LVU61
@@ -474,36 +474,36 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  395 0006 24E0     		b	.L21
  396              	.LVL36:
  397              	.L22:
-  61:Src/measuring_vd_vz.c ****         CNV_ON;
+  61:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  398              		.loc 1 61 9 is_stmt 1 discriminator 3 view .LVU64
  399 0008 144C     		ldr	r4, .L24
  400 000a 0122     		movs	r2, #1
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 9
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 9
 
 
  401 000c 4FF48051 		mov	r1, #4096
  402 0010 2046     		mov	r0, r4
  403 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
  404              	.LVL37:
-  62:Src/measuring_vd_vz.c ****         HAL_Delay(20);
+  62:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(20);
  405              		.loc 1 62 9 discriminator 3 view .LVU65
  406 0016 1420     		movs	r0, #20
  407 0018 FFF7FEFF 		bl	HAL_Delay
  408              	.LVL38:
-  63:Src/measuring_vd_vz.c ****         
-  64:Src/measuring_vd_vz.c ****         CNV_OFF;
+  63:Drivers/Middlewares/measuring_vd_vz.c ****         
+  64:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
  409              		.loc 1 64 9 discriminator 3 view .LVU66
  410 001c 0022     		movs	r2, #0
  411 001e 4FF48051 		mov	r1, #4096
  412 0022 2046     		mov	r0, r4
  413 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
  414              	.LVL39:
-  65:Src/measuring_vd_vz.c ****         HAL_Delay(2);
+  65:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);
  415              		.loc 1 65 9 discriminator 3 view .LVU67
  416 0028 0220     		movs	r0, #2
  417 002a FFF7FEFF 		bl	HAL_Delay
  418              	.LVL40:
-  66:Src/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&CFG, (uint8_t*)&out, 1, 10);
+  66:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&CFG, (uint8_t*)&out, 1, 10);
  419              		.loc 1 66 9 discriminator 3 view .LVU68
  420 002e 0A23     		movs	r3, #10
  421 0030 0093     		str	r3, [sp]
@@ -513,37 +513,37 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  425 0038 0B48     		ldr	r0, .L24+12
  426 003a FFF7FEFF 		bl	HAL_SPI_TransmitReceive
  427              	.LVL41:
-  67:Src/measuring_vd_vz.c ****         HAL_Delay(2);
+  67:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);
  428              		.loc 1 67 9 discriminator 3 view .LVU69
  429 003e 0220     		movs	r0, #2
  430 0040 FFF7FEFF 		bl	HAL_Delay
  431              	.LVL42:
-  68:Src/measuring_vd_vz.c ****         CNV_ON;
+  68:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  432              		.loc 1 68 9 discriminator 3 view .LVU70
  433 0044 0122     		movs	r2, #1
  434 0046 4FF48051 		mov	r1, #4096
  435 004a 2046     		mov	r0, r4
  436 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
  437              	.LVL43:
-  60:Src/measuring_vd_vz.c ****         CNV_ON;
+  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  438              		.loc 1 60 29 discriminator 3 view .LVU71
-  60:Src/measuring_vd_vz.c ****         CNV_ON;
+  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  439              		.loc 1 60 30 is_stmt 0 discriminator 3 view .LVU72
  440 0050 0135     		adds	r5, r5, #1
  441              	.LVL44:
  442              	.L21:
-  60:Src/measuring_vd_vz.c ****         CNV_ON;
+  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  443              		.loc 1 60 21 is_stmt 1 discriminator 1 view .LVU73
-  60:Src/measuring_vd_vz.c ****         CNV_ON;
+  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
  444              		.loc 1 60 5 is_stmt 0 discriminator 1 view .LVU74
  445 0052 032D     		cmp	r5, #3
  446 0054 D8DD     		ble	.L22
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 10
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 10
 
 
  447              	.LBE3:
-  69:Src/measuring_vd_vz.c ****     }
-  70:Src/measuring_vd_vz.c **** }
+  69:Drivers/Middlewares/measuring_vd_vz.c ****     }
+  70:Drivers/Middlewares/measuring_vd_vz.c **** }
  448              		.loc 1 70 1 view .LVU75
  449 0056 03B0     		add	sp, sp, #12
  450              	.LCFI9:
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  506              		.set	.LANCHOR0,. + 0
  509              	AD7682_IN3:
  510 0000 24F7     		.short	-2268
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 11
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 11
 
 
  511              		.section	.data.CFG,"aw"
@@ -655,54 +655,54 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 1
  576              		.file 16 "Inc/usart.h"
  577              		.file 17 "Drivers/FreeModbus/port/port.h"
  578              		.file 18 "Drivers/FreeModbus/include/mbport.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s 			page 12
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 measuring_vd_vz.c
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:16     .text.setConfigADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:24     .text.setConfigADC:0000000000000000 setConfigADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:108    .text.setConfigADC:0000000000000054 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:16     .text.setConfigADC:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:24     .text.setConfigADC:0000000000000000 setConfigADC
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:108    .text.setConfigADC:0000000000000054 $d
                             *COM*:0000000000000002 out
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:115    .text.dataTransferADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:122    .text.dataTransferADC:0000000000000000 dataTransferADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:162    .text.dataTransferADC:0000000000000024 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:115    .text.dataTransferADC:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:122    .text.dataTransferADC:0000000000000000 dataTransferADC
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:162    .text.dataTransferADC:0000000000000024 $d
                             *COM*:0000000000000004 tmp
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:170    .text.measuringVD:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:177    .text.measuringVD:0000000000000000 measuringVD
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:253    .text.measuringVD:0000000000000060 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:170    .text.measuringVD:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:177    .text.measuringVD:0000000000000000 measuringVD
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:253    .text.measuringVD:0000000000000060 $d
                             *COM*:0000000000000004 voltageADC_vd
                             *COM*:0000000000000004 currentADC_vd
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:265    .text.measuringVZ:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:272    .text.measuringVZ:0000000000000000 measuringVZ
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:353    .text.measuringVZ:0000000000000068 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:265    .text.measuringVZ:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:272    .text.measuringVZ:0000000000000000 measuringVZ
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:353    .text.measuringVZ:0000000000000068 $d
                             *COM*:0000000000000004 voltageADC_vz
                             *COM*:0000000000000004 currentADC_vz
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:366    .text.configurationADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:373    .text.configurationADC:0000000000000000 configurationADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:459    .text.configurationADC:000000000000005c $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:551    .data.UZOUT:0000000000000000 UZOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:544    .data.UDOUT:0000000000000000 UDOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:537    .data.Resistor:0000000000000000 Resistor
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:558    .data.deltaADC:0000000000000000 deltaADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:530    .data.IZOUT:0000000000000000 IZOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:523    .data.IDOUT:0000000000000000 IDOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:509    .data.AD7682_IN3:0000000000000000 AD7682_IN3
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:502    .data.AD7682_IN2:0000000000000000 AD7682_IN2
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:495    .data.AD7682_IN1:0000000000000000 AD7682_IN1
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:488    .data.AD7682_IN0:0000000000000000 AD7682_IN0
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:516    .data.CFG:0000000000000000 CFG
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:484    .data.AD7682_IN0:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:491    .data.AD7682_IN1:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:498    .data.AD7682_IN2:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:505    .data.AD7682_IN3:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:512    .data.CFG:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:519    .data.IDOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:526    .data.IZOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:533    .data.Resistor:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:540    .data.UDOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:547    .data.UZOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccS7txmd.s:554    .data.deltaADC:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:366    .text.configurationADC:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:373    .text.configurationADC:0000000000000000 configurationADC
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:459    .text.configurationADC:000000000000005c $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:551    .data.UZOUT:0000000000000000 UZOUT
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:544    .data.UDOUT:0000000000000000 UDOUT
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:537    .data.Resistor:0000000000000000 Resistor
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:558    .data.deltaADC:0000000000000000 deltaADC
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:530    .data.IZOUT:0000000000000000 IZOUT
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:523    .data.IDOUT:0000000000000000 IDOUT
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:509    .data.AD7682_IN3:0000000000000000 AD7682_IN3
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:502    .data.AD7682_IN2:0000000000000000 AD7682_IN2
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:495    .data.AD7682_IN1:0000000000000000 AD7682_IN1
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:488    .data.AD7682_IN0:0000000000000000 AD7682_IN0
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:516    .data.CFG:0000000000000000 CFG
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:484    .data.AD7682_IN0:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:491    .data.AD7682_IN1:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:498    .data.AD7682_IN2:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:505    .data.AD7682_IN3:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:512    .data.CFG:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:519    .data.IDOUT:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:526    .data.IZOUT:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:533    .data.Resistor:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:540    .data.UDOUT:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:547    .data.UZOUT:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:554    .data.deltaADC:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

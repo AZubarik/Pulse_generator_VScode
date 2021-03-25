@@ -1,5 +1,5 @@
-build/mode.o: Src/mode.c Inc/mode.h Inc/main.h \
- Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
+build/mode.o: Drivers/Middlewares/mode.c Drivers/Middlewares/mode.h \
+ Inc/main.h Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  Inc/stm32f1xx_hal_conf.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h \
@@ -23,15 +23,16 @@ build/mode.o: Src/mode.c Inc/mode.h Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/tim.h \
- Inc/usart.h Inc/gpio.h Drivers/FreeModbus/include/mb.h \
+ Inc/main.h Inc/usart.h Inc/gpio.h Drivers/FreeModbus/include/mb.h \
  Drivers/FreeModbus/port/port.h Drivers/FreeModbus/include/mbconfig.h \
- Drivers/FreeModbus/port/portcritical.h Inc/main.h \
+ Drivers/FreeModbus/port/portcritical.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/include/mbproto.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/app/user_mb_app.h \
  Drivers/FreeModbus/include/mb_m.h Drivers/FreeModbus/include/mbframe.h \
- Drivers/FreeModbus/include/mbutils.h Inc/measuring_vd_vz.h Inc/spi.h
+ Drivers/FreeModbus/include/mbutils.h \
+ Drivers/Middlewares/measuring_vd_vz.h Inc/spi.h
 
-Inc/mode.h:
+Drivers/Middlewares/mode.h:
 
 Inc/main.h:
 
@@ -89,6 +90,8 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 
 Inc/tim.h:
 
+Inc/main.h:
+
 Inc/usart.h:
 
 Inc/gpio.h:
@@ -100,8 +103,6 @@ Drivers/FreeModbus/port/port.h:
 Drivers/FreeModbus/include/mbconfig.h:
 
 Drivers/FreeModbus/port/portcritical.h:
-
-Inc/main.h:
 
 Drivers/FreeModbus/include/mbport.h:
 
@@ -117,6 +118,6 @@ Drivers/FreeModbus/include/mbframe.h:
 
 Drivers/FreeModbus/include/mbutils.h:
 
-Inc/measuring_vd_vz.h:
+Drivers/Middlewares/measuring_vd_vz.h:
 
 Inc/spi.h:

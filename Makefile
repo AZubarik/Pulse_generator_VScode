@@ -88,8 +88,8 @@ Drivers/FreeModbus/mb_m.c \
 Drivers/FreeModbus/app/user_mb_app.c \
 Drivers/FreeModbus/app/user_mb_app_m.c \
 \
-Src/mode.c \
-Src/measuring_vd_vz.c
+Drivers/Middlewares/mode.c \
+Drivers/Middlewares/measuring_vd_vz.c
 
 
 # ASM sources
@@ -157,7 +157,8 @@ C_INCLUDES =  \
 -IDrivers/FreeModbus/functions \
 -IDrivers/FreeModbus/port \
 -IDrivers/FreeModbus/app \
--IDrivers/FreeModbus/rtu 
+-IDrivers/FreeModbus/rtu \
+-IDrivers/Middlewares
 
 
 # compile gcc flags

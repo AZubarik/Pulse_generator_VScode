@@ -10,6 +10,7 @@
 
 				"${workspaceRoot}\\Drivers\\**",
                 "${workspaceRoot}\\Drivers\\FreeModbus\\**",
+                "${workspaceRoot}\\Drivers\\Middlewares**",
 				"${workspaceRoot}\\Src\\**",
 				"${workspaceRoot}\\Inc\\**"
             
