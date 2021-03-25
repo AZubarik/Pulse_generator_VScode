@@ -1,0 +1,657 @@
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"mode.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.waiting_mode,"ax",%progbits
+  16              		.align	1
+  17              		.global	waiting_mode
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	waiting_mode:
+  25              	.LFB65:
+  26              		.file 1 "Src/mode.c"
+   1:Src/mode.c    **** #include "mode.h"
+   2:Src/mode.c    **** 
+   3:Src/mode.c    **** void waiting_mode(void) {
+  27              		.loc 1 3 25 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 10B5     		push	{r4, lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+   4:Src/mode.c    **** 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, OFF);
+  36              		.loc 1 4 2 view .LVU1
+  37 0002 104C     		ldr	r4, .L6
+  38 0004 0022     		movs	r2, #0
+  39 0006 4FF40071 		mov	r1, #512
+  40 000a 2046     		mov	r0, r4
+  41 000c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  42              	.LVL0:
+   5:Src/mode.c    **** 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, OFF);
+  43              		.loc 1 5 2 view .LVU2
+  44 0010 0022     		movs	r2, #0
+  45 0012 2021     		movs	r1, #32
+  46 0014 2046     		mov	r0, r4
+  47 0016 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  48              	.LVL1:
+   6:Src/mode.c    **** 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, OFF);
+  49              		.loc 1 6 2 view .LVU3
+  50 001a 0022     		movs	r2, #0
+  51 001c 4FF48071 		mov	r1, #256
+  52 0020 2046     		mov	r0, r4
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 2
+
+
+  53 0022 FFF7FEFF 		bl	HAL_GPIO_WritePin
+  54              	.LVL2:
+   7:Src/mode.c    **** 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, OFF);	
+  55              		.loc 1 7 2 view .LVU4
+  56 0026 0022     		movs	r2, #0
+  57 0028 4021     		movs	r1, #64
+  58 002a 2046     		mov	r0, r4
+  59 002c FFF7FEFF 		bl	HAL_GPIO_WritePin
+  60              	.LVL3:
+   8:Src/mode.c    **** 	
+   9:Src/mode.c    **** 	for (int i = 0; i <= 15; i++) {
+  61              		.loc 1 9 2 view .LVU5
+  62              	.LBB2:
+  63              		.loc 1 9 7 view .LVU6
+  64              		.loc 1 9 11 is_stmt 0 view .LVU7
+  65 0030 0023     		movs	r3, #0
+  66              	.LVL4:
+  67              	.L2:
+  68              		.loc 1 9 18 is_stmt 1 discriminator 1 view .LVU8
+  69              		.loc 1 9 2 is_stmt 0 discriminator 1 view .LVU9
+  70 0032 0F2B     		cmp	r3, #15
+  71 0034 05DC     		bgt	.L5
+  10:Src/mode.c    **** 		usSRegInBuf[i] = 0;	
+  72              		.loc 1 10 3 is_stmt 1 discriminator 3 view .LVU10
+  73              		.loc 1 10 18 is_stmt 0 discriminator 3 view .LVU11
+  74 0036 044A     		ldr	r2, .L6+4
+  75 0038 0021     		movs	r1, #0
+  76 003a 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+   9:Src/mode.c    **** 		usSRegInBuf[i] = 0;	
+  77              		.loc 1 9 27 is_stmt 1 discriminator 3 view .LVU12
+   9:Src/mode.c    **** 		usSRegInBuf[i] = 0;	
+  78              		.loc 1 9 28 is_stmt 0 discriminator 3 view .LVU13
+  79 003e 0133     		adds	r3, r3, #1
+  80              	.LVL5:
+   9:Src/mode.c    **** 		usSRegInBuf[i] = 0;	
+  81              		.loc 1 9 28 discriminator 3 view .LVU14
+  82 0040 F7E7     		b	.L2
+  83              	.L5:
+   9:Src/mode.c    **** 		usSRegInBuf[i] = 0;	
+  84              		.loc 1 9 28 discriminator 3 view .LVU15
+  85              	.LBE2:
+  11:Src/mode.c    **** 	}
+  12:Src/mode.c    **** }
+  86              		.loc 1 12 1 view .LVU16
+  87 0042 10BD     		pop	{r4, pc}
+  88              	.L7:
+  89              		.align	2
+  90              	.L6:
+  91 0044 000C0140 		.word	1073810432
+  92 0048 00000000 		.word	usSRegInBuf
+  93              		.cfi_endproc
+  94              	.LFE65:
+  96              		.section	.text.modeVD,"ax",%progbits
+  97              		.align	1
+  98              		.global	modeVD
+  99              		.syntax unified
+ 100              		.thumb
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 3
+
+
+ 101              		.thumb_func
+ 102              		.fpu softvfp
+ 104              	modeVD:
+ 105              	.LFB66:
+  13:Src/mode.c    **** void modeVD(void) {
+ 106              		.loc 1 13 19 is_stmt 1 view -0
+ 107              		.cfi_startproc
+ 108              		@ args = 0, pretend = 0, frame = 0
+ 109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 110 0000 10B5     		push	{r4, lr}
+ 111              	.LCFI1:
+ 112              		.cfi_def_cfa_offset 8
+ 113              		.cfi_offset 4, -8
+ 114              		.cfi_offset 14, -4
+  14:Src/mode.c    **** 	HAL_Delay(250);
+ 115              		.loc 1 14 2 view .LVU18
+ 116 0002 FA20     		movs	r0, #250
+ 117 0004 FFF7FEFF 		bl	HAL_Delay
+ 118              	.LVL6:
+  15:Src/mode.c    **** 	ISTD_OFF;
+ 119              		.loc 1 15 2 view .LVU19
+ 120 0008 0B4C     		ldr	r4, .L10
+ 121 000a 0022     		movs	r2, #0
+ 122 000c 4FF40071 		mov	r1, #512
+ 123 0010 2046     		mov	r0, r4
+ 124 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 125              	.LVL7:
+  16:Src/mode.c    **** 	HAL_Delay(5000);
+ 126              		.loc 1 16 2 view .LVU20
+ 127 0016 41F28830 		movw	r0, #5000
+ 128 001a FFF7FEFF 		bl	HAL_Delay
+ 129              	.LVL8:
+  17:Src/mode.c    **** 		measuringVD(); 			  
+ 130              		.loc 1 17 3 view .LVU21
+ 131 001e FFF7FEFF 		bl	measuringVD
+ 132              	.LVL9:
+  18:Src/mode.c    **** 	usSRegHoldBuf[1] = 0;
+ 133              		.loc 1 18 2 view .LVU22
+ 134              		.loc 1 18 19 is_stmt 0 view .LVU23
+ 135 0022 064B     		ldr	r3, .L10+4
+ 136 0024 0022     		movs	r2, #0
+ 137 0026 5A80     		strh	r2, [r3, #2]	@ movhi
+  19:Src/mode.c    **** 	ISTD_ON;
+ 138              		.loc 1 19 2 is_stmt 1 view .LVU24
+ 139 0028 0122     		movs	r2, #1
+ 140 002a 4FF40071 		mov	r1, #512
+ 141 002e 2046     		mov	r0, r4
+ 142 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 143              	.LVL10:
+  20:Src/mode.c    **** }
+ 144              		.loc 1 20 1 is_stmt 0 view .LVU25
+ 145 0034 10BD     		pop	{r4, pc}
+ 146              	.L11:
+ 147 0036 00BF     		.align	2
+ 148              	.L10:
+ 149 0038 00080140 		.word	1073809408
+ 150 003c 00000000 		.word	usSRegHoldBuf
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 4
+
+
+ 151              		.cfi_endproc
+ 152              	.LFE66:
+ 154              		.section	.text.modeVD_pulse,"ax",%progbits
+ 155              		.align	1
+ 156              		.global	modeVD_pulse
+ 157              		.syntax unified
+ 158              		.thumb
+ 159              		.thumb_func
+ 160              		.fpu softvfp
+ 162              	modeVD_pulse:
+ 163              	.LFB67:
+  21:Src/mode.c    **** 
+  22:Src/mode.c    **** void modeVD_pulse(void) {
+ 164              		.loc 1 22 25 is_stmt 1 view -0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 0
+ 167              		@ frame_needed = 0, uses_anonymous_args = 0
+ 168 0000 70B5     		push	{r4, r5, r6, lr}
+ 169              	.LCFI2:
+ 170              		.cfi_def_cfa_offset 16
+ 171              		.cfi_offset 4, -16
+ 172              		.cfi_offset 5, -12
+ 173              		.cfi_offset 6, -8
+ 174              		.cfi_offset 14, -4
+  23:Src/mode.c    **** 	HAL_Delay(250);
+ 175              		.loc 1 23 2 view .LVU27
+ 176 0002 FA20     		movs	r0, #250
+ 177 0004 FFF7FEFF 		bl	HAL_Delay
+ 178              	.LVL11:
+  24:Src/mode.c    **** 	id30min = 0; id30max = 0;
+ 179              		.loc 1 24 2 view .LVU28
+ 180              		.loc 1 24 10 is_stmt 0 view .LVU29
+ 181 0008 0024     		movs	r4, #0
+ 182 000a 174B     		ldr	r3, .L14
+ 183 000c 1C60     		str	r4, [r3]
+ 184              		.loc 1 24 15 is_stmt 1 view .LVU30
+ 185              		.loc 1 24 23 is_stmt 0 view .LVU31
+ 186 000e 174B     		ldr	r3, .L14+4
+ 187 0010 1C60     		str	r4, [r3]
+  25:Src/mode.c    **** 
+  26:Src/mode.c    **** 	HAL_TIM_Base_Start_IT(&htim2);
+ 188              		.loc 1 26 2 is_stmt 1 view .LVU32
+ 189 0012 174E     		ldr	r6, .L14+8
+ 190 0014 3046     		mov	r0, r6
+ 191 0016 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 192              	.LVL12:
+  27:Src/mode.c    **** 	PWMN_Start(&htim1, TIM_CHANNEL_2);
+ 193              		.loc 1 27 2 view .LVU33
+ 194 001a 164D     		ldr	r5, .L14+12
+ 195 001c 0421     		movs	r1, #4
+ 196 001e 2846     		mov	r0, r5
+ 197 0020 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 198              	.LVL13:
+  28:Src/mode.c    **** 	HAL_Delay(500);
+ 199              		.loc 1 28 2 view .LVU34
+ 200 0024 4FF4FA70 		mov	r0, #500
+ 201 0028 FFF7FEFF 		bl	HAL_Delay
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 5
+
+
+ 202              	.LVL14:
+  29:Src/mode.c    **** 	HAL_TIM_Base_Stop_IT(&htim2);
+ 203              		.loc 1 29 2 view .LVU35
+ 204 002c 3046     		mov	r0, r6
+ 205 002e FFF7FEFF 		bl	HAL_TIM_Base_Stop_IT
+ 206              	.LVL15:
+  30:Src/mode.c    **** 	PWMN_Stop(&htim1, TIM_CHANNEL_2);
+ 207              		.loc 1 30 2 view .LVU36
+ 208 0032 0421     		movs	r1, #4
+ 209 0034 2846     		mov	r0, r5
+ 210 0036 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Stop
+ 211              	.LVL16:
+  31:Src/mode.c    **** 	
+  32:Src/mode.c    **** 	ISTD_OFF;
+ 212              		.loc 1 32 2 view .LVU37
+ 213 003a 0F4D     		ldr	r5, .L14+16
+ 214 003c 2246     		mov	r2, r4
+ 215 003e 4FF40071 		mov	r1, #512
+ 216 0042 2846     		mov	r0, r5
+ 217 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 218              	.LVL17:
+  33:Src/mode.c    **** 	HAL_Delay(5000);
+ 219              		.loc 1 33 2 view .LVU38
+ 220 0048 41F28830 		movw	r0, #5000
+ 221 004c FFF7FEFF 		bl	HAL_Delay
+ 222              	.LVL18:
+  34:Src/mode.c    **** 	measuringVD();
+ 223              		.loc 1 34 2 view .LVU39
+ 224 0050 FFF7FEFF 		bl	measuringVD
+ 225              	.LVL19:
+  35:Src/mode.c    **** 				  
+  36:Src/mode.c    **** 	usSRegHoldBuf[1] = 0;
+ 226              		.loc 1 36 2 view .LVU40
+ 227              		.loc 1 36 19 is_stmt 0 view .LVU41
+ 228 0054 094B     		ldr	r3, .L14+20
+ 229 0056 5C80     		strh	r4, [r3, #2]	@ movhi
+  37:Src/mode.c    **** 
+  38:Src/mode.c    **** 	ISTD_ON;
+ 230              		.loc 1 38 2 is_stmt 1 view .LVU42
+ 231 0058 0122     		movs	r2, #1
+ 232 005a 4FF40071 		mov	r1, #512
+ 233 005e 2846     		mov	r0, r5
+ 234 0060 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 235              	.LVL20:
+  39:Src/mode.c    **** }
+ 236              		.loc 1 39 1 is_stmt 0 view .LVU43
+ 237 0064 70BD     		pop	{r4, r5, r6, pc}
+ 238              	.L15:
+ 239 0066 00BF     		.align	2
+ 240              	.L14:
+ 241 0068 00000000 		.word	id30min
+ 242 006c 00000000 		.word	id30max
+ 243 0070 00000000 		.word	htim2
+ 244 0074 00000000 		.word	htim1
+ 245 0078 00080140 		.word	1073809408
+ 246 007c 00000000 		.word	usSRegHoldBuf
+ 247              		.cfi_endproc
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 6
+
+
+ 248              	.LFE67:
+ 250              		.section	.text.modeVZ,"ax",%progbits
+ 251              		.align	1
+ 252              		.global	modeVZ
+ 253              		.syntax unified
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.fpu softvfp
+ 258              	modeVZ:
+ 259              	.LFB68:
+  40:Src/mode.c    **** 
+  41:Src/mode.c    **** void modeVZ(void) {
+ 260              		.loc 1 41 19 is_stmt 1 view -0
+ 261              		.cfi_startproc
+ 262              		@ args = 0, pretend = 0, frame = 0
+ 263              		@ frame_needed = 0, uses_anonymous_args = 0
+ 264 0000 10B5     		push	{r4, lr}
+ 265              	.LCFI3:
+ 266              		.cfi_def_cfa_offset 8
+ 267              		.cfi_offset 4, -8
+ 268              		.cfi_offset 14, -4
+  42:Src/mode.c    **** 	HAL_Delay(250);
+ 269              		.loc 1 42 2 view .LVU45
+ 270 0002 FA20     		movs	r0, #250
+ 271 0004 FFF7FEFF 		bl	HAL_Delay
+ 272              	.LVL21:
+  43:Src/mode.c    **** 	ISTZ_OFF;
+ 273              		.loc 1 43 2 view .LVU46
+ 274 0008 0B4C     		ldr	r4, .L18
+ 275 000a 0022     		movs	r2, #0
+ 276 000c 4FF48071 		mov	r1, #256
+ 277 0010 2046     		mov	r0, r4
+ 278 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 279              	.LVL22:
+  44:Src/mode.c    **** 	HAL_Delay(5000);
+ 280              		.loc 1 44 2 view .LVU47
+ 281 0016 41F28830 		movw	r0, #5000
+ 282 001a FFF7FEFF 		bl	HAL_Delay
+ 283              	.LVL23:
+  45:Src/mode.c    **** 		measuringVZ();		  
+ 284              		.loc 1 45 3 view .LVU48
+ 285 001e FFF7FEFF 		bl	measuringVZ
+ 286              	.LVL24:
+  46:Src/mode.c    **** 	usSRegHoldBuf[1] = 0;
+ 287              		.loc 1 46 2 view .LVU49
+ 288              		.loc 1 46 19 is_stmt 0 view .LVU50
+ 289 0022 064B     		ldr	r3, .L18+4
+ 290 0024 0022     		movs	r2, #0
+ 291 0026 5A80     		strh	r2, [r3, #2]	@ movhi
+  47:Src/mode.c    **** 	ISTZ_ON;
+ 292              		.loc 1 47 2 is_stmt 1 view .LVU51
+ 293 0028 0122     		movs	r2, #1
+ 294 002a 4FF48071 		mov	r1, #256
+ 295 002e 2046     		mov	r0, r4
+ 296 0030 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 297              	.LVL25:
+  48:Src/mode.c    **** }
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 7
+
+
+ 298              		.loc 1 48 1 is_stmt 0 view .LVU52
+ 299 0034 10BD     		pop	{r4, pc}
+ 300              	.L19:
+ 301 0036 00BF     		.align	2
+ 302              	.L18:
+ 303 0038 00080140 		.word	1073809408
+ 304 003c 00000000 		.word	usSRegHoldBuf
+ 305              		.cfi_endproc
+ 306              	.LFE68:
+ 308              		.section	.text.modeVZ_pulse,"ax",%progbits
+ 309              		.align	1
+ 310              		.global	modeVZ_pulse
+ 311              		.syntax unified
+ 312              		.thumb
+ 313              		.thumb_func
+ 314              		.fpu softvfp
+ 316              	modeVZ_pulse:
+ 317              	.LFB69:
+  49:Src/mode.c    **** 
+  50:Src/mode.c    **** void modeVZ_pulse(void) {
+ 318              		.loc 1 50 25 is_stmt 1 view -0
+ 319              		.cfi_startproc
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322 0000 70B5     		push	{r4, r5, r6, lr}
+ 323              	.LCFI4:
+ 324              		.cfi_def_cfa_offset 16
+ 325              		.cfi_offset 4, -16
+ 326              		.cfi_offset 5, -12
+ 327              		.cfi_offset 6, -8
+ 328              		.cfi_offset 14, -4
+  51:Src/mode.c    **** 	HAL_Delay(250);
+ 329              		.loc 1 51 2 view .LVU54
+ 330 0002 FA20     		movs	r0, #250
+ 331 0004 FFF7FEFF 		bl	HAL_Delay
+ 332              	.LVL26:
+  52:Src/mode.c    **** 	iz30min = 0, iz30max = 0;
+ 333              		.loc 1 52 2 view .LVU55
+ 334              		.loc 1 52 10 is_stmt 0 view .LVU56
+ 335 0008 0024     		movs	r4, #0
+ 336 000a 174B     		ldr	r3, .L22
+ 337 000c 1C60     		str	r4, [r3]
+ 338              		.loc 1 52 23 view .LVU57
+ 339 000e 174B     		ldr	r3, .L22+4
+ 340 0010 1C60     		str	r4, [r3]
+  53:Src/mode.c    **** 	
+  54:Src/mode.c    **** 	HAL_TIM_Base_Start_IT(&htim3);
+ 341              		.loc 1 54 2 is_stmt 1 view .LVU58
+ 342 0012 174E     		ldr	r6, .L22+8
+ 343 0014 3046     		mov	r0, r6
+ 344 0016 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 345              	.LVL27:
+  55:Src/mode.c    **** 	PWMN_Start(&htim1, TIM_CHANNEL_3);	  
+ 346              		.loc 1 55 2 view .LVU59
+ 347 001a 164D     		ldr	r5, .L22+12
+ 348 001c 0821     		movs	r1, #8
+ 349 001e 2846     		mov	r0, r5
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 8
+
+
+ 350 0020 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 351              	.LVL28:
+  56:Src/mode.c    **** 	HAL_Delay(500);
+ 352              		.loc 1 56 2 view .LVU60
+ 353 0024 4FF4FA70 		mov	r0, #500
+ 354 0028 FFF7FEFF 		bl	HAL_Delay
+ 355              	.LVL29:
+  57:Src/mode.c    **** 	HAL_TIM_Base_Stop_IT(&htim3);
+ 356              		.loc 1 57 2 view .LVU61
+ 357 002c 3046     		mov	r0, r6
+ 358 002e FFF7FEFF 		bl	HAL_TIM_Base_Stop_IT
+ 359              	.LVL30:
+  58:Src/mode.c    **** 	PWMN_Stop(&htim1, TIM_CHANNEL_3);
+ 360              		.loc 1 58 2 view .LVU62
+ 361 0032 0821     		movs	r1, #8
+ 362 0034 2846     		mov	r0, r5
+ 363 0036 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Stop
+ 364              	.LVL31:
+  59:Src/mode.c    **** 	
+  60:Src/mode.c    **** 	ISTZ_OFF;
+ 365              		.loc 1 60 2 view .LVU63
+ 366 003a 0F4D     		ldr	r5, .L22+16
+ 367 003c 2246     		mov	r2, r4
+ 368 003e 4FF48071 		mov	r1, #256
+ 369 0042 2846     		mov	r0, r5
+ 370 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 371              	.LVL32:
+  61:Src/mode.c    **** 	HAL_Delay(5000);
+ 372              		.loc 1 61 2 view .LVU64
+ 373 0048 41F28830 		movw	r0, #5000
+ 374 004c FFF7FEFF 		bl	HAL_Delay
+ 375              	.LVL33:
+  62:Src/mode.c    **** 	measuringVZ();
+ 376              		.loc 1 62 2 view .LVU65
+ 377 0050 FFF7FEFF 		bl	measuringVZ
+ 378              	.LVL34:
+  63:Src/mode.c    **** 			  
+  64:Src/mode.c    **** 	usSRegHoldBuf[1] = 0;
+ 379              		.loc 1 64 2 view .LVU66
+ 380              		.loc 1 64 19 is_stmt 0 view .LVU67
+ 381 0054 094B     		ldr	r3, .L22+20
+ 382 0056 5C80     		strh	r4, [r3, #2]	@ movhi
+  65:Src/mode.c    **** 	
+  66:Src/mode.c    **** 	ISTZ_ON;
+ 383              		.loc 1 66 2 is_stmt 1 view .LVU68
+ 384 0058 0122     		movs	r2, #1
+ 385 005a 4FF48071 		mov	r1, #256
+ 386 005e 2846     		mov	r0, r5
+ 387 0060 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 388              	.LVL35:
+  67:Src/mode.c    **** }
+ 389              		.loc 1 67 1 is_stmt 0 view .LVU69
+ 390 0064 70BD     		pop	{r4, r5, r6, pc}
+ 391              	.L23:
+ 392 0066 00BF     		.align	2
+ 393              	.L22:
+ 394 0068 00000000 		.word	iz30min
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 9
+
+
+ 395 006c 00000000 		.word	iz30max
+ 396 0070 00000000 		.word	htim3
+ 397 0074 00000000 		.word	htim1
+ 398 0078 00080140 		.word	1073809408
+ 399 007c 00000000 		.word	usSRegHoldBuf
+ 400              		.cfi_endproc
+ 401              	.LFE69:
+ 403              		.section	.text.diagnostic,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	diagnostic
+ 406              		.syntax unified
+ 407              		.thumb
+ 408              		.thumb_func
+ 409              		.fpu softvfp
+ 411              	diagnostic:
+ 412              	.LFB70:
+  68:Src/mode.c    **** 
+  69:Src/mode.c    **** void diagnostic(void) {
+ 413              		.loc 1 69 23 is_stmt 1 view -0
+ 414              		.cfi_startproc
+ 415              		@ args = 0, pretend = 0, frame = 0
+ 416              		@ frame_needed = 0, uses_anonymous_args = 0
+ 417 0000 38B5     		push	{r3, r4, r5, lr}
+ 418              	.LCFI5:
+ 419              		.cfi_def_cfa_offset 16
+ 420              		.cfi_offset 3, -16
+ 421              		.cfi_offset 4, -12
+ 422              		.cfi_offset 5, -8
+ 423              		.cfi_offset 14, -4
+  70:Src/mode.c    **** 	HAL_Delay(250);
+ 424              		.loc 1 70 2 view .LVU71
+ 425 0002 FA20     		movs	r0, #250
+ 426 0004 FFF7FEFF 		bl	HAL_Delay
+ 427              	.LVL36:
+  71:Src/mode.c    **** 	id30min = 0, id30max = 0;
+ 428              		.loc 1 71 2 view .LVU72
+ 429              		.loc 1 71 10 is_stmt 0 view .LVU73
+ 430 0008 0023     		movs	r3, #0
+ 431 000a 0E4A     		ldr	r2, .L26
+ 432 000c 1360     		str	r3, [r2]
+ 433              		.loc 1 71 23 view .LVU74
+ 434 000e 0E4A     		ldr	r2, .L26+4
+ 435 0010 1360     		str	r3, [r2]
+  72:Src/mode.c    **** 	
+  73:Src/mode.c    **** 	HAL_TIM_Base_Start_IT(&htim2);
+ 436              		.loc 1 73 2 is_stmt 1 view .LVU75
+ 437 0012 0E4D     		ldr	r5, .L26+8
+ 438 0014 2846     		mov	r0, r5
+ 439 0016 FFF7FEFF 		bl	HAL_TIM_Base_Start_IT
+ 440              	.LVL37:
+  74:Src/mode.c    **** 	PWMN_Start(&htim1, TIM_CHANNEL_2);	  
+ 441              		.loc 1 74 2 view .LVU76
+ 442 001a 0D4C     		ldr	r4, .L26+12
+ 443 001c 0421     		movs	r1, #4
+ 444 001e 2046     		mov	r0, r4
+ 445 0020 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 446              	.LVL38:
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 10
+
+
+  75:Src/mode.c    **** 	HAL_Delay(2000);
+ 447              		.loc 1 75 2 view .LVU77
+ 448 0024 4FF4FA60 		mov	r0, #2000
+ 449 0028 FFF7FEFF 		bl	HAL_Delay
+ 450              	.LVL39:
+  76:Src/mode.c    **** 	HAL_TIM_Base_Stop_IT(&htim2);
+ 451              		.loc 1 76 2 view .LVU78
+ 452 002c 2846     		mov	r0, r5
+ 453 002e FFF7FEFF 		bl	HAL_TIM_Base_Stop_IT
+ 454              	.LVL40:
+  77:Src/mode.c    **** 	PWMN_Stop(&htim1, TIM_CHANNEL_2);
+ 455              		.loc 1 77 2 view .LVU79
+ 456 0032 0421     		movs	r1, #4
+ 457 0034 2046     		mov	r0, r4
+ 458 0036 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Stop
+ 459              	.LVL41:
+  78:Src/mode.c    **** 	
+  79:Src/mode.c    **** 	HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
+ 460              		.loc 1 79 2 view .LVU80
+ 461 003a 1021     		movs	r1, #16
+ 462 003c 0548     		ldr	r0, .L26+16
+ 463 003e FFF7FEFF 		bl	HAL_GPIO_TogglePin
+ 464              	.LVL42:
+  80:Src/mode.c    **** }...
+ 465              		.loc 1 80 1 is_stmt 0 view .LVU81
+ 466 0042 38BD     		pop	{r3, r4, r5, pc}
+ 467              	.L27:
+ 468              		.align	2
+ 469              	.L26:
+ 470 0044 00000000 		.word	id30min
+ 471 0048 00000000 		.word	id30max
+ 472 004c 00000000 		.word	htim2
+ 473 0050 00000000 		.word	htim1
+ 474 0054 000C0140 		.word	1073810432
+ 475              		.cfi_endproc
+ 476              	.LFE70:
+ 478              		.comm	eventDiagnostic,4,4
+ 479              		.comm	eventVZ,4,4
+ 480              		.comm	eventVD,4,4
+ 481              		.comm	iz30max,4,4
+ 482              		.comm	iz30min,4,4
+ 483              		.comm	id30max,4,4
+ 484              		.comm	id30min,4,4
+ 485              		.text
+ 486              	.Letext0:
+ 487              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
+ 488              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 489              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 490              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 491              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 492              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 493              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 494              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 495              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 496              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 497              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 498              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 11
+
+
+ 499              		.file 14 "Inc/tim.h"
+ 500              		.file 15 "Inc/usart.h"
+ 501              		.file 16 "Drivers/FreeModbus/port/port.h"
+ 502              		.file 17 "Drivers/FreeModbus/include/mbport.h"
+ 503              		.file 18 "Inc/spi.h"
+ 504              		.file 19 "Inc/mode.h"
+ 505              		.file 20 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h"
+ 506              		.file 21 "Inc/measuring_vd_vz.h"
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mode.c
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:16     .text.waiting_mode:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:24     .text.waiting_mode:0000000000000000 waiting_mode
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:91     .text.waiting_mode:0000000000000044 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:97     .text.modeVD:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:104    .text.modeVD:0000000000000000 modeVD
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:149    .text.modeVD:0000000000000038 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:155    .text.modeVD_pulse:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:162    .text.modeVD_pulse:0000000000000000 modeVD_pulse
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:241    .text.modeVD_pulse:0000000000000068 $d
+                            *COM*:0000000000000004 id30min
+                            *COM*:0000000000000004 id30max
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:251    .text.modeVZ:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:258    .text.modeVZ:0000000000000000 modeVZ
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:303    .text.modeVZ:0000000000000038 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:309    .text.modeVZ_pulse:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:316    .text.modeVZ_pulse:0000000000000000 modeVZ_pulse
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:394    .text.modeVZ_pulse:0000000000000068 $d
+                            *COM*:0000000000000004 iz30min
+                            *COM*:0000000000000004 iz30max
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:404    .text.diagnostic:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:411    .text.diagnostic:0000000000000000 diagnostic
+C:\Users\QUALIT~1\AppData\Local\Temp\ccWDmRNy.s:470    .text.diagnostic:0000000000000044 $d
+                            *COM*:0000000000000004 eventDiagnostic
+                            *COM*:0000000000000004 eventVZ
+                            *COM*:0000000000000004 eventVD
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+usSRegInBuf
+HAL_Delay
+measuringVD
+usSRegHoldBuf
+HAL_TIM_Base_Start_IT
+HAL_TIMEx_PWMN_Start
+HAL_TIM_Base_Stop_IT
+HAL_TIMEx_PWMN_Stop
+htim2
+htim1
+measuringVZ
+htim3
+HAL_GPIO_TogglePin

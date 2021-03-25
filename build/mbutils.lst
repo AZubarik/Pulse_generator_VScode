@@ -1,0 +1,444 @@
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"mbutils.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.xMBUtilSetBits,"ax",%progbits
+  16              		.align	1
+  17              		.global	xMBUtilSetBits
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	xMBUtilSetBits:
+  25              	.LVL0:
+  26              	.LFB65:
+  27              		.file 1 "Drivers/FreeModbus/functions/mbutils.c"
+   1:Drivers/FreeModbus/functions/mbutils.c **** /* 
+   2:Drivers/FreeModbus/functions/mbutils.c ****  * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+   3:Drivers/FreeModbus/functions/mbutils.c ****  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
+   4:Drivers/FreeModbus/functions/mbutils.c ****  * All rights reserved.
+   5:Drivers/FreeModbus/functions/mbutils.c ****  *
+   6:Drivers/FreeModbus/functions/mbutils.c ****  * Redistribution and use in source and binary forms, with or without
+   7:Drivers/FreeModbus/functions/mbutils.c ****  * modification, are permitted provided that the following conditions
+   8:Drivers/FreeModbus/functions/mbutils.c ****  * are met:
+   9:Drivers/FreeModbus/functions/mbutils.c ****  * 1. Redistributions of source code must retain the above copyright
+  10:Drivers/FreeModbus/functions/mbutils.c ****  *    notice, this list of conditions and the following disclaimer.
+  11:Drivers/FreeModbus/functions/mbutils.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+  12:Drivers/FreeModbus/functions/mbutils.c ****  *    notice, this list of conditions and the following disclaimer in the
+  13:Drivers/FreeModbus/functions/mbutils.c ****  *    documentation and/or other materials provided with the distribution.
+  14:Drivers/FreeModbus/functions/mbutils.c ****  * 3. The name of the author may not be used to endorse or promote products
+  15:Drivers/FreeModbus/functions/mbutils.c ****  *    derived from this software without specific prior written permission.
+  16:Drivers/FreeModbus/functions/mbutils.c ****  *
+  17:Drivers/FreeModbus/functions/mbutils.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+  18:Drivers/FreeModbus/functions/mbutils.c ****  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+  19:Drivers/FreeModbus/functions/mbutils.c ****  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  20:Drivers/FreeModbus/functions/mbutils.c ****  * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+  21:Drivers/FreeModbus/functions/mbutils.c ****  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  22:Drivers/FreeModbus/functions/mbutils.c ****  * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  23:Drivers/FreeModbus/functions/mbutils.c ****  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  24:Drivers/FreeModbus/functions/mbutils.c ****  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  25:Drivers/FreeModbus/functions/mbutils.c ****  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  26:Drivers/FreeModbus/functions/mbutils.c ****  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  27:Drivers/FreeModbus/functions/mbutils.c ****  *
+  28:Drivers/FreeModbus/functions/mbutils.c ****  * File: $Id: mbutils.c,v 1.6 2007/02/18 23:49:07 wolti Exp $
+  29:Drivers/FreeModbus/functions/mbutils.c ****  */
+  30:Drivers/FreeModbus/functions/mbutils.c **** 
+  31:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- System includes ----------------------------------*/
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 2
+
+
+  32:Drivers/FreeModbus/functions/mbutils.c **** #include "stdlib.h"
+  33:Drivers/FreeModbus/functions/mbutils.c **** #include "string.h"
+  34:Drivers/FreeModbus/functions/mbutils.c **** 
+  35:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- Platform includes --------------------------------*/
+  36:Drivers/FreeModbus/functions/mbutils.c **** #include "port.h"
+  37:Drivers/FreeModbus/functions/mbutils.c **** 
+  38:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- Modbus includes ----------------------------------*/
+  39:Drivers/FreeModbus/functions/mbutils.c **** #include "mb.h"
+  40:Drivers/FreeModbus/functions/mbutils.c **** #include "mbproto.h"
+  41:Drivers/FreeModbus/functions/mbutils.c **** 
+  42:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- Defines ------------------------------------------*/
+  43:Drivers/FreeModbus/functions/mbutils.c **** #define BITS_UCHAR      8U
+  44:Drivers/FreeModbus/functions/mbutils.c **** 
+  45:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- Start implementation -----------------------------*/
+  46:Drivers/FreeModbus/functions/mbutils.c **** void
+  47:Drivers/FreeModbus/functions/mbutils.c **** xMBUtilSetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits,
+  48:Drivers/FreeModbus/functions/mbutils.c ****                 UCHAR ucValue )
+  49:Drivers/FreeModbus/functions/mbutils.c **** {
+  28              		.loc 1 49 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              		.loc 1 49 1 is_stmt 0 view .LVU1
+  34 0000 70B4     		push	{r4, r5, r6}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 12
+  37              		.cfi_offset 4, -12
+  38              		.cfi_offset 5, -8
+  39              		.cfi_offset 6, -4
+  50:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usWordBuf;
+  40              		.loc 1 50 5 is_stmt 1 view .LVU2
+  51:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usMask;
+  41              		.loc 1 51 5 view .LVU3
+  52:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usByteOffset;
+  42              		.loc 1 52 5 view .LVU4
+  53:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usNPreBits;
+  43              		.loc 1 53 5 view .LVU5
+  54:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usValue = ucValue;
+  44              		.loc 1 54 5 view .LVU6
+  45              	.LVL1:
+  55:Drivers/FreeModbus/functions/mbutils.c **** 
+  56:Drivers/FreeModbus/functions/mbutils.c ****     assert_param( ucNBits <= 8 );
+  46              		.loc 1 56 5 view .LVU7
+  57:Drivers/FreeModbus/functions/mbutils.c ****     assert_param( ( size_t )BITS_UCHAR == sizeof( UCHAR ) * 8 );
+  47              		.loc 1 57 5 view .LVU8
+  58:Drivers/FreeModbus/functions/mbutils.c **** 
+  59:Drivers/FreeModbus/functions/mbutils.c ****     /* Calculate byte offset for first byte containing the bit values starting
+  60:Drivers/FreeModbus/functions/mbutils.c ****      * at usBitOffset. */
+  61:Drivers/FreeModbus/functions/mbutils.c ****     usByteOffset = ( USHORT )( ( usBitOffset ) / BITS_UCHAR );
+  48              		.loc 1 61 5 view .LVU9
+  49              		.loc 1 61 18 is_stmt 0 view .LVU10
+  50 0002 CD08     		lsrs	r5, r1, #3
+  51              	.LVL2:
+  62:Drivers/FreeModbus/functions/mbutils.c **** 
+  63:Drivers/FreeModbus/functions/mbutils.c ****     /* How many bits precede our bits to set. */
+  64:Drivers/FreeModbus/functions/mbutils.c ****     usNPreBits = ( USHORT )( usBitOffset - usByteOffset * BITS_UCHAR );
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 3
+
+
+  52              		.loc 1 64 5 is_stmt 1 view .LVU11
+  65:Drivers/FreeModbus/functions/mbutils.c **** 
+  66:Drivers/FreeModbus/functions/mbutils.c ****     /* Move bit field into position over bits to set */
+  67:Drivers/FreeModbus/functions/mbutils.c ****     usValue <<= usNPreBits;
+  53              		.loc 1 67 5 view .LVU12
+  54              		.loc 1 67 13 is_stmt 0 view .LVU13
+  55 0004 01F00704 		and	r4, r1, #7
+  56 0008 03FA04F6 		lsl	r6, r3, r4
+  57              	.LVL3:
+  68:Drivers/FreeModbus/functions/mbutils.c **** 
+  69:Drivers/FreeModbus/functions/mbutils.c ****     /* Prepare a mask for setting the new bits. */
+  70:Drivers/FreeModbus/functions/mbutils.c ****     usMask = ( USHORT )( ( 1 << ( USHORT ) ucNBits ) - 1 );
+  58              		.loc 1 70 5 is_stmt 1 view .LVU14
+  59              		.loc 1 70 30 is_stmt 0 view .LVU15
+  60 000c 0124     		movs	r4, #1
+  61 000e 04FA02F3 		lsl	r3, r4, r2
+  62              	.LVL4:
+  63              		.loc 1 70 14 view .LVU16
+  64 0012 9BB2     		uxth	r3, r3
+  65              		.loc 1 70 12 view .LVU17
+  66 0014 013B     		subs	r3, r3, #1
+  67 0016 9BB2     		uxth	r3, r3
+  68              	.LVL5:
+  71:Drivers/FreeModbus/functions/mbutils.c ****     usMask <<= usBitOffset - usByteOffset * BITS_UCHAR;
+  69              		.loc 1 71 5 is_stmt 1 view .LVU18
+  70              		.loc 1 71 28 is_stmt 0 view .LVU19
+  71 0018 01F00701 		and	r1, r1, #7
+  72              	.LVL6:
+  73              		.loc 1 71 12 view .LVU20
+  74 001c 03FA01F1 		lsl	r1, r3, r1
+  75              	.LVL7:
+  72:Drivers/FreeModbus/functions/mbutils.c **** 
+  73:Drivers/FreeModbus/functions/mbutils.c ****     /* copy bits into temporary storage. */
+  74:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf = ucByteBuf[usByteOffset];
+  76              		.loc 1 74 5 is_stmt 1 view .LVU21
+  77              		.loc 1 74 26 is_stmt 0 view .LVU22
+  78 0020 435D     		ldrb	r3, [r0, r5]	@ zero_extendqisi2
+  79              	.LVL8:
+  75:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf |= ucByteBuf[usByteOffset + 1] << BITS_UCHAR;
+  80              		.loc 1 75 5 is_stmt 1 view .LVU23
+  81              		.loc 1 75 27 is_stmt 0 view .LVU24
+  82 0022 2A19     		adds	r2, r5, r4
+  83              	.LVL9:
+  84              		.loc 1 75 27 view .LVU25
+  85 0024 845C     		ldrb	r4, [r0, r2]	@ zero_extendqisi2
+  86              		.loc 1 75 15 view .LVU26
+  87 0026 43EA0423 		orr	r3, r3, r4, lsl #8
+  88              	.LVL10:
+  89              		.loc 1 75 15 view .LVU27
+  90 002a 1BB2     		sxth	r3, r3
+  91              	.LVL11:
+  76:Drivers/FreeModbus/functions/mbutils.c **** 
+  77:Drivers/FreeModbus/functions/mbutils.c ****     /* Zero out bit field bits and then or value bits into them. */
+  78:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf = ( USHORT )( ( usWordBuf & ( ~usMask ) ) | usValue );
+  92              		.loc 1 78 5 is_stmt 1 view .LVU28
+  93              		.loc 1 78 41 is_stmt 0 view .LVU29
+  94 002c 23EA0103 		bic	r3, r3, r1
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 4
+
+
+  95              	.LVL12:
+  96              		.loc 1 78 41 view .LVU30
+  97 0030 1BB2     		sxth	r3, r3
+  98              		.loc 1 78 57 view .LVU31
+  99 0032 3343     		orrs	r3, r3, r6
+ 100              	.LVL13:
+  79:Drivers/FreeModbus/functions/mbutils.c **** 
+  80:Drivers/FreeModbus/functions/mbutils.c ****     /* move bits back into storage */
+  81:Drivers/FreeModbus/functions/mbutils.c ****     ucByteBuf[usByteOffset] = ( UCHAR )( usWordBuf & 0xFF );
+ 101              		.loc 1 81 5 is_stmt 1 view .LVU32
+ 102              		.loc 1 81 29 is_stmt 0 view .LVU33
+ 103 0034 4355     		strb	r3, [r0, r5]
+  82:Drivers/FreeModbus/functions/mbutils.c ****     ucByteBuf[usByteOffset + 1] = ( UCHAR )( usWordBuf >> BITS_UCHAR );
+ 104              		.loc 1 82 5 is_stmt 1 view .LVU34
+ 105              		.loc 1 82 35 is_stmt 0 view .LVU35
+ 106 0036 C3F30723 		ubfx	r3, r3, #8, #8
+ 107              	.LVL14:
+ 108              		.loc 1 82 33 view .LVU36
+ 109 003a 8354     		strb	r3, [r0, r2]
+  83:Drivers/FreeModbus/functions/mbutils.c **** }
+ 110              		.loc 1 83 1 view .LVU37
+ 111 003c 70BC     		pop	{r4, r5, r6}
+ 112              	.LCFI1:
+ 113              		.cfi_restore 6
+ 114              		.cfi_restore 5
+ 115              		.cfi_restore 4
+ 116              		.cfi_def_cfa_offset 0
+ 117              	.LVL15:
+ 118              		.loc 1 83 1 view .LVU38
+ 119 003e 7047     		bx	lr
+ 120              		.cfi_endproc
+ 121              	.LFE65:
+ 123              		.section	.text.xMBUtilGetBits,"ax",%progbits
+ 124              		.align	1
+ 125              		.global	xMBUtilGetBits
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 129              		.fpu softvfp
+ 131              	xMBUtilGetBits:
+ 132              	.LVL16:
+ 133              	.LFB66:
+  84:Drivers/FreeModbus/functions/mbutils.c **** 
+  85:Drivers/FreeModbus/functions/mbutils.c **** UCHAR
+  86:Drivers/FreeModbus/functions/mbutils.c **** xMBUtilGetBits( UCHAR * ucByteBuf, USHORT usBitOffset, UCHAR ucNBits )
+  87:Drivers/FreeModbus/functions/mbutils.c **** {
+ 134              		.loc 1 87 1 is_stmt 1 view -0
+ 135              		.cfi_startproc
+ 136              		@ args = 0, pretend = 0, frame = 0
+ 137              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138              		@ link register save eliminated.
+ 139              		.loc 1 87 1 is_stmt 0 view .LVU40
+ 140 0000 10B4     		push	{r4}
+ 141              	.LCFI2:
+ 142              		.cfi_def_cfa_offset 4
+ 143              		.cfi_offset 4, -4
+  88:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usWordBuf;
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 5
+
+
+ 144              		.loc 1 88 5 is_stmt 1 view .LVU41
+  89:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usMask;
+ 145              		.loc 1 89 5 view .LVU42
+  90:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usByteOffset;
+ 146              		.loc 1 90 5 view .LVU43
+  91:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usNPreBits;
+ 147              		.loc 1 91 5 view .LVU44
+  92:Drivers/FreeModbus/functions/mbutils.c **** 
+  93:Drivers/FreeModbus/functions/mbutils.c ****     /* Calculate byte offset for first byte containing the bit values starting
+  94:Drivers/FreeModbus/functions/mbutils.c ****      * at usBitOffset. */
+  95:Drivers/FreeModbus/functions/mbutils.c ****     usByteOffset = ( USHORT )( ( usBitOffset ) / BITS_UCHAR );
+ 148              		.loc 1 95 5 view .LVU45
+ 149              		.loc 1 95 18 is_stmt 0 view .LVU46
+ 150 0002 CC08     		lsrs	r4, r1, #3
+ 151              	.LVL17:
+  96:Drivers/FreeModbus/functions/mbutils.c **** 
+  97:Drivers/FreeModbus/functions/mbutils.c ****     /* How many bits precede our bits to set. */
+  98:Drivers/FreeModbus/functions/mbutils.c ****     usNPreBits = ( USHORT )( usBitOffset - usByteOffset * BITS_UCHAR );
+ 152              		.loc 1 98 5 is_stmt 1 view .LVU47
+  99:Drivers/FreeModbus/functions/mbutils.c **** 
+ 100:Drivers/FreeModbus/functions/mbutils.c ****     /* Prepare a mask for setting the new bits. */
+ 101:Drivers/FreeModbus/functions/mbutils.c ****     usMask = ( USHORT )( ( 1 << ( USHORT ) ucNBits ) - 1 );
+ 153              		.loc 1 101 5 view .LVU48
+ 154              		.loc 1 101 30 is_stmt 0 view .LVU49
+ 155 0004 0123     		movs	r3, #1
+ 156 0006 9340     		lsls	r3, r3, r2
+ 157              		.loc 1 101 14 view .LVU50
+ 158 0008 9BB2     		uxth	r3, r3
+ 159              		.loc 1 101 12 view .LVU51
+ 160 000a 013B     		subs	r3, r3, #1
+ 161              	.LVL18:
+ 102:Drivers/FreeModbus/functions/mbutils.c **** 
+ 103:Drivers/FreeModbus/functions/mbutils.c ****     /* copy bits into temporary storage. */
+ 104:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf = ucByteBuf[usByteOffset];
+ 162              		.loc 1 104 5 is_stmt 1 view .LVU52
+ 163              		.loc 1 104 26 is_stmt 0 view .LVU53
+ 164 000c 025D     		ldrb	r2, [r0, r4]	@ zero_extendqisi2
+ 165              	.LVL19:
+ 105:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf |= ucByteBuf[usByteOffset + 1] << BITS_UCHAR;
+ 166              		.loc 1 105 5 is_stmt 1 view .LVU54
+ 167              		.loc 1 105 27 is_stmt 0 view .LVU55
+ 168 000e 2044     		add	r0, r0, r4
+ 169              	.LVL20:
+ 170              		.loc 1 105 27 view .LVU56
+ 171 0010 4078     		ldrb	r0, [r0, #1]	@ zero_extendqisi2
+ 172              		.loc 1 105 15 view .LVU57
+ 173 0012 42EA0020 		orr	r0, r2, r0, lsl #8
+ 174              	.LVL21:
+ 106:Drivers/FreeModbus/functions/mbutils.c **** 
+ 107:Drivers/FreeModbus/functions/mbutils.c ****     /* throw away unneeded bits. */
+ 108:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf >>= usNPreBits;
+ 175              		.loc 1 108 5 is_stmt 1 view .LVU58
+ 176              		.loc 1 108 15 is_stmt 0 view .LVU59
+ 177 0016 01F00701 		and	r1, r1, #7
+ 178              	.LVL22:
+ 179              		.loc 1 108 15 view .LVU60
+ 180 001a 0841     		asrs	r0, r0, r1
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 6
+
+
+ 181              	.LVL23:
+ 182              		.loc 1 108 15 view .LVU61
+ 183 001c 80B2     		uxth	r0, r0
+ 184              	.LVL24:
+ 109:Drivers/FreeModbus/functions/mbutils.c **** 
+ 110:Drivers/FreeModbus/functions/mbutils.c ****     /* mask away bits above the requested bitfield. */
+ 111:Drivers/FreeModbus/functions/mbutils.c ****     usWordBuf &= usMask;
+ 185              		.loc 1 111 5 is_stmt 1 view .LVU62
+ 186              		.loc 1 111 15 is_stmt 0 view .LVU63
+ 187 001e 1840     		ands	r0, r0, r3
+ 188              	.LVL25:
+ 112:Drivers/FreeModbus/functions/mbutils.c **** 
+ 113:Drivers/FreeModbus/functions/mbutils.c ****     return ( UCHAR ) usWordBuf;
+ 189              		.loc 1 113 5 is_stmt 1 view .LVU64
+ 114:Drivers/FreeModbus/functions/mbutils.c **** }
+ 190              		.loc 1 114 1 is_stmt 0 view .LVU65
+ 191 0020 C0B2     		uxtb	r0, r0
+ 192              	.LVL26:
+ 193              		.loc 1 114 1 view .LVU66
+ 194 0022 10BC     		pop	{r4}
+ 195              	.LCFI3:
+ 196              		.cfi_restore 4
+ 197              		.cfi_def_cfa_offset 0
+ 198              	.LVL27:
+ 199              		.loc 1 114 1 view .LVU67
+ 200 0024 7047     		bx	lr
+ 201              		.cfi_endproc
+ 202              	.LFE66:
+ 204              		.section	.text.prveMBError2Exception,"ax",%progbits
+ 205              		.align	1
+ 206              		.global	prveMBError2Exception
+ 207              		.syntax unified
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.fpu softvfp
+ 212              	prveMBError2Exception:
+ 213              	.LVL28:
+ 214              	.LFB67:
+ 115:Drivers/FreeModbus/functions/mbutils.c **** 
+ 116:Drivers/FreeModbus/functions/mbutils.c **** eMBException
+ 117:Drivers/FreeModbus/functions/mbutils.c **** prveMBError2Exception( eMBErrorCode eErrorCode )
+ 118:Drivers/FreeModbus/functions/mbutils.c **** {
+ 215              		.loc 1 118 1 is_stmt 1 view -0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 119:Drivers/FreeModbus/functions/mbutils.c ****     eMBException    eStatus;
+ 220              		.loc 1 119 5 view .LVU69
+ 120:Drivers/FreeModbus/functions/mbutils.c **** 
+ 121:Drivers/FreeModbus/functions/mbutils.c ****     switch ( eErrorCode )
+ 221              		.loc 1 121 5 view .LVU70
+ 222 0000 0128     		cmp	r0, #1
+ 223 0002 05D0     		beq	.L7
+ 224 0004 0728     		cmp	r0, #7
+ 225 0006 05D0     		beq	.L8
+ 226 0008 08B1     		cbz	r0, .L10
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 7
+
+
+ 122:Drivers/FreeModbus/functions/mbutils.c ****     {
+ 123:Drivers/FreeModbus/functions/mbutils.c ****         case MB_ENOERR:
+ 124:Drivers/FreeModbus/functions/mbutils.c ****             eStatus = MB_EX_NONE;
+ 125:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 126:Drivers/FreeModbus/functions/mbutils.c **** 
+ 127:Drivers/FreeModbus/functions/mbutils.c ****         case MB_ENOREG:
+ 128:Drivers/FreeModbus/functions/mbutils.c ****             eStatus = MB_EX_ILLEGAL_DATA_ADDRESS;
+ 129:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 130:Drivers/FreeModbus/functions/mbutils.c **** 
+ 131:Drivers/FreeModbus/functions/mbutils.c ****         case MB_ETIMEDOUT:
+ 132:Drivers/FreeModbus/functions/mbutils.c ****             eStatus = MB_EX_SLAVE_BUSY;
+ 133:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 134:Drivers/FreeModbus/functions/mbutils.c **** 
+ 135:Drivers/FreeModbus/functions/mbutils.c ****         default:
+ 136:Drivers/FreeModbus/functions/mbutils.c ****             eStatus = MB_EX_SLAVE_DEVICE_FAILURE;
+ 227              		.loc 1 136 21 is_stmt 0 view .LVU71
+ 228 000a 0420     		movs	r0, #4
+ 229              	.LVL29:
+ 137:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 138:Drivers/FreeModbus/functions/mbutils.c ****     }
+ 139:Drivers/FreeModbus/functions/mbutils.c **** 
+ 140:Drivers/FreeModbus/functions/mbutils.c ****     return eStatus;
+ 230              		.loc 1 140 5 is_stmt 1 view .LVU72
+ 141:Drivers/FreeModbus/functions/mbutils.c **** }
+ 231              		.loc 1 141 1 is_stmt 0 view .LVU73
+ 232 000c 7047     		bx	lr
+ 233              	.LVL30:
+ 234              	.L10:
+ 235              		.loc 1 141 1 view .LVU74
+ 236 000e 7047     		bx	lr
+ 237              	.L7:
+ 128:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 238              		.loc 1 128 21 view .LVU75
+ 239 0010 0220     		movs	r0, #2
+ 240              	.LVL31:
+ 128:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 241              		.loc 1 128 21 view .LVU76
+ 242 0012 7047     		bx	lr
+ 243              	.LVL32:
+ 244              	.L8:
+ 132:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 245              		.loc 1 132 21 view .LVU77
+ 246 0014 0620     		movs	r0, #6
+ 247              	.LVL33:
+ 132:Drivers/FreeModbus/functions/mbutils.c ****             break;
+ 248              		.loc 1 132 21 view .LVU78
+ 249 0016 7047     		bx	lr
+ 250              		.cfi_endproc
+ 251              	.LFE67:
+ 253              		.text
+ 254              	.Letext0:
+ 255              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
+ 256              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\lock.h"
+ 257              		.file 4 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_types.h"
+ 258              		.file 5 "c:\\program files\\microsoft vs code\\gcc_arm\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\s
+ 259              		.file 6 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\reent.h"
+ 260              		.file 7 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\stdlib.h"
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 8
+
+
+ 261              		.file 8 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 262              		.file 9 "Drivers/CMSIS/Include/core_cm3.h"
+ 263              		.file 10 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 264              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 265              		.file 12 "Drivers/FreeModbus/port/port.h"
+ 266              		.file 13 "Drivers/FreeModbus/include/mbport.h"
+ 267              		.file 14 "Drivers/FreeModbus/include/mbproto.h"
+ 268              		.file 15 "Drivers/FreeModbus/include/mb.h"
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mbutils.c
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:16     .text.xMBUtilSetBits:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:24     .text.xMBUtilSetBits:0000000000000000 xMBUtilSetBits
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:124    .text.xMBUtilGetBits:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:131    .text.xMBUtilGetBits:0000000000000000 xMBUtilGetBits
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:205    .text.prveMBError2Exception:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccUBlzta.s:212    .text.prveMBError2Exception:0000000000000000 prveMBError2Exception
+
+NO UNDEFINED SYMBOLS

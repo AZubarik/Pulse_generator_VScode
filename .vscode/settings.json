@@ -1,0 +1,10 @@
+{
+	//"cortex-debug.armToolchainPath": "C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Linux/gcc_arm/bin",
+	"cortex-debug.enableTelemetry": false,
+	"cortex-debug.JLinkGDBServerPath": "C:/Program Files (x86)/SEGGER/JLinkJLinkGDBServerCL.exe",
+	"files.associations": {
+		"mbport.h": "c",
+		"user_mb_app.h": "c",
+		"mb.h": "c",
+	}
+}

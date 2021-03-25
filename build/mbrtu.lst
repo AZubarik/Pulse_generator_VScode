@@ -1,0 +1,1328 @@
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"mbrtu.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.eMBRTUInit,"ax",%progbits
+  16              		.align	1
+  17              		.global	eMBRTUInit
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	eMBRTUInit:
+  25              	.LVL0:
+  26              	.LFB65:
+  27              		.file 1 "Drivers/FreeModbus/rtu/mbrtu.c"
+   1:Drivers/FreeModbus/rtu/mbrtu.c **** /* 
+   2:Drivers/FreeModbus/rtu/mbrtu.c ****  * FreeModbus Libary: A portable Modbus implementation for Modbus ASCII/RTU.
+   3:Drivers/FreeModbus/rtu/mbrtu.c ****  * Copyright (c) 2006-2018 Christian Walter <cwalter@embedded-solutions.at>
+   4:Drivers/FreeModbus/rtu/mbrtu.c ****  * All rights reserved.
+   5:Drivers/FreeModbus/rtu/mbrtu.c ****  *
+   6:Drivers/FreeModbus/rtu/mbrtu.c ****  * Redistribution and use in source and binary forms, with or without
+   7:Drivers/FreeModbus/rtu/mbrtu.c ****  * modification, are permitted provided that the following conditions
+   8:Drivers/FreeModbus/rtu/mbrtu.c ****  * are met:
+   9:Drivers/FreeModbus/rtu/mbrtu.c ****  * 1. Redistributions of source code must retain the above copyright
+  10:Drivers/FreeModbus/rtu/mbrtu.c ****  *    notice, this list of conditions and the following disclaimer.
+  11:Drivers/FreeModbus/rtu/mbrtu.c ****  * 2. Redistributions in binary form must reproduce the above copyright
+  12:Drivers/FreeModbus/rtu/mbrtu.c ****  *    notice, this list of conditions and the following disclaimer in the
+  13:Drivers/FreeModbus/rtu/mbrtu.c ****  *    documentation and/or other materials provided with the distribution.
+  14:Drivers/FreeModbus/rtu/mbrtu.c ****  * 3. The name of the author may not be used to endorse or promote products
+  15:Drivers/FreeModbus/rtu/mbrtu.c ****  *    derived from this software without specific prior written permission.
+  16:Drivers/FreeModbus/rtu/mbrtu.c ****  *
+  17:Drivers/FreeModbus/rtu/mbrtu.c ****  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+  18:Drivers/FreeModbus/rtu/mbrtu.c ****  * IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+  19:Drivers/FreeModbus/rtu/mbrtu.c ****  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+  20:Drivers/FreeModbus/rtu/mbrtu.c ****  * IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+  21:Drivers/FreeModbus/rtu/mbrtu.c ****  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+  22:Drivers/FreeModbus/rtu/mbrtu.c ****  * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  23:Drivers/FreeModbus/rtu/mbrtu.c ****  * DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  24:Drivers/FreeModbus/rtu/mbrtu.c ****  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  25:Drivers/FreeModbus/rtu/mbrtu.c ****  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+  26:Drivers/FreeModbus/rtu/mbrtu.c ****  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  27:Drivers/FreeModbus/rtu/mbrtu.c ****  *
+  28:Drivers/FreeModbus/rtu/mbrtu.c ****  * File: $Id: mbrtu.c,v 1.18 2007/09/12 10:15:56 wolti Exp $
+  29:Drivers/FreeModbus/rtu/mbrtu.c ****  */
+  30:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  31:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- System includes ----------------------------------*/
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 2
+
+
+  32:Drivers/FreeModbus/rtu/mbrtu.c **** #include "stdlib.h"
+  33:Drivers/FreeModbus/rtu/mbrtu.c **** #include "string.h"
+  34:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  35:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Platform includes --------------------------------*/
+  36:Drivers/FreeModbus/rtu/mbrtu.c **** #include "port.h"
+  37:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  38:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Modbus includes ----------------------------------*/
+  39:Drivers/FreeModbus/rtu/mbrtu.c **** #include "mb.h"
+  40:Drivers/FreeModbus/rtu/mbrtu.c **** #include "mbrtu.h"
+  41:Drivers/FreeModbus/rtu/mbrtu.c **** #include "mbframe.h"
+  42:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  43:Drivers/FreeModbus/rtu/mbrtu.c **** #include "mbcrc.h"
+  44:Drivers/FreeModbus/rtu/mbrtu.c **** #include "mbport.h"
+  45:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  46:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Defines ------------------------------------------*/
+  47:Drivers/FreeModbus/rtu/mbrtu.c **** #define MB_SER_PDU_SIZE_MIN     4       /*!< Minimum size of a Modbus RTU frame. */
+  48:Drivers/FreeModbus/rtu/mbrtu.c **** #define MB_SER_PDU_SIZE_MAX     256     /*!< Maximum size of a Modbus RTU frame. */
+  49:Drivers/FreeModbus/rtu/mbrtu.c **** #define MB_SER_PDU_SIZE_CRC     2       /*!< Size of CRC field in PDU. */
+  50:Drivers/FreeModbus/rtu/mbrtu.c **** #define MB_SER_PDU_ADDR_OFF     0       /*!< Offset of slave address in Ser-PDU. */
+  51:Drivers/FreeModbus/rtu/mbrtu.c **** #define MB_SER_PDU_PDU_OFF      1       /*!< Offset of Modbus-PDU in Ser-PDU. */
+  52:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  53:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Type definitions ---------------------------------*/
+  54:Drivers/FreeModbus/rtu/mbrtu.c **** typedef enum
+  55:Drivers/FreeModbus/rtu/mbrtu.c **** {
+  56:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_RX_INIT,              /*!< Receiver is in initial state. */
+  57:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_RX_IDLE,              /*!< Receiver is in idle state. */
+  58:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_RX_RCV,               /*!< Frame is beeing received. */
+  59:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_RX_ERROR              /*!< If the frame is invalid. */
+  60:Drivers/FreeModbus/rtu/mbrtu.c **** } eMBRcvState;
+  61:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  62:Drivers/FreeModbus/rtu/mbrtu.c **** typedef enum
+  63:Drivers/FreeModbus/rtu/mbrtu.c **** {
+  64:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_TX_IDLE,              /*!< Transmitter is in idle state. */
+  65:Drivers/FreeModbus/rtu/mbrtu.c ****     STATE_TX_XMIT               /*!< Transmitter is in transfer state. */
+  66:Drivers/FreeModbus/rtu/mbrtu.c **** } eMBSndState;
+  67:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  68:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Static variables ---------------------------------*/
+  69:Drivers/FreeModbus/rtu/mbrtu.c **** static volatile eMBSndState eSndState;
+  70:Drivers/FreeModbus/rtu/mbrtu.c **** static volatile eMBRcvState eRcvState;
+  71:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  72:Drivers/FreeModbus/rtu/mbrtu.c **** volatile UCHAR  ucRTUBuf[MB_SER_PDU_SIZE_MAX];
+  73:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  74:Drivers/FreeModbus/rtu/mbrtu.c **** static volatile UCHAR *pucSndBufferCur;
+  75:Drivers/FreeModbus/rtu/mbrtu.c **** static volatile USHORT usSndBufferCount;
+  76:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  77:Drivers/FreeModbus/rtu/mbrtu.c **** static volatile USHORT usRcvBufferPos;
+  78:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  79:Drivers/FreeModbus/rtu/mbrtu.c **** /* ----------------------- Start implementation -----------------------------*/
+  80:Drivers/FreeModbus/rtu/mbrtu.c **** eMBErrorCode
+  81:Drivers/FreeModbus/rtu/mbrtu.c **** eMBRTUInit( UCHAR ucSlaveAddress, void *dHUART, ULONG ulBaudRate, void *dHTIM )
+  82:Drivers/FreeModbus/rtu/mbrtu.c **** {
+  28              		.loc 1 82 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 82 1 is_stmt 0 view .LVU1
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 3
+
+
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0E46     		mov	r6, r1
+  41 0004 1446     		mov	r4, r2
+  42 0006 1D46     		mov	r5, r3
+  83:Drivers/FreeModbus/rtu/mbrtu.c ****     eMBErrorCode    eStatus = MB_ENOERR;
+  43              		.loc 1 83 5 is_stmt 1 view .LVU2
+  44              	.LVL1:
+  84:Drivers/FreeModbus/rtu/mbrtu.c ****     ULONG           usTimerT35_50us;
+  45              		.loc 1 84 5 view .LVU3
+  85:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  86:Drivers/FreeModbus/rtu/mbrtu.c ****     ( void )ucSlaveAddress;
+  46              		.loc 1 86 5 view .LVU4
+  87:Drivers/FreeModbus/rtu/mbrtu.c ****     ENTER_CRITICAL_SECTION(  );
+  47              		.loc 1 87 5 view .LVU5
+  48 0008 FFF7FEFF 		bl	__critical_enter
+  49              	.LVL2:
+  88:Drivers/FreeModbus/rtu/mbrtu.c **** 
+  89:Drivers/FreeModbus/rtu/mbrtu.c ****     /* Modbus RTU uses 8 Databits. */
+  90:Drivers/FreeModbus/rtu/mbrtu.c ****     if( xMBPortSerialInit( dHUART, ulBaudRate, dHTIM ) != TRUE )
+  50              		.loc 1 90 5 view .LVU6
+  51              		.loc 1 90 9 is_stmt 0 view .LVU7
+  52 000c 2A46     		mov	r2, r5
+  53 000e 2146     		mov	r1, r4
+  54 0010 3046     		mov	r0, r6
+  55 0012 FFF7FEFF 		bl	xMBPortSerialInit
+  56              	.LVL3:
+  57              		.loc 1 90 7 view .LVU8
+  58 0016 0128     		cmp	r0, #1
+  59 0018 04D0     		beq	.L8
+  91:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+  92:Drivers/FreeModbus/rtu/mbrtu.c ****         eStatus = MB_EPORTERR;
+  60              		.loc 1 92 17 view .LVU9
+  61 001a 0324     		movs	r4, #3
+  62              	.LVL4:
+  63              	.L2:
+  93:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+  94:Drivers/FreeModbus/rtu/mbrtu.c ****     else
+  95:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+  96:Drivers/FreeModbus/rtu/mbrtu.c ****         /* If baudrate > 19200 then we should use the fixed timer values
+  97:Drivers/FreeModbus/rtu/mbrtu.c ****          * t35 = 1750us. Otherwise t35 must be 3.5 times the character time.
+  98:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+  99:Drivers/FreeModbus/rtu/mbrtu.c ****         if( ulBaudRate > 19200 )
+ 100:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 101:Drivers/FreeModbus/rtu/mbrtu.c ****             usTimerT35_50us = 35;       /* 1800us. */
+ 102:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 103:Drivers/FreeModbus/rtu/mbrtu.c ****         else
+ 104:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 105:Drivers/FreeModbus/rtu/mbrtu.c ****             /* The timer reload value for a character is given by:
+ 106:Drivers/FreeModbus/rtu/mbrtu.c ****              *
+ 107:Drivers/FreeModbus/rtu/mbrtu.c ****              * ChTimeValue = Ticks_per_1s / ( Baudrate / 11 )
+ 108:Drivers/FreeModbus/rtu/mbrtu.c ****              *             = 11 * Ticks_per_1s / Baudrate
+ 109:Drivers/FreeModbus/rtu/mbrtu.c ****              *             = 220000 / Baudrate
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 4
+
+
+ 110:Drivers/FreeModbus/rtu/mbrtu.c ****              * The reload for t3.5 is 1.5 times this value and similary
+ 111:Drivers/FreeModbus/rtu/mbrtu.c ****              * for t3.5.
+ 112:Drivers/FreeModbus/rtu/mbrtu.c ****              */
+ 113:Drivers/FreeModbus/rtu/mbrtu.c ****             usTimerT35_50us = ( 7UL * 220000UL ) / ( 2UL * ulBaudRate );
+ 114:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 115:Drivers/FreeModbus/rtu/mbrtu.c ****         if( xMBPortTimersInit( ( USHORT ) usTimerT35_50us, dHTIM ) != TRUE )
+ 116:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 117:Drivers/FreeModbus/rtu/mbrtu.c ****             eStatus = MB_EPORTERR;
+ 118:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 119:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 120:Drivers/FreeModbus/rtu/mbrtu.c ****     EXIT_CRITICAL_SECTION(  );
+  64              		.loc 1 120 5 is_stmt 1 view .LVU10
+  65 001c FFF7FEFF 		bl	__critical_exit
+  66              	.LVL5:
+ 121:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 122:Drivers/FreeModbus/rtu/mbrtu.c ****     return eStatus;
+  67              		.loc 1 122 5 view .LVU11
+ 123:Drivers/FreeModbus/rtu/mbrtu.c **** }
+  68              		.loc 1 123 1 is_stmt 0 view .LVU12
+  69 0020 2046     		mov	r0, r4
+  70 0022 70BD     		pop	{r4, r5, r6, pc}
+  71              	.LVL6:
+  72              	.L8:
+  99:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  73              		.loc 1 99 9 is_stmt 1 view .LVU13
+  99:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  74              		.loc 1 99 11 is_stmt 0 view .LVU14
+  75 0024 B4F5964F 		cmp	r4, #19200
+  76 0028 0BD8     		bhi	.L5
+ 113:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+  77              		.loc 1 113 13 is_stmt 1 view .LVU15
+ 113:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+  78              		.loc 1 113 58 is_stmt 0 view .LVU16
+  79 002a 6400     		lsls	r4, r4, #1
+  80              	.LVL7:
+ 113:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+  81              		.loc 1 113 29 view .LVU17
+  82 002c 0748     		ldr	r0, .L10
+  83 002e B0FBF4F0 		udiv	r0, r0, r4
+  84              	.LVL8:
+  85              	.L3:
+ 115:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  86              		.loc 1 115 9 is_stmt 1 view .LVU18
+ 115:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  87              		.loc 1 115 13 is_stmt 0 view .LVU19
+  88 0032 2946     		mov	r1, r5
+  89 0034 80B2     		uxth	r0, r0
+  90              	.LVL9:
+ 115:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  91              		.loc 1 115 13 view .LVU20
+  92 0036 FFF7FEFF 		bl	xMBPortTimersInit
+  93              	.LVL10:
+ 115:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+  94              		.loc 1 115 11 view .LVU21
+  95 003a 0128     		cmp	r0, #1
+  96 003c 03D0     		beq	.L9
+ 117:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 5
+
+
+  97              		.loc 1 117 21 view .LVU22
+  98 003e 0324     		movs	r4, #3
+  99 0040 ECE7     		b	.L2
+ 100              	.LVL11:
+ 101              	.L5:
+ 101:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 102              		.loc 1 101 29 view .LVU23
+ 103 0042 2320     		movs	r0, #35
+ 104 0044 F5E7     		b	.L3
+ 105              	.LVL12:
+ 106              	.L9:
+  83:Drivers/FreeModbus/rtu/mbrtu.c ****     ULONG           usTimerT35_50us;
+ 107              		.loc 1 83 21 view .LVU24
+ 108 0046 0024     		movs	r4, #0
+ 109 0048 E8E7     		b	.L2
+ 110              	.L11:
+ 111 004a 00BF     		.align	2
+ 112              	.L10:
+ 113 004c A07F1700 		.word	1540000
+ 114              		.cfi_endproc
+ 115              	.LFE65:
+ 117              		.section	.text.eMBRTUStart,"ax",%progbits
+ 118              		.align	1
+ 119              		.global	eMBRTUStart
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.fpu softvfp
+ 125              	eMBRTUStart:
+ 126              	.LFB66:
+ 124:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 125:Drivers/FreeModbus/rtu/mbrtu.c **** void
+ 126:Drivers/FreeModbus/rtu/mbrtu.c **** eMBRTUStart( void )
+ 127:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 127              		.loc 1 127 1 is_stmt 1 view -0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 0, uses_anonymous_args = 0
+ 131 0000 08B5     		push	{r3, lr}
+ 132              	.LCFI1:
+ 133              		.cfi_def_cfa_offset 8
+ 134              		.cfi_offset 3, -8
+ 135              		.cfi_offset 14, -4
+ 128:Drivers/FreeModbus/rtu/mbrtu.c ****     ENTER_CRITICAL_SECTION(  );
+ 136              		.loc 1 128 5 view .LVU26
+ 137 0002 FFF7FEFF 		bl	__critical_enter
+ 138              	.LVL13:
+ 129:Drivers/FreeModbus/rtu/mbrtu.c ****     /* Initially the receiver is in the state STATE_RX_INIT. we start
+ 130:Drivers/FreeModbus/rtu/mbrtu.c ****      * the timer and if no character is received within t3.5 we change
+ 131:Drivers/FreeModbus/rtu/mbrtu.c ****      * to STATE_RX_IDLE. This makes sure that we delay startup of the
+ 132:Drivers/FreeModbus/rtu/mbrtu.c ****      * modbus protocol stack until the bus is free.
+ 133:Drivers/FreeModbus/rtu/mbrtu.c ****      */
+ 134:Drivers/FreeModbus/rtu/mbrtu.c ****     eRcvState = STATE_RX_INIT;
+ 139              		.loc 1 134 5 view .LVU27
+ 140              		.loc 1 134 15 is_stmt 0 view .LVU28
+ 141 0006 0021     		movs	r1, #0
+ 142 0008 044B     		ldr	r3, .L14
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 6
+
+
+ 143 000a 1970     		strb	r1, [r3]
+ 135:Drivers/FreeModbus/rtu/mbrtu.c ****     vMBPortSerialEnable( TRUE, FALSE );
+ 144              		.loc 1 135 5 is_stmt 1 view .LVU29
+ 145 000c 0120     		movs	r0, #1
+ 146 000e FFF7FEFF 		bl	vMBPortSerialEnable
+ 147              	.LVL14:
+ 136:Drivers/FreeModbus/rtu/mbrtu.c ****     vMBPortTimersEnable(  );
+ 148              		.loc 1 136 5 view .LVU30
+ 149 0012 FFF7FEFF 		bl	vMBPortTimersEnable
+ 150              	.LVL15:
+ 137:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 138:Drivers/FreeModbus/rtu/mbrtu.c ****     EXIT_CRITICAL_SECTION(  );
+ 151              		.loc 1 138 5 view .LVU31
+ 152 0016 FFF7FEFF 		bl	__critical_exit
+ 153              	.LVL16:
+ 139:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 154              		.loc 1 139 1 is_stmt 0 view .LVU32
+ 155 001a 08BD     		pop	{r3, pc}
+ 156              	.L15:
+ 157              		.align	2
+ 158              	.L14:
+ 159 001c 00000000 		.word	.LANCHOR0
+ 160              		.cfi_endproc
+ 161              	.LFE66:
+ 163              		.section	.text.eMBRTUStop,"ax",%progbits
+ 164              		.align	1
+ 165              		.global	eMBRTUStop
+ 166              		.syntax unified
+ 167              		.thumb
+ 168              		.thumb_func
+ 169              		.fpu softvfp
+ 171              	eMBRTUStop:
+ 172              	.LFB67:
+ 140:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 141:Drivers/FreeModbus/rtu/mbrtu.c **** void
+ 142:Drivers/FreeModbus/rtu/mbrtu.c **** eMBRTUStop( void )
+ 143:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 173              		.loc 1 143 1 is_stmt 1 view -0
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 0
+ 176              		@ frame_needed = 0, uses_anonymous_args = 0
+ 177 0000 08B5     		push	{r3, lr}
+ 178              	.LCFI2:
+ 179              		.cfi_def_cfa_offset 8
+ 180              		.cfi_offset 3, -8
+ 181              		.cfi_offset 14, -4
+ 144:Drivers/FreeModbus/rtu/mbrtu.c ****     ENTER_CRITICAL_SECTION(  );
+ 182              		.loc 1 144 5 view .LVU34
+ 183 0002 FFF7FEFF 		bl	__critical_enter
+ 184              	.LVL17:
+ 145:Drivers/FreeModbus/rtu/mbrtu.c ****     vMBPortSerialEnable( FALSE, FALSE );
+ 185              		.loc 1 145 5 view .LVU35
+ 186 0006 0021     		movs	r1, #0
+ 187 0008 0846     		mov	r0, r1
+ 188 000a FFF7FEFF 		bl	vMBPortSerialEnable
+ 189              	.LVL18:
+ 146:Drivers/FreeModbus/rtu/mbrtu.c ****     vMBPortTimersDisable(  );
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 7
+
+
+ 190              		.loc 1 146 5 view .LVU36
+ 191 000e FFF7FEFF 		bl	vMBPortTimersDisable
+ 192              	.LVL19:
+ 147:Drivers/FreeModbus/rtu/mbrtu.c ****     EXIT_CRITICAL_SECTION(  );
+ 193              		.loc 1 147 5 view .LVU37
+ 194 0012 FFF7FEFF 		bl	__critical_exit
+ 195              	.LVL20:
+ 148:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 196              		.loc 1 148 1 is_stmt 0 view .LVU38
+ 197 0016 08BD     		pop	{r3, pc}
+ 198              		.cfi_endproc
+ 199              	.LFE67:
+ 201              		.section	.text.eMBRTUReceive,"ax",%progbits
+ 202              		.align	1
+ 203              		.global	eMBRTUReceive
+ 204              		.syntax unified
+ 205              		.thumb
+ 206              		.thumb_func
+ 207              		.fpu softvfp
+ 209              	eMBRTUReceive:
+ 210              	.LVL21:
+ 211              	.LFB68:
+ 149:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 150:Drivers/FreeModbus/rtu/mbrtu.c **** eMBErrorCode
+ 151:Drivers/FreeModbus/rtu/mbrtu.c **** eMBRTUReceive( UCHAR * pucRcvAddress, UCHAR ** pucFrame, USHORT * pusLength )
+ 152:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 212              		.loc 1 152 1 is_stmt 1 view -0
+ 213              		.cfi_startproc
+ 214              		@ args = 0, pretend = 0, frame = 0
+ 215              		@ frame_needed = 0, uses_anonymous_args = 0
+ 216              		.loc 1 152 1 is_stmt 0 view .LVU40
+ 217 0000 70B5     		push	{r4, r5, r6, lr}
+ 218              	.LCFI3:
+ 219              		.cfi_def_cfa_offset 16
+ 220              		.cfi_offset 4, -16
+ 221              		.cfi_offset 5, -12
+ 222              		.cfi_offset 6, -8
+ 223              		.cfi_offset 14, -4
+ 224 0002 0646     		mov	r6, r0
+ 225 0004 0D46     		mov	r5, r1
+ 226 0006 1446     		mov	r4, r2
+ 153:Drivers/FreeModbus/rtu/mbrtu.c ****     eMBErrorCode    eStatus = MB_ENOERR;
+ 227              		.loc 1 153 5 is_stmt 1 view .LVU41
+ 228              	.LVL22:
+ 154:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 155:Drivers/FreeModbus/rtu/mbrtu.c ****     ENTER_CRITICAL_SECTION(  );
+ 229              		.loc 1 155 5 view .LVU42
+ 230 0008 FFF7FEFF 		bl	__critical_enter
+ 231              	.LVL23:
+ 156:Drivers/FreeModbus/rtu/mbrtu.c ****     assert_param( usRcvBufferPos < MB_SER_PDU_SIZE_MAX );
+ 232              		.loc 1 156 5 view .LVU43
+ 157:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 158:Drivers/FreeModbus/rtu/mbrtu.c ****     /* Length and CRC check */
+ 159:Drivers/FreeModbus/rtu/mbrtu.c ****     if( ( usRcvBufferPos >= MB_SER_PDU_SIZE_MIN )
+ 233              		.loc 1 159 5 view .LVU44
+ 234              		.loc 1 159 26 is_stmt 0 view .LVU45
+ 235 000c 0F4B     		ldr	r3, .L24
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 8
+
+
+ 236 000e 1B88     		ldrh	r3, [r3]
+ 237 0010 9BB2     		uxth	r3, r3
+ 238              		.loc 1 159 7 view .LVU46
+ 239 0012 032B     		cmp	r3, #3
+ 240 0014 04D8     		bhi	.L23
+ 160:Drivers/FreeModbus/rtu/mbrtu.c ****         && ( usMBCRC16( ( UCHAR * ) ucRTUBuf, usRcvBufferPos ) == 0 ) )
+ 161:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 162:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Save the address field. All frames are passed to the upper layed
+ 163:Drivers/FreeModbus/rtu/mbrtu.c ****          * and the decision if a frame is used is done there.
+ 164:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 165:Drivers/FreeModbus/rtu/mbrtu.c ****         *pucRcvAddress = ucRTUBuf[MB_SER_PDU_ADDR_OFF];
+ 166:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 167:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Total length of Modbus-PDU is Modbus-Serial-Line-PDU minus
+ 168:Drivers/FreeModbus/rtu/mbrtu.c ****          * size of address field and CRC checksum.
+ 169:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 170:Drivers/FreeModbus/rtu/mbrtu.c ****         *pusLength = ( USHORT )( usRcvBufferPos - MB_SER_PDU_PDU_OFF - MB_SER_PDU_SIZE_CRC );
+ 171:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 172:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Return the start of the Modbus PDU to the caller. */
+ 173:Drivers/FreeModbus/rtu/mbrtu.c ****         *pucFrame = ( UCHAR * ) & ucRTUBuf[MB_SER_PDU_PDU_OFF];
+ 174:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 175:Drivers/FreeModbus/rtu/mbrtu.c ****     else
+ 176:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 177:Drivers/FreeModbus/rtu/mbrtu.c ****         eStatus = MB_EIO;
+ 241              		.loc 1 177 17 view .LVU47
+ 242 0016 0524     		movs	r4, #5
+ 243              	.LVL24:
+ 244              	.L19:
+ 178:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 179:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 180:Drivers/FreeModbus/rtu/mbrtu.c ****     EXIT_CRITICAL_SECTION(  );
+ 245              		.loc 1 180 5 is_stmt 1 view .LVU48
+ 246 0018 FFF7FEFF 		bl	__critical_exit
+ 247              	.LVL25:
+ 181:Drivers/FreeModbus/rtu/mbrtu.c ****     return eStatus;
+ 248              		.loc 1 181 5 view .LVU49
+ 182:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 249              		.loc 1 182 1 is_stmt 0 view .LVU50
+ 250 001c 2046     		mov	r0, r4
+ 251 001e 70BD     		pop	{r4, r5, r6, pc}
+ 252              	.LVL26:
+ 253              	.L23:
+ 160:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 254              		.loc 1 160 14 view .LVU51
+ 255 0020 0A4B     		ldr	r3, .L24
+ 256 0022 1988     		ldrh	r1, [r3]
+ 257 0024 89B2     		uxth	r1, r1
+ 258 0026 0A48     		ldr	r0, .L24+4
+ 259 0028 FFF7FEFF 		bl	usMBCRC16
+ 260              	.LVL27:
+ 160:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 261              		.loc 1 160 9 view .LVU52
+ 262 002c 58B9     		cbnz	r0, .L21
+ 165:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 263              		.loc 1 165 9 is_stmt 1 view .LVU53
+ 165:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 264              		.loc 1 165 34 is_stmt 0 view .LVU54
+ 265 002e 084A     		ldr	r2, .L24+4
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 9
+
+
+ 266 0030 12F8013B 		ldrb	r3, [r2], #1	@ zero_extendqisi2
+ 165:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 267              		.loc 1 165 24 view .LVU55
+ 268 0034 3370     		strb	r3, [r6]
+ 170:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 269              		.loc 1 170 9 is_stmt 1 view .LVU56
+ 170:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 270              		.loc 1 170 22 is_stmt 0 view .LVU57
+ 271 0036 054B     		ldr	r3, .L24
+ 272 0038 1B88     		ldrh	r3, [r3]
+ 273 003a 9BB2     		uxth	r3, r3
+ 274 003c 033B     		subs	r3, r3, #3
+ 170:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 275              		.loc 1 170 20 view .LVU58
+ 276 003e 2380     		strh	r3, [r4]	@ movhi
+ 173:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 277              		.loc 1 173 9 is_stmt 1 view .LVU59
+ 173:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 278              		.loc 1 173 19 is_stmt 0 view .LVU60
+ 279 0040 2A60     		str	r2, [r5]
+ 153:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 280              		.loc 1 153 21 view .LVU61
+ 281 0042 0024     		movs	r4, #0
+ 282              	.LVL28:
+ 173:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 283              		.loc 1 173 19 view .LVU62
+ 284 0044 E8E7     		b	.L19
+ 285              	.LVL29:
+ 286              	.L21:
+ 177:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 287              		.loc 1 177 17 view .LVU63
+ 288 0046 0524     		movs	r4, #5
+ 289              	.LVL30:
+ 177:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 290              		.loc 1 177 17 view .LVU64
+ 291 0048 E6E7     		b	.L19
+ 292              	.L25:
+ 293 004a 00BF     		.align	2
+ 294              	.L24:
+ 295 004c 00000000 		.word	.LANCHOR1
+ 296 0050 00000000 		.word	ucRTUBuf
+ 297              		.cfi_endproc
+ 298              	.LFE68:
+ 300              		.section	.text.eMBRTUSend,"ax",%progbits
+ 301              		.align	1
+ 302              		.global	eMBRTUSend
+ 303              		.syntax unified
+ 304              		.thumb
+ 305              		.thumb_func
+ 306              		.fpu softvfp
+ 308              	eMBRTUSend:
+ 309              	.LVL31:
+ 310              	.LFB69:
+ 183:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 184:Drivers/FreeModbus/rtu/mbrtu.c **** eMBErrorCode
+ 185:Drivers/FreeModbus/rtu/mbrtu.c **** eMBRTUSend( UCHAR ucSlaveAddress, const UCHAR * pucFrame, USHORT usLength )
+ 186:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 10
+
+
+ 311              		.loc 1 186 1 is_stmt 1 view -0
+ 312              		.cfi_startproc
+ 313              		@ args = 0, pretend = 0, frame = 0
+ 314              		@ frame_needed = 0, uses_anonymous_args = 0
+ 315              		.loc 1 186 1 is_stmt 0 view .LVU66
+ 316 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 317              	.LCFI4:
+ 318              		.cfi_def_cfa_offset 24
+ 319              		.cfi_offset 4, -24
+ 320              		.cfi_offset 5, -20
+ 321              		.cfi_offset 6, -16
+ 322              		.cfi_offset 7, -12
+ 323              		.cfi_offset 8, -8
+ 324              		.cfi_offset 14, -4
+ 325 0004 0646     		mov	r6, r0
+ 326 0006 0C46     		mov	r4, r1
+ 327 0008 1546     		mov	r5, r2
+ 187:Drivers/FreeModbus/rtu/mbrtu.c ****     eMBErrorCode    eStatus = MB_ENOERR;
+ 328              		.loc 1 187 5 is_stmt 1 view .LVU67
+ 329              	.LVL32:
+ 188:Drivers/FreeModbus/rtu/mbrtu.c ****     USHORT          usCRC16;
+ 330              		.loc 1 188 5 view .LVU68
+ 189:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 190:Drivers/FreeModbus/rtu/mbrtu.c ****     ENTER_CRITICAL_SECTION(  );
+ 331              		.loc 1 190 5 view .LVU69
+ 332 000a FFF7FEFF 		bl	__critical_enter
+ 333              	.LVL33:
+ 191:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 192:Drivers/FreeModbus/rtu/mbrtu.c ****     /* Check if the receiver is still in idle state. If not we where to
+ 193:Drivers/FreeModbus/rtu/mbrtu.c ****      * slow with processing the received frame and the master sent another
+ 194:Drivers/FreeModbus/rtu/mbrtu.c ****      * frame on the network. We have to abort sending the frame.
+ 195:Drivers/FreeModbus/rtu/mbrtu.c ****      */
+ 196:Drivers/FreeModbus/rtu/mbrtu.c ****     if( eRcvState == STATE_RX_IDLE )
+ 334              		.loc 1 196 5 view .LVU70
+ 335              		.loc 1 196 19 is_stmt 0 view .LVU71
+ 336 000e 1C4B     		ldr	r3, .L31
+ 337 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 338 0012 DBB2     		uxtb	r3, r3
+ 339              		.loc 1 196 7 view .LVU72
+ 340 0014 012B     		cmp	r3, #1
+ 341 0016 05D0     		beq	.L30
+ 197:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 198:Drivers/FreeModbus/rtu/mbrtu.c ****         /* First byte before the Modbus-PDU is the slave address. */
+ 199:Drivers/FreeModbus/rtu/mbrtu.c ****         pucSndBufferCur = ( UCHAR * ) pucFrame - 1;
+ 200:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount = 1;
+ 201:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 202:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Now copy the Modbus-PDU into the Modbus-Serial-Line-PDU. */
+ 203:Drivers/FreeModbus/rtu/mbrtu.c ****         pucSndBufferCur[MB_SER_PDU_ADDR_OFF] = ucSlaveAddress;
+ 204:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount += usLength;
+ 205:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 206:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Calculate CRC16 checksum for Modbus-Serial-Line-PDU. */
+ 207:Drivers/FreeModbus/rtu/mbrtu.c ****         usCRC16 = usMBCRC16( ( UCHAR * ) pucSndBufferCur, usSndBufferCount );
+ 208:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 & 0xFF );
+ 209:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+ 210:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 211:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Activate the transmitter. */
+ 212:Drivers/FreeModbus/rtu/mbrtu.c ****         eSndState = STATE_TX_XMIT;
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 11
+
+
+ 213:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortSerialEnable( FALSE, TRUE );
+ 214:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 215:Drivers/FreeModbus/rtu/mbrtu.c ****     else
+ 216:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 217:Drivers/FreeModbus/rtu/mbrtu.c ****         eStatus = MB_EIO;
+ 342              		.loc 1 217 17 view .LVU73
+ 343 0018 0524     		movs	r4, #5
+ 344              	.LVL34:
+ 345              	.L27:
+ 218:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 219:Drivers/FreeModbus/rtu/mbrtu.c ****     EXIT_CRITICAL_SECTION(  );
+ 346              		.loc 1 219 5 is_stmt 1 view .LVU74
+ 347 001a FFF7FEFF 		bl	__critical_exit
+ 348              	.LVL35:
+ 220:Drivers/FreeModbus/rtu/mbrtu.c ****     return eStatus;
+ 349              		.loc 1 220 5 view .LVU75
+ 221:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 350              		.loc 1 221 1 is_stmt 0 view .LVU76
+ 351 001e 2046     		mov	r0, r4
+ 352 0020 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 353              	.LVL36:
+ 354              	.L30:
+ 199:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount = 1;
+ 355              		.loc 1 199 9 is_stmt 1 view .LVU77
+ 199:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount = 1;
+ 356              		.loc 1 199 48 is_stmt 0 view .LVU78
+ 357 0024 601E     		subs	r0, r4, #1
+ 199:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount = 1;
+ 358              		.loc 1 199 25 view .LVU79
+ 359 0026 174B     		ldr	r3, .L31+4
+ 360 0028 1860     		str	r0, [r3]
+ 200:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 361              		.loc 1 200 9 is_stmt 1 view .LVU80
+ 200:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 362              		.loc 1 200 26 is_stmt 0 view .LVU81
+ 363 002a 174F     		ldr	r7, .L31+8
+ 364 002c 4FF00108 		mov	r8, #1
+ 365 0030 A7F80080 		strh	r8, [r7]	@ movhi
+ 203:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount += usLength;
+ 366              		.loc 1 203 9 is_stmt 1 view .LVU82
+ 203:Drivers/FreeModbus/rtu/mbrtu.c ****         usSndBufferCount += usLength;
+ 367              		.loc 1 203 46 is_stmt 0 view .LVU83
+ 368 0034 04F8016C 		strb	r6, [r4, #-1]
+ 204:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 369              		.loc 1 204 9 is_stmt 1 view .LVU84
+ 204:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 370              		.loc 1 204 26 is_stmt 0 view .LVU85
+ 371 0038 3A88     		ldrh	r2, [r7]
+ 372 003a 92B2     		uxth	r2, r2
+ 373 003c 1544     		add	r5, r5, r2
+ 374 003e ADB2     		uxth	r5, r5
+ 375 0040 3D80     		strh	r5, [r7]	@ movhi
+ 207:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 & 0xFF );
+ 376              		.loc 1 207 9 is_stmt 1 view .LVU86
+ 207:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 & 0xFF );
+ 377              		.loc 1 207 19 is_stmt 0 view .LVU87
+ 378 0042 3988     		ldrh	r1, [r7]
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 12
+
+
+ 379 0044 89B2     		uxth	r1, r1
+ 380 0046 FFF7FEFF 		bl	usMBCRC16
+ 381              	.LVL37:
+ 208:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+ 382              		.loc 1 208 9 is_stmt 1 view .LVU88
+ 208:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+ 383              		.loc 1 208 34 is_stmt 0 view .LVU89
+ 384 004a 3B88     		ldrh	r3, [r7]
+ 385 004c 9BB2     		uxth	r3, r3
+ 386 004e 03EB0802 		add	r2, r3, r8
+ 387 0052 92B2     		uxth	r2, r2
+ 388 0054 3A80     		strh	r2, [r7]	@ movhi
+ 208:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+ 389              		.loc 1 208 40 view .LVU90
+ 390 0056 C2B2     		uxtb	r2, r0
+ 208:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usSndBufferCount++] = ( UCHAR )( usCRC16 >> 8 );
+ 391              		.loc 1 208 38 view .LVU91
+ 392 0058 0C49     		ldr	r1, .L31+12
+ 393 005a CA54     		strb	r2, [r1, r3]
+ 209:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 394              		.loc 1 209 9 is_stmt 1 view .LVU92
+ 209:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 395              		.loc 1 209 34 is_stmt 0 view .LVU93
+ 396 005c 3B88     		ldrh	r3, [r7]
+ 397 005e 9BB2     		uxth	r3, r3
+ 398 0060 03EB0802 		add	r2, r3, r8
+ 399 0064 92B2     		uxth	r2, r2
+ 400 0066 3A80     		strh	r2, [r7]	@ movhi
+ 209:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 401              		.loc 1 209 40 view .LVU94
+ 402 0068 C0F30720 		ubfx	r0, r0, #8, #8
+ 403              	.LVL38:
+ 209:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 404              		.loc 1 209 38 view .LVU95
+ 405 006c C854     		strb	r0, [r1, r3]
+ 212:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortSerialEnable( FALSE, TRUE );
+ 406              		.loc 1 212 9 is_stmt 1 view .LVU96
+ 212:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortSerialEnable( FALSE, TRUE );
+ 407              		.loc 1 212 19 is_stmt 0 view .LVU97
+ 408 006e 084B     		ldr	r3, .L31+16
+ 409 0070 83F80080 		strb	r8, [r3]
+ 213:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 410              		.loc 1 213 9 is_stmt 1 view .LVU98
+ 411 0074 4146     		mov	r1, r8
+ 412 0076 0020     		movs	r0, #0
+ 413 0078 FFF7FEFF 		bl	vMBPortSerialEnable
+ 414              	.LVL39:
+ 187:Drivers/FreeModbus/rtu/mbrtu.c ****     USHORT          usCRC16;
+ 415              		.loc 1 187 21 is_stmt 0 view .LVU99
+ 416 007c 0024     		movs	r4, #0
+ 417              	.LVL40:
+ 187:Drivers/FreeModbus/rtu/mbrtu.c ****     USHORT          usCRC16;
+ 418              		.loc 1 187 21 view .LVU100
+ 419 007e CCE7     		b	.L27
+ 420              	.L32:
+ 421              		.align	2
+ 422              	.L31:
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 13
+
+
+ 423 0080 00000000 		.word	.LANCHOR0
+ 424 0084 00000000 		.word	.LANCHOR2
+ 425 0088 00000000 		.word	.LANCHOR3
+ 426 008c 00000000 		.word	ucRTUBuf
+ 427 0090 00000000 		.word	.LANCHOR4
+ 428              		.cfi_endproc
+ 429              	.LFE69:
+ 431              		.section	.text.xMBRTUReceiveFSM,"ax",%progbits
+ 432              		.align	1
+ 433              		.global	xMBRTUReceiveFSM
+ 434              		.syntax unified
+ 435              		.thumb
+ 436              		.thumb_func
+ 437              		.fpu softvfp
+ 439              	xMBRTUReceiveFSM:
+ 440              	.LFB70:
+ 222:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 223:Drivers/FreeModbus/rtu/mbrtu.c **** BOOL
+ 224:Drivers/FreeModbus/rtu/mbrtu.c **** xMBRTUReceiveFSM( void )
+ 225:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 441              		.loc 1 225 1 is_stmt 1 view -0
+ 442              		.cfi_startproc
+ 443              		@ args = 0, pretend = 0, frame = 8
+ 444              		@ frame_needed = 0, uses_anonymous_args = 0
+ 445 0000 00B5     		push	{lr}
+ 446              	.LCFI5:
+ 447              		.cfi_def_cfa_offset 4
+ 448              		.cfi_offset 14, -4
+ 449 0002 83B0     		sub	sp, sp, #12
+ 450              	.LCFI6:
+ 451              		.cfi_def_cfa_offset 16
+ 226:Drivers/FreeModbus/rtu/mbrtu.c ****     BOOL            xTaskNeedSwitch = FALSE;
+ 452              		.loc 1 226 5 view .LVU102
+ 453              	.LVL41:
+ 227:Drivers/FreeModbus/rtu/mbrtu.c ****     UCHAR           ucByte;
+ 454              		.loc 1 227 5 view .LVU103
+ 228:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 229:Drivers/FreeModbus/rtu/mbrtu.c ****     assert_param( eSndState == STATE_TX_IDLE );
+ 455              		.loc 1 229 5 view .LVU104
+ 230:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 231:Drivers/FreeModbus/rtu/mbrtu.c ****     /* Always read the character. */
+ 232:Drivers/FreeModbus/rtu/mbrtu.c ****     ( void )xMBPortSerialGetByte( ( CHAR * ) & ucByte );
+ 456              		.loc 1 232 5 view .LVU105
+ 457              		.loc 1 232 13 is_stmt 0 view .LVU106
+ 458 0004 0DF10700 		add	r0, sp, #7
+ 459 0008 FFF7FEFF 		bl	xMBPortSerialGetByte
+ 460              	.LVL42:
+ 233:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 234:Drivers/FreeModbus/rtu/mbrtu.c ****     switch ( eRcvState )
+ 461              		.loc 1 234 5 is_stmt 1 view .LVU107
+ 462 000c 1C4B     		ldr	r3, .L43
+ 463 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 464 0010 DBB2     		uxtb	r3, r3
+ 465 0012 032B     		cmp	r3, #3
+ 466 0014 05D8     		bhi	.L34
+ 467 0016 DFE803F0 		tbb	[pc, r3]
+ 468              	.L36:
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 14
+
+
+ 469 001a 02       		.byte	(.L39-.L36)/2
+ 470 001b 0B       		.byte	(.L38-.L36)/2
+ 471 001c 1D       		.byte	(.L37-.L36)/2
+ 472 001d 08       		.byte	(.L35-.L36)/2
+ 473              		.p2align 1
+ 474              	.L39:
+ 235:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 236:Drivers/FreeModbus/rtu/mbrtu.c ****         /* If we have received a character in the init state we have to
+ 237:Drivers/FreeModbus/rtu/mbrtu.c ****          * wait until the frame is finished.
+ 238:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 239:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_INIT:
+ 240:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortTimersEnable( );
+ 475              		.loc 1 240 9 view .LVU108
+ 476 001e FFF7FEFF 		bl	vMBPortTimersEnable
+ 477              	.LVL43:
+ 241:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 478              		.loc 1 241 9 view .LVU109
+ 479              	.L34:
+ 242:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 243:Drivers/FreeModbus/rtu/mbrtu.c ****         /* In the error state we wait until all characters in the
+ 244:Drivers/FreeModbus/rtu/mbrtu.c ****          * damaged frame are transmitted.
+ 245:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 246:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_ERROR:
+ 247:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortTimersEnable( );
+ 248:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 249:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 250:Drivers/FreeModbus/rtu/mbrtu.c ****         /* In the idle state we wait for a new character. If a character
+ 251:Drivers/FreeModbus/rtu/mbrtu.c ****          * is received the t1.5 and t3.5 timers are started and the
+ 252:Drivers/FreeModbus/rtu/mbrtu.c ****          * receiver is in the state STATE_RX_RECEIVCE.
+ 253:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 254:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_IDLE:
+ 255:Drivers/FreeModbus/rtu/mbrtu.c ****         usRcvBufferPos = 0;
+ 256:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usRcvBufferPos++] = ucByte;
+ 257:Drivers/FreeModbus/rtu/mbrtu.c ****         eRcvState = STATE_RX_RCV;
+ 258:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 259:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Enable t3.5 timers. */
+ 260:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortTimersEnable( );
+ 261:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 262:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 263:Drivers/FreeModbus/rtu/mbrtu.c ****         /* We are currently receiving a frame. Reset the timer after
+ 264:Drivers/FreeModbus/rtu/mbrtu.c ****          * every character received. If more than the maximum possible
+ 265:Drivers/FreeModbus/rtu/mbrtu.c ****          * number of bytes in a modbus frame is received the frame is
+ 266:Drivers/FreeModbus/rtu/mbrtu.c ****          * ignored.
+ 267:Drivers/FreeModbus/rtu/mbrtu.c ****          */
+ 268:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_RCV:
+ 269:Drivers/FreeModbus/rtu/mbrtu.c ****         if( usRcvBufferPos < MB_SER_PDU_SIZE_MAX )
+ 270:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 271:Drivers/FreeModbus/rtu/mbrtu.c ****             ucRTUBuf[usRcvBufferPos++] = ucByte;
+ 272:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 273:Drivers/FreeModbus/rtu/mbrtu.c ****         else
+ 274:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 275:Drivers/FreeModbus/rtu/mbrtu.c ****             eRcvState = STATE_RX_ERROR;
+ 276:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 277:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortTimersEnable();
+ 278:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 279:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 280:Drivers/FreeModbus/rtu/mbrtu.c ****     return xTaskNeedSwitch;
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 15
+
+
+ 480              		.loc 1 280 5 view .LVU110
+ 281:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 481              		.loc 1 281 1 is_stmt 0 view .LVU111
+ 482 0022 0020     		movs	r0, #0
+ 483 0024 03B0     		add	sp, sp, #12
+ 484              	.LCFI7:
+ 485              		.cfi_remember_state
+ 486              		.cfi_def_cfa_offset 4
+ 487              		@ sp needed
+ 488 0026 5DF804FB 		ldr	pc, [sp], #4
+ 489              	.L35:
+ 490              	.LCFI8:
+ 491              		.cfi_restore_state
+ 247:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 492              		.loc 1 247 9 is_stmt 1 view .LVU112
+ 493 002a FFF7FEFF 		bl	vMBPortTimersEnable
+ 494              	.LVL44:
+ 248:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 495              		.loc 1 248 9 view .LVU113
+ 496 002e F8E7     		b	.L34
+ 497              	.L38:
+ 255:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usRcvBufferPos++] = ucByte;
+ 498              		.loc 1 255 9 view .LVU114
+ 255:Drivers/FreeModbus/rtu/mbrtu.c ****         ucRTUBuf[usRcvBufferPos++] = ucByte;
+ 499              		.loc 1 255 24 is_stmt 0 view .LVU115
+ 500 0030 144A     		ldr	r2, .L43+4
+ 501 0032 0023     		movs	r3, #0
+ 502 0034 1380     		strh	r3, [r2]	@ movhi
+ 256:Drivers/FreeModbus/rtu/mbrtu.c ****         eRcvState = STATE_RX_RCV;
+ 503              		.loc 1 256 9 is_stmt 1 view .LVU116
+ 256:Drivers/FreeModbus/rtu/mbrtu.c ****         eRcvState = STATE_RX_RCV;
+ 504              		.loc 1 256 32 is_stmt 0 view .LVU117
+ 505 0036 1388     		ldrh	r3, [r2]
+ 506 0038 9BB2     		uxth	r3, r3
+ 507 003a 591C     		adds	r1, r3, #1
+ 508 003c 89B2     		uxth	r1, r1
+ 509 003e 1180     		strh	r1, [r2]	@ movhi
+ 256:Drivers/FreeModbus/rtu/mbrtu.c ****         eRcvState = STATE_RX_RCV;
+ 510              		.loc 1 256 36 view .LVU118
+ 511 0040 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 512 0044 104A     		ldr	r2, .L43+8
+ 513 0046 D154     		strb	r1, [r2, r3]
+ 257:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 514              		.loc 1 257 9 is_stmt 1 view .LVU119
+ 257:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 515              		.loc 1 257 19 is_stmt 0 view .LVU120
+ 516 0048 0D4B     		ldr	r3, .L43
+ 517 004a 0222     		movs	r2, #2
+ 518 004c 1A70     		strb	r2, [r3]
+ 260:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 519              		.loc 1 260 9 is_stmt 1 view .LVU121
+ 520 004e FFF7FEFF 		bl	vMBPortTimersEnable
+ 521              	.LVL45:
+ 261:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 522              		.loc 1 261 9 view .LVU122
+ 523 0052 E6E7     		b	.L34
+ 524              	.L37:
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 16
+
+
+ 269:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 525              		.loc 1 269 9 view .LVU123
+ 269:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 526              		.loc 1 269 28 is_stmt 0 view .LVU124
+ 527 0054 0B4B     		ldr	r3, .L43+4
+ 528 0056 1B88     		ldrh	r3, [r3]
+ 529 0058 9BB2     		uxth	r3, r3
+ 269:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 530              		.loc 1 269 11 view .LVU125
+ 531 005a FF2B     		cmp	r3, #255
+ 532 005c 0CD8     		bhi	.L40
+ 271:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 533              		.loc 1 271 13 is_stmt 1 view .LVU126
+ 271:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 534              		.loc 1 271 36 is_stmt 0 view .LVU127
+ 535 005e 0949     		ldr	r1, .L43+4
+ 536 0060 0B88     		ldrh	r3, [r1]
+ 537 0062 9BB2     		uxth	r3, r3
+ 538 0064 5A1C     		adds	r2, r3, #1
+ 539 0066 92B2     		uxth	r2, r2
+ 540 0068 0A80     		strh	r2, [r1]	@ movhi
+ 271:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 541              		.loc 1 271 40 view .LVU128
+ 542 006a 9DF80710 		ldrb	r1, [sp, #7]	@ zero_extendqisi2
+ 543 006e 064A     		ldr	r2, .L43+8
+ 544 0070 D154     		strb	r1, [r2, r3]
+ 545              	.L41:
+ 277:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 546              		.loc 1 277 9 is_stmt 1 view .LVU129
+ 547 0072 FFF7FEFF 		bl	vMBPortTimersEnable
+ 548              	.LVL46:
+ 278:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 549              		.loc 1 278 9 view .LVU130
+ 550 0076 D4E7     		b	.L34
+ 551              	.L40:
+ 275:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 552              		.loc 1 275 13 view .LVU131
+ 275:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 553              		.loc 1 275 23 is_stmt 0 view .LVU132
+ 554 0078 014B     		ldr	r3, .L43
+ 555 007a 0322     		movs	r2, #3
+ 556 007c 1A70     		strb	r2, [r3]
+ 557 007e F8E7     		b	.L41
+ 558              	.L44:
+ 559              		.align	2
+ 560              	.L43:
+ 561 0080 00000000 		.word	.LANCHOR0
+ 562 0084 00000000 		.word	.LANCHOR1
+ 563 0088 00000000 		.word	ucRTUBuf
+ 564              		.cfi_endproc
+ 565              	.LFE70:
+ 567              		.section	.text.xMBRTUTransmitFSM,"ax",%progbits
+ 568              		.align	1
+ 569              		.global	xMBRTUTransmitFSM
+ 570              		.syntax unified
+ 571              		.thumb
+ 572              		.thumb_func
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 17
+
+
+ 573              		.fpu softvfp
+ 575              	xMBRTUTransmitFSM:
+ 576              	.LFB71:
+ 282:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 283:Drivers/FreeModbus/rtu/mbrtu.c **** BOOL
+ 284:Drivers/FreeModbus/rtu/mbrtu.c **** xMBRTUTransmitFSM( void )
+ 285:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 577              		.loc 1 285 1 is_stmt 1 view -0
+ 578              		.cfi_startproc
+ 579              		@ args = 0, pretend = 0, frame = 0
+ 580              		@ frame_needed = 0, uses_anonymous_args = 0
+ 581 0000 38B5     		push	{r3, r4, r5, lr}
+ 582              	.LCFI9:
+ 583              		.cfi_def_cfa_offset 16
+ 584              		.cfi_offset 3, -16
+ 585              		.cfi_offset 4, -12
+ 586              		.cfi_offset 5, -8
+ 587              		.cfi_offset 14, -4
+ 286:Drivers/FreeModbus/rtu/mbrtu.c ****     BOOL            xNeedPoll = FALSE;
+ 588              		.loc 1 286 5 view .LVU134
+ 589              	.LVL47:
+ 287:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 288:Drivers/FreeModbus/rtu/mbrtu.c ****     assert_param( eRcvState == STATE_RX_IDLE );
+ 590              		.loc 1 288 5 view .LVU135
+ 289:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 290:Drivers/FreeModbus/rtu/mbrtu.c ****     switch ( eSndState )
+ 591              		.loc 1 290 5 view .LVU136
+ 592 0002 144B     		ldr	r3, .L51
+ 593 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 594 0006 03F0FF04 		and	r4, r3, #255
+ 595 000a 23B1     		cbz	r3, .L46
+ 596 000c 012C     		cmp	r4, #1
+ 597 000e 07D0     		beq	.L47
+ 598 0010 0024     		movs	r4, #0
+ 599              	.LVL48:
+ 600              	.L48:
+ 291:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 292:Drivers/FreeModbus/rtu/mbrtu.c ****         /* We should not get a transmitter event if the transmitter is in
+ 293:Drivers/FreeModbus/rtu/mbrtu.c ****          * idle state.  */
+ 294:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_TX_IDLE:
+ 295:Drivers/FreeModbus/rtu/mbrtu.c ****         /* enable receiver/disable transmitter. */
+ 296:Drivers/FreeModbus/rtu/mbrtu.c ****         vMBPortSerialEnable( TRUE, FALSE );
+ 297:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 298:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 299:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_TX_XMIT:
+ 300:Drivers/FreeModbus/rtu/mbrtu.c ****         /* check if we are finished. */
+ 301:Drivers/FreeModbus/rtu/mbrtu.c ****         if( usSndBufferCount != 0 )
+ 302:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 303:Drivers/FreeModbus/rtu/mbrtu.c **** #if SEND_ALL_BYTES_IN_ONE_CALL > 0
+ 304:Drivers/FreeModbus/rtu/mbrtu.c **** 			xMBPortSerialPutBytes(pucSndBufferCur, usSndBufferCount);
+ 305:Drivers/FreeModbus/rtu/mbrtu.c **** 			usSndBufferCount = 0;
+ 306:Drivers/FreeModbus/rtu/mbrtu.c **** #else
+ 307:Drivers/FreeModbus/rtu/mbrtu.c ****             xMBPortSerialPutByte( ( CHAR )*pucSndBufferCur );
+ 308:Drivers/FreeModbus/rtu/mbrtu.c ****             pucSndBufferCur++;  /* next byte in sendbuffer. */
+ 309:Drivers/FreeModbus/rtu/mbrtu.c ****             usSndBufferCount--;
+ 310:Drivers/FreeModbus/rtu/mbrtu.c **** #endif
+ 311:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 18
+
+
+ 312:Drivers/FreeModbus/rtu/mbrtu.c ****         else
+ 313:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 314:Drivers/FreeModbus/rtu/mbrtu.c ****             xNeedPoll = xMBPortEventPost( EV_FRAME_SENT );
+ 315:Drivers/FreeModbus/rtu/mbrtu.c ****             /* Disable transmitter. This prevents another transmit buffer
+ 316:Drivers/FreeModbus/rtu/mbrtu.c ****              * empty interrupt. */
+ 317:Drivers/FreeModbus/rtu/mbrtu.c ****             vMBPortSerialEnable( TRUE, FALSE );
+ 318:Drivers/FreeModbus/rtu/mbrtu.c ****             eSndState = STATE_TX_IDLE;
+ 319:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 320:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 321:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 322:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 323:Drivers/FreeModbus/rtu/mbrtu.c ****     return xNeedPoll;
+ 601              		.loc 1 323 5 view .LVU137
+ 324:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 602              		.loc 1 324 1 is_stmt 0 view .LVU138
+ 603 0012 2046     		mov	r0, r4
+ 604 0014 38BD     		pop	{r3, r4, r5, pc}
+ 605              	.LVL49:
+ 606              	.L46:
+ 296:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 607              		.loc 1 296 9 is_stmt 1 view .LVU139
+ 608 0016 0021     		movs	r1, #0
+ 609 0018 0120     		movs	r0, #1
+ 610 001a FFF7FEFF 		bl	vMBPortSerialEnable
+ 611              	.LVL50:
+ 297:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 612              		.loc 1 297 9 view .LVU140
+ 613 001e F8E7     		b	.L48
+ 614              	.L47:
+ 301:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 615              		.loc 1 301 9 view .LVU141
+ 301:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 616              		.loc 1 301 30 is_stmt 0 view .LVU142
+ 617 0020 0D4B     		ldr	r3, .L51+4
+ 618 0022 1B88     		ldrh	r3, [r3]
+ 619 0024 9BB2     		uxth	r3, r3
+ 301:Drivers/FreeModbus/rtu/mbrtu.c ****         {
+ 620              		.loc 1 301 11 view .LVU143
+ 621 0026 4BB1     		cbz	r3, .L49
+ 304:Drivers/FreeModbus/rtu/mbrtu.c **** 			usSndBufferCount = 0;
+ 622              		.loc 1 304 4 is_stmt 1 view .LVU144
+ 623 0028 0B4D     		ldr	r5, .L51+4
+ 624 002a 2988     		ldrh	r1, [r5]
+ 625 002c 89B2     		uxth	r1, r1
+ 626 002e 0B4B     		ldr	r3, .L51+8
+ 627 0030 1868     		ldr	r0, [r3]
+ 628 0032 FFF7FEFF 		bl	xMBPortSerialPutBytes
+ 629              	.LVL51:
+ 305:Drivers/FreeModbus/rtu/mbrtu.c **** #else
+ 630              		.loc 1 305 4 view .LVU145
+ 305:Drivers/FreeModbus/rtu/mbrtu.c **** #else
+ 631              		.loc 1 305 21 is_stmt 0 view .LVU146
+ 632 0036 0024     		movs	r4, #0
+ 633 0038 2C80     		strh	r4, [r5]	@ movhi
+ 634 003a EAE7     		b	.L48
+ 635              	.L49:
+ 314:Drivers/FreeModbus/rtu/mbrtu.c ****             /* Disable transmitter. This prevents another transmit buffer
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 19
+
+
+ 636              		.loc 1 314 13 is_stmt 1 view .LVU147
+ 314:Drivers/FreeModbus/rtu/mbrtu.c ****             /* Disable transmitter. This prevents another transmit buffer
+ 637              		.loc 1 314 25 is_stmt 0 view .LVU148
+ 638 003c 0820     		movs	r0, #8
+ 639 003e FFF7FEFF 		bl	xMBPortEventPost
+ 640              	.LVL52:
+ 641 0042 0446     		mov	r4, r0
+ 642              	.LVL53:
+ 317:Drivers/FreeModbus/rtu/mbrtu.c ****             eSndState = STATE_TX_IDLE;
+ 643              		.loc 1 317 13 is_stmt 1 view .LVU149
+ 644 0044 0021     		movs	r1, #0
+ 645 0046 0120     		movs	r0, #1
+ 646 0048 FFF7FEFF 		bl	vMBPortSerialEnable
+ 647              	.LVL54:
+ 318:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 648              		.loc 1 318 13 view .LVU150
+ 318:Drivers/FreeModbus/rtu/mbrtu.c ****         }
+ 649              		.loc 1 318 23 is_stmt 0 view .LVU151
+ 650 004c 014B     		ldr	r3, .L51
+ 651 004e 0022     		movs	r2, #0
+ 652 0050 1A70     		strb	r2, [r3]
+ 653 0052 DEE7     		b	.L48
+ 654              	.L52:
+ 655              		.align	2
+ 656              	.L51:
+ 657 0054 00000000 		.word	.LANCHOR4
+ 658 0058 00000000 		.word	.LANCHOR3
+ 659 005c 00000000 		.word	.LANCHOR2
+ 660              		.cfi_endproc
+ 661              	.LFE71:
+ 663              		.section	.text.xMBRTUTimerT35Expired,"ax",%progbits
+ 664              		.align	1
+ 665              		.global	xMBRTUTimerT35Expired
+ 666              		.syntax unified
+ 667              		.thumb
+ 668              		.thumb_func
+ 669              		.fpu softvfp
+ 671              	xMBRTUTimerT35Expired:
+ 672              	.LFB72:
+ 325:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 326:Drivers/FreeModbus/rtu/mbrtu.c **** BOOL
+ 327:Drivers/FreeModbus/rtu/mbrtu.c **** xMBRTUTimerT35Expired( void )
+ 328:Drivers/FreeModbus/rtu/mbrtu.c **** {
+ 673              		.loc 1 328 1 is_stmt 1 view -0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677 0000 10B5     		push	{r4, lr}
+ 678              	.LCFI10:
+ 679              		.cfi_def_cfa_offset 8
+ 680              		.cfi_offset 4, -8
+ 681              		.cfi_offset 14, -4
+ 329:Drivers/FreeModbus/rtu/mbrtu.c ****     BOOL            xNeedPoll = FALSE;
+ 682              		.loc 1 329 5 view .LVU153
+ 683              	.LVL55:
+ 330:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 331:Drivers/FreeModbus/rtu/mbrtu.c ****     switch ( eRcvState )
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 20
+
+
+ 684              		.loc 1 331 5 view .LVU154
+ 685 0002 0C4B     		ldr	r3, .L58
+ 686 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 687 0006 5BB1     		cbz	r3, .L54
+ 688 0008 03F0FF02 		and	r2, r3, #255
+ 689 000c 022A     		cmp	r2, #2
+ 690 000e 0CD0     		beq	.L55
+ 691 0010 0024     		movs	r4, #0
+ 692              	.LVL56:
+ 693              	.L56:
+ 332:Drivers/FreeModbus/rtu/mbrtu.c ****     {
+ 333:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Timer t35 expired. Startup phase is finished. */
+ 334:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_INIT:
+ 335:Drivers/FreeModbus/rtu/mbrtu.c ****         xNeedPoll = xMBPortEventPost( EV_READY );
+ 336:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 337:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 338:Drivers/FreeModbus/rtu/mbrtu.c ****         /* A frame was received and t35 expired. Notify the listener that
+ 339:Drivers/FreeModbus/rtu/mbrtu.c ****          * a new frame was received. */
+ 340:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_RCV:
+ 341:Drivers/FreeModbus/rtu/mbrtu.c ****         xNeedPoll = xMBPortEventPost( EV_FRAME_RECEIVED );
+ 342:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 343:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 344:Drivers/FreeModbus/rtu/mbrtu.c ****         /* An error occured while receiving the frame. */
+ 345:Drivers/FreeModbus/rtu/mbrtu.c ****     case STATE_RX_ERROR:
+ 346:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 347:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 348:Drivers/FreeModbus/rtu/mbrtu.c ****         /* Function called in an illegal state. */
+ 349:Drivers/FreeModbus/rtu/mbrtu.c ****     default:
+ 350:Drivers/FreeModbus/rtu/mbrtu.c ****         assert_param( ( eRcvState == STATE_RX_INIT ) ||
+ 351:Drivers/FreeModbus/rtu/mbrtu.c ****                 ( eRcvState == STATE_RX_RCV ) || ( eRcvState == STATE_RX_ERROR ) );
+ 352:Drivers/FreeModbus/rtu/mbrtu.c ****          break;
+ 353:Drivers/FreeModbus/rtu/mbrtu.c ****     }
+ 354:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 355:Drivers/FreeModbus/rtu/mbrtu.c ****     vMBPortTimersDisable(  );
+ 694              		.loc 1 355 5 view .LVU155
+ 695 0012 FFF7FEFF 		bl	vMBPortTimersDisable
+ 696              	.LVL57:
+ 356:Drivers/FreeModbus/rtu/mbrtu.c ****     eRcvState = STATE_RX_IDLE;
+ 697              		.loc 1 356 5 view .LVU156
+ 698              		.loc 1 356 15 is_stmt 0 view .LVU157
+ 699 0016 074B     		ldr	r3, .L58
+ 700 0018 0122     		movs	r2, #1
+ 701 001a 1A70     		strb	r2, [r3]
+ 357:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 358:Drivers/FreeModbus/rtu/mbrtu.c ****     return xNeedPoll;
+ 702              		.loc 1 358 5 is_stmt 1 view .LVU158
+ 359:Drivers/FreeModbus/rtu/mbrtu.c **** }
+ 703              		.loc 1 359 1 is_stmt 0 view .LVU159
+ 704 001c 2046     		mov	r0, r4
+ 705 001e 10BD     		pop	{r4, pc}
+ 706              	.LVL58:
+ 707              	.L54:
+ 335:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 708              		.loc 1 335 9 is_stmt 1 view .LVU160
+ 335:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 709              		.loc 1 335 21 is_stmt 0 view .LVU161
+ 710 0020 0120     		movs	r0, #1
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 21
+
+
+ 711 0022 FFF7FEFF 		bl	xMBPortEventPost
+ 712              	.LVL59:
+ 713 0026 0446     		mov	r4, r0
+ 714              	.LVL60:
+ 336:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 715              		.loc 1 336 9 is_stmt 1 view .LVU162
+ 716 0028 F3E7     		b	.L56
+ 717              	.LVL61:
+ 718              	.L55:
+ 341:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 719              		.loc 1 341 9 view .LVU163
+ 341:Drivers/FreeModbus/rtu/mbrtu.c ****         break;
+ 720              		.loc 1 341 21 is_stmt 0 view .LVU164
+ 721 002a 0220     		movs	r0, #2
+ 722 002c FFF7FEFF 		bl	xMBPortEventPost
+ 723              	.LVL62:
+ 724 0030 0446     		mov	r4, r0
+ 725              	.LVL63:
+ 342:Drivers/FreeModbus/rtu/mbrtu.c **** 
+ 726              		.loc 1 342 9 is_stmt 1 view .LVU165
+ 727 0032 EEE7     		b	.L56
+ 728              	.L59:
+ 729              		.align	2
+ 730              	.L58:
+ 731 0034 00000000 		.word	.LANCHOR0
+ 732              		.cfi_endproc
+ 733              	.LFE72:
+ 735              		.comm	ucRTUBuf,256,4
+ 736              		.section	.bss.eRcvState,"aw",%nobits
+ 737              		.set	.LANCHOR0,. + 0
+ 740              	eRcvState:
+ 741 0000 00       		.space	1
+ 742              		.section	.bss.eSndState,"aw",%nobits
+ 743              		.set	.LANCHOR4,. + 0
+ 746              	eSndState:
+ 747 0000 00       		.space	1
+ 748              		.section	.bss.pucSndBufferCur,"aw",%nobits
+ 749              		.align	2
+ 750              		.set	.LANCHOR2,. + 0
+ 753              	pucSndBufferCur:
+ 754 0000 00000000 		.space	4
+ 755              		.section	.bss.usRcvBufferPos,"aw",%nobits
+ 756              		.align	1
+ 757              		.set	.LANCHOR1,. + 0
+ 760              	usRcvBufferPos:
+ 761 0000 0000     		.space	2
+ 762              		.section	.bss.usSndBufferCount,"aw",%nobits
+ 763              		.align	1
+ 764              		.set	.LANCHOR3,. + 0
+ 767              	usSndBufferCount:
+ 768 0000 0000     		.space	2
+ 769              		.text
+ 770              	.Letext0:
+ 771              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
+ 772              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\lock.h"
+ 773              		.file 4 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_types.h"
+ 774              		.file 5 "c:\\program files\\microsoft vs code\\gcc_arm\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\s
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 22
+
+
+ 775              		.file 6 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\reent.h"
+ 776              		.file 7 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\stdlib.h"
+ 777              		.file 8 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 778              		.file 9 "Drivers/CMSIS/Include/core_cm3.h"
+ 779              		.file 10 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 780              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 781              		.file 12 "Drivers/FreeModbus/port/port.h"
+ 782              		.file 13 "Drivers/FreeModbus/include/mbport.h"
+ 783              		.file 14 "Drivers/FreeModbus/include/mb.h"
+ 784              		.file 15 "Drivers/FreeModbus/port/portcritical.h"
+ 785              		.file 16 "Drivers/FreeModbus/rtu/mbcrc.h"
+ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mbrtu.c
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:16     .text.eMBRTUInit:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:24     .text.eMBRTUInit:0000000000000000 eMBRTUInit
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:113    .text.eMBRTUInit:000000000000004c $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:118    .text.eMBRTUStart:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:125    .text.eMBRTUStart:0000000000000000 eMBRTUStart
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:159    .text.eMBRTUStart:000000000000001c $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:164    .text.eMBRTUStop:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:171    .text.eMBRTUStop:0000000000000000 eMBRTUStop
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:202    .text.eMBRTUReceive:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:209    .text.eMBRTUReceive:0000000000000000 eMBRTUReceive
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:295    .text.eMBRTUReceive:000000000000004c $d
+                            *COM*:0000000000000100 ucRTUBuf
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:301    .text.eMBRTUSend:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:308    .text.eMBRTUSend:0000000000000000 eMBRTUSend
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:423    .text.eMBRTUSend:0000000000000080 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:432    .text.xMBRTUReceiveFSM:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:439    .text.xMBRTUReceiveFSM:0000000000000000 xMBRTUReceiveFSM
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:469    .text.xMBRTUReceiveFSM:000000000000001a $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:473    .text.xMBRTUReceiveFSM:000000000000001e $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:561    .text.xMBRTUReceiveFSM:0000000000000080 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:568    .text.xMBRTUTransmitFSM:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:575    .text.xMBRTUTransmitFSM:0000000000000000 xMBRTUTransmitFSM
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:657    .text.xMBRTUTransmitFSM:0000000000000054 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:664    .text.xMBRTUTimerT35Expired:0000000000000000 $t
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:671    .text.xMBRTUTimerT35Expired:0000000000000000 xMBRTUTimerT35Expired
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:731    .text.xMBRTUTimerT35Expired:0000000000000034 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:740    .bss.eRcvState:0000000000000000 eRcvState
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:741    .bss.eRcvState:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:746    .bss.eSndState:0000000000000000 eSndState
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:747    .bss.eSndState:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:749    .bss.pucSndBufferCur:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:753    .bss.pucSndBufferCur:0000000000000000 pucSndBufferCur
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:756    .bss.usRcvBufferPos:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:760    .bss.usRcvBufferPos:0000000000000000 usRcvBufferPos
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:763    .bss.usSndBufferCount:0000000000000000 $d
+C:\Users\QUALIT~1\AppData\Local\Temp\ccdN4df9.s:767    .bss.usSndBufferCount:0000000000000000 usSndBufferCount
+
+UNDEFINED SYMBOLS
+__critical_enter
+xMBPortSerialInit
+__critical_exit
+xMBPortTimersInit
+vMBPortSerialEnable
+vMBPortTimersEnable
+vMBPortTimersDisable
+usMBCRC16
+xMBPortSerialGetByte
+xMBPortSerialPutBytes
+xMBPortEventPost
