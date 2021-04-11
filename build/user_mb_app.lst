@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
   29:Drivers/FreeModbus/app/user_mb_app.c **** USHORT   usSRegInStart                                = S_REG_INPUT_START;
   30:Drivers/FreeModbus/app/user_mb_app.c **** USHORT   usSRegInBuf[S_REG_INPUT_NREGS]               ;
   31:Drivers/FreeModbus/app/user_mb_app.c **** #endif
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 2
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 2
 
 
   32:Drivers/FreeModbus/app/user_mb_app.c **** 
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
   49              		.loc 1 64 5 view .LVU11
   50              		.loc 1 64 18 is_stmt 0 view .LVU12
   51 0002 0F4B     		ldr	r3, .L8
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 3
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 3
 
 
   52 0004 1C88     		ldrh	r4, [r3]
@@ -137,7 +137,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
   60              		.loc 1 69 54 is_stmt 0 view .LVU16
   61 000a 9918     		adds	r1, r3, r2
   62              		.loc 1 69 40 view .LVU17
-  63 000c 0F29     		cmp	r1, #15
+  63 000c 1429     		cmp	r1, #20
   64 000e 15DC     		bgt	.L5
   70:Drivers/FreeModbus/app/user_mb_app.c ****     {
   71:Drivers/FreeModbus/app/user_mb_app.c ****         iRegIndex = usAddress - usRegInStart;
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
   94 002a 0133     		adds	r3, r3, #1
   95              	.LVL8:
   96              		.loc 1 76 22 view .LVU32
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 4
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 4
 
 
   97 002c 9BB2     		uxth	r3, r3
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  134              		.align	2
  135              	.L8:
  136 0040 00000000 		.word	.LANCHOR0
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 5
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 5
 
 
  137 0044 00000000 		.word	usSRegInBuf
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  171              		.loc 1 111 5 view .LVU50
  112:Drivers/FreeModbus/app/user_mb_app.c ****     REG_HOLDING_START = S_REG_HOLDING_START;
  172              		.loc 1 112 5 view .LVU51
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 6
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 6
 
 
  113:Drivers/FreeModbus/app/user_mb_app.c ****     REG_HOLDING_NREGS = S_REG_HOLDING_NREGS;
@@ -325,7 +325,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  187              		.loc 1 119 56 is_stmt 0 view .LVU59
  188 000a 8C18     		adds	r4, r1, r2
  189              		.loc 1 119 42 view .LVU60
- 190 000c 0A2C     		cmp	r4, #10
+ 190 000c 142C     		cmp	r4, #20
  191 000e 2DDC     		bgt	.L16
  120:Drivers/FreeModbus/app/user_mb_app.c ****     {
  121:Drivers/FreeModbus/app/user_mb_app.c ****         iRegIndex = usAddress - usRegHoldStart;
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  211 001e 164E     		ldr	r6, .L18+4
  212 0020 36F81150 		ldrh	r5, [r6, r1, lsl #1]
  213              	.LVL25:
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 7
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 7
 
 
  214              		.loc 1 128 35 view .LVU68
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  253              		.loc 1 139 17 is_stmt 1 view .LVU83
  254              		.loc 1 139 47 is_stmt 0 view .LVU84
  255 0044 0446     		mov	r4, r0
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 8
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 8
 
 
  256 0046 14F8023B 		ldrb	r3, [r4], #2	@ zero_extendqisi2
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  148:Drivers/FreeModbus/app/user_mb_app.c ****     {
  149:Drivers/FreeModbus/app/user_mb_app.c ****         eStatus = MB_ENOREG;
  298              		.loc 1 149 17 view .LVU101
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 9
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 9
 
 
  299 006c 0120     		movs	r0, #1
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  170:Drivers/FreeModbus/app/user_mb_app.c ****     eMBErrorCode    eStatus = MB_ENOERR;
  171:Drivers/FreeModbus/app/user_mb_app.c ****     USHORT          iRegIndex , iRegBitIndex , iNReg;
  172:Drivers/FreeModbus/app/user_mb_app.c ****     UCHAR *         pucCoilBuf;
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 10
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 10
 
 
  173:Drivers/FreeModbus/app/user_mb_app.c ****     USHORT          COIL_START;
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  227:Drivers/FreeModbus/app/user_mb_app.c ****     else
  228:Drivers/FreeModbus/app/user_mb_app.c ****     {
  229:Drivers/FreeModbus/app/user_mb_app.c ****         eStatus = MB_ENOREG;
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 11
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 11
 
 
  230:Drivers/FreeModbus/app/user_mb_app.c ****     }
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  371              	.LVL46:
  250:Drivers/FreeModbus/app/user_mb_app.c ****     USHORT          iRegIndex , iRegBitIndex , iNReg;
  372              		.loc 1 250 5 view .LVU111
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 12
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 12
 
 
  251:Drivers/FreeModbus/app/user_mb_app.c ****     UCHAR *         pucDiscreteInputBuf;
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  278:Drivers/FreeModbus/app/user_mb_app.c ****         usNDiscrete = usNDiscrete % 8;
  279:Drivers/FreeModbus/app/user_mb_app.c ****         /* filling zero to high bit */
  280:Drivers/FreeModbus/app/user_mb_app.c ****         *pucRegBuffer = *pucRegBuffer << (8 - usNDiscrete);
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 13
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 13
 
 
  281:Drivers/FreeModbus/app/user_mb_app.c ****         *pucRegBuffer = *pucRegBuffer >> (8 - usNDiscrete);
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  433              	.LVL57:
  272:Drivers/FreeModbus/app/user_mb_app.c ****                     iRegBitIndex, 8);
  434              		.loc 1 272 31 view .LVU141
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 14
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 14
 
 
  435 0032 0822     		movs	r2, #8
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  281:Drivers/FreeModbus/app/user_mb_app.c ****     }
  475              		.loc 1 281 9 is_stmt 1 view .LVU156
  281:Drivers/FreeModbus/app/user_mb_app.c ****     }
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 15
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 15
 
 
  476              		.loc 1 281 39 is_stmt 0 view .LVU157
@@ -859,9 +859,9 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  488 0070 00000000 		.word	ucSDiscInBuf
  489              		.cfi_endproc
  490              	.LFE68:
- 492              		.comm	usSRegHoldBuf,20,4
+ 492              		.comm	usSRegHoldBuf,40,4
  493              		.global	usSRegHoldStart
- 494              		.comm	usSRegInBuf,30,4
+ 494              		.comm	usSRegInBuf,40,4
  495              		.global	usSRegInStart
  496              		.comm	ucSDiscInBuf,1,4
  497              		.global	usSDiscInStart
@@ -882,40 +882,56 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 1
  518 0000 0000     		.space	2
  519              		.text
  520              	.Letext0:
- 521              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
- 522              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 521              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 522              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
  523              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
  524              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 525              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 526              		.file 7 "Drivers/FreeModbus/port/port.h"
- 527              		.file 8 "Drivers/FreeModbus/include/mbport.h"
- 528              		.file 9 "Drivers/FreeModbus/include/mb.h"
- 529              		.file 10 "Drivers/FreeModbus/include/mbutils.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s 			page 16
+ 525              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 526              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 527              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 528              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 529              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 530              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 531              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 532              		.file 13 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 533              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 534              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 535              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 536              		.file 17 "Inc/spi.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 16
+
+
+ 537              		.file 18 "Inc/tim.h"
+ 538              		.file 19 "Inc/usart.h"
+ 539              		.file 20 "Drivers/FreeModbus/port/port.h"
+ 540              		.file 21 "Drivers/FreeModbus/include/mbport.h"
+ 541              		.file 22 "Drivers/FreeModbus/include/mb.h"
+ 542              		.file 23 "Drivers/FreeModbus/include/mbutils.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 user_mb_app.c
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:16     .text.eMBRegInputCB:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:24     .text.eMBRegInputCB:0000000000000000 eMBRegInputCB
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:136    .text.eMBRegInputCB:0000000000000040 $d
-                            *COM*:000000000000001e usSRegInBuf
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:142    .text.eMBRegHoldingCB:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:149    .text.eMBRegHoldingCB:0000000000000000 eMBRegHoldingCB
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:314    .text.eMBRegHoldingCB:0000000000000074 $d
-                            *COM*:0000000000000014 usSRegHoldBuf
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:320    .text.eMBRegCoilsCB:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:327    .text.eMBRegCoilsCB:0000000000000000 eMBRegCoilsCB
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:345    .text.eMBRegDiscreteCB:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:352    .text.eMBRegDiscreteCB:0000000000000000 eMBRegDiscreteCB
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:487    .text.eMBRegDiscreteCB:000000000000006c $d
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:16     .text.eMBRegInputCB:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:24     .text.eMBRegInputCB:0000000000000000 eMBRegInputCB
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:136    .text.eMBRegInputCB:0000000000000040 $d
+                            *COM*:0000000000000028 usSRegInBuf
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:142    .text.eMBRegHoldingCB:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:149    .text.eMBRegHoldingCB:0000000000000000 eMBRegHoldingCB
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:314    .text.eMBRegHoldingCB:0000000000000074 $d
+                            *COM*:0000000000000028 usSRegHoldBuf
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:320    .text.eMBRegCoilsCB:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:327    .text.eMBRegCoilsCB:0000000000000000 eMBRegCoilsCB
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:345    .text.eMBRegDiscreteCB:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:352    .text.eMBRegDiscreteCB:0000000000000000 eMBRegDiscreteCB
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:487    .text.eMBRegDiscreteCB:000000000000006c $d
                             *COM*:0000000000000001 ucSDiscInBuf
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:510    .bss.usSRegHoldStart:0000000000000000 usSRegHoldStart
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:517    .bss.usSRegInStart:0000000000000000 usSRegInStart
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:503    .bss.usSDiscInStart:0000000000000000 usSDiscInStart
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:499    .bss.usSDiscInStart:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:506    .bss.usSRegHoldStart:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\cccfTH3g.s:513    .bss.usSRegInStart:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:510    .bss.usSRegHoldStart:0000000000000000 usSRegHoldStart
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:517    .bss.usSRegInStart:0000000000000000 usSRegInStart
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:503    .bss.usSDiscInStart:0000000000000000 usSDiscInStart
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:499    .bss.usSDiscInStart:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:506    .bss.usSRegHoldStart:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccurIhNZ.s:513    .bss.usSRegInStart:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 xMBUtilGetBits

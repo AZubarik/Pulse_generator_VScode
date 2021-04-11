@@ -1,16 +1,16 @@
 #include "mode.h"
 
-void waiting_mode(void) {
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, OFF);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, OFF);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, OFF);
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, OFF);	
+void WaitingMode (void) {
+	LED_Cathode_VZ_OFF;
+	LED_Cathode_VD_OFF;
+	LED_VD_OFF;
+	LED_VZ_OFF;	
 	
 	for (int i = 0; i <= 15; i++) {
 		usSRegInBuf[i] = 0;	
 	}
 }
-void modeVD(void) {
+void StaticMeasurementMode_VD (void) {
 	HAL_Delay(250);
 	ISTD_OFF;
 	HAL_Delay(5000);
@@ -19,7 +19,7 @@ void modeVD(void) {
 	ISTD_ON;
 }
 
-void modeVD_pulse(void) {
+void modeVD_pulse (void) {
 	HAL_Delay(250);
 	id30min = 0; id30max = 0;
 
@@ -38,7 +38,7 @@ void modeVD_pulse(void) {
 	ISTD_ON;
 }
 
-void modeVZ(void) {
+void StaticMeasurementMode_VZ (void) {
 	HAL_Delay(250);
 	ISTZ_OFF;
 	HAL_Delay(5000);

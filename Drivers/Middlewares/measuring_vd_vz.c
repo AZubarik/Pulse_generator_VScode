@@ -14,7 +14,7 @@ float   IDOUT = 0.5,                        //coef usilenia po toky
 int   UDOUT = 2,
       UZOUT = 2;
 uint16_t out;
-uint16_t* tmp;
+uint16_t* tmp = 0;
 float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
 extern uint16_t usSRegInBuf[];
 

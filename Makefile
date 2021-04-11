@@ -88,8 +88,11 @@ Drivers/FreeModbus/mb_m.c \
 Drivers/FreeModbus/app/user_mb_app.c \
 Drivers/FreeModbus/app/user_mb_app_m.c \
 \
+Drivers/Middlewares/FunctionsTxRx.c \
 Drivers/Middlewares/mode.c \
-Drivers/Middlewares/measuring_vd_vz.c
+Drivers/Middlewares/measuring_vd_vz.c\
+\
+Drivers/Middlewares/Flash.c
 
 
 # ASM sources

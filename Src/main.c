@@ -19,39 +19,26 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "spi.h"
-#include "tim.h"
-#include "usart.h"
-#include "gpio.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mb.h"
 #include "mbport.h"
 #include "user_mb_app.h"
+
+#include "FunctionsTxRx.h"
+#include "Flash.h"
+#include "mode.h"
+#include "measuring_vd_vz.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 extern uint16_t usSRegInBuf[];
 extern uint16_t usSRegHoldBuf[];
+
+int operatingMode, Start, RecordFlash = 0;
+float add1 = 0;
 /* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-int operatingMode, Start = 0; 
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
-/* Private variables ---------------------------------------------------------*/
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -71,7 +58,6 @@ void SystemClock_Config(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -80,17 +66,16 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-
   /* USER CODE END Init */
 
   /* Configure the system clock */
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
+  /* USER CODE BEGIN 2 */
   MX_GPIO_Init();
   MX_SPI2_Init();
   MX_TIM1_Init();
@@ -98,7 +83,8 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
-  /* USER CODE BEGIN 2 */
+
+  ISTD_ON;	ISTZ_ON;
   
 	eMBInit(MB_RTU, 2, &huart3, 115200, &htim4);
 	eMBEnable();
@@ -107,54 +93,58 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  while (1) {
     operatingMode = usSRegHoldBuf[0];
 	  Start = usSRegHoldBuf[1];
-	  
+    	  
 	  switch (operatingMode) {
 		  case 3:
-		  waiting_mode();
+		  WaitingMode();
 		  break;
 		  
 		  case 1:
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, OFF); HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, ON);  //Светодиод катода диода
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, OFF); HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ON);  //Светодиод режима диода
+		  LED_Cathode_VZ_OFF; LED_VZ_OFF;
+      LED_Cathode_VD_ON;  LED_VD_ON;          //Светодиод режима диода //Светодиод катода диода
 			  
 			  if (Start == 1) {
-				  modeVD(); 
+          StaticMeasurementMode_VD(); 
 			  }
-		  
 			  if (Start == 2) {
 				  modeVD_pulse();
 			  }
 		  break;
 		  
 		  case 2:
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, OFF); HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, ON);   //Светодиод катода VZ
-		  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, OFF); HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, ON);		//Светодиод режима VZ
+      LED_Cathode_VD_OFF; LED_VD_OFF;
+      LED_Cathode_VZ_ON;  LED_VZ_ON;   //Светодиод катода VZ //Светодиод режима VZ
 			  
 			  if (Start == 3) {
-				  modeVZ();
+				  StaticMeasurementMode_VZ();
 			  }
-		  
 			  if (Start == 4) {
 				  modeVZ_pulse();
 			  } 
 		  break;
 		  
 		  case 5:
-		  waiting_mode();
+		  WaitingMode();
 		  diagnostic();
 		  usSRegHoldBuf[0] = 0;
-		  break;					  
+		  break;	
+
+      case 6:
+      add1 = dataReception (4);
+      dataTransfer(12, add1);
+
+      RecordFlash = usSRegHoldBuf[6];
+      if (RecordFlash == 26) {
+        //WritingToFlash();	
+       } 
+      break;		  
 	  }
-	  //HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_4);
 	  HAL_Delay(20);
-	  
 	  eMBPoll();
     /* USER CODE END WHILE */
-
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -162,7 +152,7 @@ int main(void)
 
 /**
   * @brief System Clock Configuration
-  * @retval None
+  * @retval 
   */
 void SystemClock_Config(void)
 {

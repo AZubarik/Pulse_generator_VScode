@@ -2,9 +2,9 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Cortex Debug",
+			"name": "cortex-debug",
 			"cwd": "${workspaceRoot}",
-			"executable": "./build/Blink.elf",
+			"executable": "./build/Generator_PWR.elf",
 			"svdFile": "./JLink/STM32F103xx.svd",
 			"request": "launch",
 			"type": "cortex-debug",

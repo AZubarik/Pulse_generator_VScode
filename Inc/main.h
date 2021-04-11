@@ -30,19 +30,23 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-#define ON                  GPIO_PIN_SET
-#define OFF					GPIO_PIN_RESET
+#include <string.h>
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
+
+#define ON              GPIO_PIN_SET
+#define OFF					    GPIO_PIN_RESET
 /* SPI2 ---------------------------------------------------------------------*/	
 
-#define CNV_ON				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, ON)
-#define CNV_OFF				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, OFF)
+#define CNV_ON				  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, ON)
+#define CNV_OFF				  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, OFF)
 	 
 /* PWM ---------------------------------------------------------------------*/
 	 
-#define PWMN_Stop			HAL_TIMEx_PWMN_Stop
-#define PWMN_Start			HAL_TIMEx_PWMN_Start
+#define PWMN_Stop			  HAL_TIMEx_PWMN_Stop
+#define PWMN_Start		  HAL_TIMEx_PWMN_Start
 	 
 /* TIM ---------------------------------------------------------------------*/
 	 
@@ -50,29 +54,29 @@ extern "C" {
 #define TIM_Start_IT		HAL_TIM_Base_Start_IT
 
 /* LED_VD, LED_VZ ----------------------------------------------------------*/
-#define LED_VD				GPIO_PIN_7
-#define LED_VZ				GPIO_PIN_12
+#define LED_VD                GPIO_PIN_7
+#define LED_VZ				        GPIO_PIN_12
 	 
-#define LED_VD1				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8)
-/* -------------------------------------------------------------------------*/	
-#define IZ30MIN				HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)	 
-#define	IZ30MAX				HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3)
-#define ID30MIN				HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) 
-#define	ID30MAX				HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2)
-	 
-#define ISTD_ON				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, ON)	
-#define ISTD_OFF			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, OFF)
-	 
-#define	ISTZ_ON				HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, ON) 
-#define	ISTZ_OFF			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, OFF)
+#define LED_VD_ON				      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, ON)
+#define LED_VD_OFF			      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, OFF)
+#define LED_Cathode_VD_ON     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, ON)
+#define LED_Cathode_VD_OFF    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, OFF)
 
-void waiting_mode(void);
-void modeVD(void);
-void modeVZ(void);
-void modeVD_pulse(void);
-void modeVZ_pulse(void);	
-void diagnostic(void);
-/* USER CODE END Includes */
+#define LED_VZ_ON				      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ON)
+#define LED_VZ_OFF			      HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, OFF)
+#define LED_Cathode_VZ_ON     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, ON)
+#define LED_Cathode_VZ_OFF    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, OFF)
+/* -------------------------------------------------------------------------*/	
+#define IZ30MIN				        HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0)	 
+#define	IZ30MAX				        HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_3)
+#define ID30MIN				        HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_1) 
+#define	ID30MAX				        HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_2)
+	 
+#define ISTD_ON				        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, ON)	
+#define ISTD_OFF			        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, OFF)
+	 
+#define	ISTZ_ON				        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, ON) 
+#define	ISTZ_OFF			        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, OFF)
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */

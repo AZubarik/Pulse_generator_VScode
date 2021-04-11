@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -43,7 +43,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
   14:Drivers/Middlewares/measuring_vd_vz.c **** int   UDOUT = 2,
   15:Drivers/Middlewares/measuring_vd_vz.c ****       UZOUT = 2;
   16:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t out;
-  17:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t* tmp;
+  17:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t* tmp = 0;
   18:Drivers/Middlewares/measuring_vd_vz.c **** float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
   19:Drivers/Middlewares/measuring_vd_vz.c **** extern uint16_t usSRegInBuf[];
   20:Drivers/Middlewares/measuring_vd_vz.c **** 
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
   35              		.cfi_def_cfa_offset 12
   36              		.cfi_offset 4, -12
   37              		.cfi_offset 5, -8
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 2
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 2
 
 
   38              		.cfi_offset 14, -4
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
   85              		.loc 1 22 31 discriminator 3 view .LVU12
   22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
   86              		.loc 1 22 32 is_stmt 0 discriminator 3 view .LVU13
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 3
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 3
 
 
   87 0046 0134     		adds	r4, r4, #1
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  135              		.loc 1 33 2 is_stmt 1 view .LVU21
  136              		.loc 1 33 6 is_stmt 0 view .LVU22
  137 0004 074B     		ldr	r3, .L10
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 4
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 4
 
 
  138 0006 01AA     		add	r2, sp, #4
@@ -208,7 +208,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  159              	.L11:
  160 0022 00BF     		.align	2
  161              	.L10:
- 162 0024 00000000 		.word	tmp
+ 162 0024 00000000 		.word	.LANCHOR0
  163 0028 00000000 		.word	usSRegInBuf
  164              		.cfi_endproc
  165              	.LFE66:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  189              		.cfi_offset 14, -4
   39:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN3);
  190              		.loc 1 39 5 view .LVU31
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 5
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 5
 
 
  191 0002 174B     		ldr	r3, .L14
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  240 0052 0146     		mov	r1, r0
  241              		.loc 1 44 19 view .LVU41
  242 0054 094B     		ldr	r3, .L14+28
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 6
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 6
 
 
  243 0056 1860     		str	r0, [r3]	@ float
@@ -313,13 +313,13 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  250              	.L15:
  251              		.align	2
  252              	.L14:
- 253 0060 00000000 		.word	.LANCHOR0
+ 253 0060 00000000 		.word	.LANCHOR1
  254 0064 00000000 		.word	out
- 255 0068 00000000 		.word	.LANCHOR1
- 256 006c 00000000 		.word	.LANCHOR2
+ 255 0068 00000000 		.word	.LANCHOR2
+ 256 006c 00000000 		.word	.LANCHOR3
  257 0070 00000000 		.word	voltageADC_vd
- 258 0074 00000000 		.word	.LANCHOR3
- 259 0078 00000000 		.word	.LANCHOR4
+ 258 0074 00000000 		.word	.LANCHOR4
+ 259 0078 00000000 		.word	.LANCHOR5
  260 007c 00000000 		.word	currentADC_vd
  261              		.cfi_endproc
  262              	.LFE67:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  293 000c 3088     		ldrh	r0, [r6]
  294 000e FFF7FEFF 		bl	__aeabi_i2f
  295              	.LVL24:
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 7
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 7
 
 
  296 0012 174D     		ldr	r5, .L18+8
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  345 0060 0620     		movs	r0, #6
  346 0062 FFF7FEFF 		bl	dataTransferADC
  347              	.LVL34:
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 8
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 8
 
 
   56:Drivers/Middlewares/measuring_vd_vz.c **** }
@@ -427,14 +427,14 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  350              	.L19:
  351              		.align	2
  352              	.L18:
- 353 0068 00000000 		.word	.LANCHOR5
+ 353 0068 00000000 		.word	.LANCHOR6
  354 006c 00000000 		.word	out
- 355 0070 00000000 		.word	.LANCHOR1
- 356 0074 00000000 		.word	.LANCHOR6
+ 355 0070 00000000 		.word	.LANCHOR2
+ 356 0074 00000000 		.word	.LANCHOR7
  357 0078 00000000 		.word	voltageADC_vz
- 358 007c 00000000 		.word	.LANCHOR7
- 359 0080 00000000 		.word	.LANCHOR8
- 360 0084 00000000 		.word	.LANCHOR9
+ 358 007c 00000000 		.word	.LANCHOR8
+ 359 0080 00000000 		.word	.LANCHOR9
+ 360 0084 00000000 		.word	.LANCHOR10
  361 0088 00000000 		.word	currentADC_vz
  362              		.cfi_endproc
  363              	.LFE68:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  398              		.loc 1 61 9 is_stmt 1 discriminator 3 view .LVU64
  399 0008 144C     		ldr	r4, .L24
  400 000a 0122     		movs	r2, #1
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 9
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 9
 
 
  401 000c 4FF48051 		mov	r1, #4096
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  444              		.loc 1 60 5 is_stmt 0 discriminator 1 view .LVU74
  445 0052 032D     		cmp	r5, #3
  446 0054 D8DD     		ble	.L22
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 10
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 10
 
 
  447              	.LBE3:
@@ -557,7 +557,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  458              	.L24:
  459 005c 000C0140 		.word	1073810432
  460 0060 00000000 		.word	out
- 461 0064 00000000 		.word	.LANCHOR10
+ 461 0064 00000000 		.word	.LANCHOR11
  462 0068 00000000 		.word	hspi2
  463              		.cfi_endproc
  464              	.LFE69:
@@ -565,7 +565,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  467              		.comm	currentADC_vz,4,4
  468              		.comm	voltageADC_vd,4,4
  469              		.comm	currentADC_vd,4,4
- 470              		.comm	tmp,4,4
+ 470              		.global	tmp
  471              		.comm	out,2,2
  472              		.global	UZOUT
  473              		.global	UDOUT
@@ -578,131 +578,144 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 1
  480              		.global	AD7682_IN1
  481              		.global	AD7682_IN0
  482              		.global	CFG
- 483              		.section	.data.AD7682_IN0,"aw"
- 484              		.align	1
- 485              		.set	.LANCHOR7,. + 0
- 488              	AD7682_IN0:
- 489 0000 24F1     		.short	-3804
- 490              		.section	.data.AD7682_IN1,"aw"
+ 483              		.section	.bss.tmp,"aw",%nobits
+ 484              		.align	2
+ 485              		.set	.LANCHOR0,. + 0
+ 488              	tmp:
+ 489 0000 00000000 		.space	4
+ 490              		.section	.data.AD7682_IN0,"aw"
  491              		.align	1
- 492              		.set	.LANCHOR5,. + 0
- 495              	AD7682_IN1:
- 496 0000 24F3     		.short	-3292
- 497              		.section	.data.AD7682_IN2,"aw"
+ 492              		.set	.LANCHOR8,. + 0
+ 495              	AD7682_IN0:
+ 496 0000 24F1     		.short	-3804
+ 497              		.section	.data.AD7682_IN1,"aw"
  498              		.align	1
- 499              		.set	.LANCHOR3,. + 0
- 502              	AD7682_IN2:
- 503 0000 24F5     		.short	-2780
- 504              		.section	.data.AD7682_IN3,"aw"
+ 499              		.set	.LANCHOR6,. + 0
+ 502              	AD7682_IN1:
+ 503 0000 24F3     		.short	-3292
+ 504              		.section	.data.AD7682_IN2,"aw"
  505              		.align	1
- 506              		.set	.LANCHOR0,. + 0
- 509              	AD7682_IN3:
- 510 0000 24F7     		.short	-2268
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 11
+ 506              		.set	.LANCHOR4,. + 0
+ 509              	AD7682_IN2:
+ 510 0000 24F5     		.short	-2780
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 11
 
 
- 511              		.section	.data.CFG,"aw"
+ 511              		.section	.data.AD7682_IN3,"aw"
  512              		.align	1
- 513              		.set	.LANCHOR10,. + 0
- 516              	CFG:
- 517 0000 FCE7     		.short	-6148
- 518              		.section	.data.IDOUT,"aw"
- 519              		.align	2
- 520              		.set	.LANCHOR4,. + 0
- 523              	IDOUT:
- 524 0000 0000003F 		.word	1056964608
- 525              		.section	.data.IZOUT,"aw"
+ 513              		.set	.LANCHOR1,. + 0
+ 516              	AD7682_IN3:
+ 517 0000 24F7     		.short	-2268
+ 518              		.section	.data.CFG,"aw"
+ 519              		.align	1
+ 520              		.set	.LANCHOR11,. + 0
+ 523              	CFG:
+ 524 0000 FCE7     		.short	-6148
+ 525              		.section	.data.IDOUT,"aw"
  526              		.align	2
- 527              		.set	.LANCHOR8,. + 0
- 530              	IZOUT:
+ 527              		.set	.LANCHOR5,. + 0
+ 530              	IDOUT:
  531 0000 0000003F 		.word	1056964608
- 532              		.section	.data.Resistor,"aw"
+ 532              		.section	.data.IZOUT,"aw"
  533              		.align	2
  534              		.set	.LANCHOR9,. + 0
- 537              	Resistor:
- 538 0000 0000803E 		.word	1048576000
- 539              		.section	.data.UDOUT,"aw"
+ 537              	IZOUT:
+ 538 0000 0000003F 		.word	1056964608
+ 539              		.section	.data.Resistor,"aw"
  540              		.align	2
- 541              		.set	.LANCHOR2,. + 0
- 544              	UDOUT:
- 545 0000 02000000 		.word	2
- 546              		.section	.data.UZOUT,"aw"
+ 541              		.set	.LANCHOR10,. + 0
+ 544              	Resistor:
+ 545 0000 0000803E 		.word	1048576000
+ 546              		.section	.data.UDOUT,"aw"
  547              		.align	2
- 548              		.set	.LANCHOR6,. + 0
- 551              	UZOUT:
+ 548              		.set	.LANCHOR3,. + 0
+ 551              	UDOUT:
  552 0000 02000000 		.word	2
- 553              		.section	.data.deltaADC,"aw"
+ 553              		.section	.data.UZOUT,"aw"
  554              		.align	2
- 555              		.set	.LANCHOR1,. + 0
- 558              	deltaADC:
- 559 0000 6F128338 		.word	948114031
- 560              		.text
- 561              	.Letext0:
- 562              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
- 563              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
- 564              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 565              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 566              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 567              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 568              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 569              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 570              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 571              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 572              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
- 573              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 574              		.file 14 "Inc/spi.h"
- 575              		.file 15 "Inc/tim.h"
- 576              		.file 16 "Inc/usart.h"
- 577              		.file 17 "Drivers/FreeModbus/port/port.h"
- 578              		.file 18 "Drivers/FreeModbus/include/mbport.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s 			page 12
+ 555              		.set	.LANCHOR7,. + 0
+ 558              	UZOUT:
+ 559 0000 02000000 		.word	2
+ 560              		.section	.data.deltaADC,"aw"
+ 561              		.align	2
+ 562              		.set	.LANCHOR2,. + 0
+ 565              	deltaADC:
+ 566 0000 6F128338 		.word	948114031
+ 567              		.text
+ 568              	.Letext0:
+ 569              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 570              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 571              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 572              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 573              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 574              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 575              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 576              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 577              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 578              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 579              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 580              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 581              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 582              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 583              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 12
+
+
+ 584              		.file 17 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 585              		.file 18 "Inc/spi.h"
+ 586              		.file 19 "Inc/tim.h"
+ 587              		.file 20 "Inc/usart.h"
+ 588              		.file 21 "Drivers/FreeModbus/port/port.h"
+ 589              		.file 22 "Drivers/FreeModbus/include/mbport.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 measuring_vd_vz.c
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:16     .text.setConfigADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:24     .text.setConfigADC:0000000000000000 setConfigADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:108    .text.setConfigADC:0000000000000054 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:16     .text.setConfigADC:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:24     .text.setConfigADC:0000000000000000 setConfigADC
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:108    .text.setConfigADC:0000000000000054 $d
                             *COM*:0000000000000002 out
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:115    .text.dataTransferADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:122    .text.dataTransferADC:0000000000000000 dataTransferADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:162    .text.dataTransferADC:0000000000000024 $d
-                            *COM*:0000000000000004 tmp
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:170    .text.measuringVD:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:177    .text.measuringVD:0000000000000000 measuringVD
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:253    .text.measuringVD:0000000000000060 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:115    .text.dataTransferADC:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:122    .text.dataTransferADC:0000000000000000 dataTransferADC
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:162    .text.dataTransferADC:0000000000000024 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:170    .text.measuringVD:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:177    .text.measuringVD:0000000000000000 measuringVD
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:253    .text.measuringVD:0000000000000060 $d
                             *COM*:0000000000000004 voltageADC_vd
                             *COM*:0000000000000004 currentADC_vd
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:265    .text.measuringVZ:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:272    .text.measuringVZ:0000000000000000 measuringVZ
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:353    .text.measuringVZ:0000000000000068 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:265    .text.measuringVZ:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:272    .text.measuringVZ:0000000000000000 measuringVZ
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:353    .text.measuringVZ:0000000000000068 $d
                             *COM*:0000000000000004 voltageADC_vz
                             *COM*:0000000000000004 currentADC_vz
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:366    .text.configurationADC:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:373    .text.configurationADC:0000000000000000 configurationADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:459    .text.configurationADC:000000000000005c $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:551    .data.UZOUT:0000000000000000 UZOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:544    .data.UDOUT:0000000000000000 UDOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:537    .data.Resistor:0000000000000000 Resistor
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:558    .data.deltaADC:0000000000000000 deltaADC
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:530    .data.IZOUT:0000000000000000 IZOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:523    .data.IDOUT:0000000000000000 IDOUT
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:509    .data.AD7682_IN3:0000000000000000 AD7682_IN3
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:502    .data.AD7682_IN2:0000000000000000 AD7682_IN2
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:495    .data.AD7682_IN1:0000000000000000 AD7682_IN1
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:488    .data.AD7682_IN0:0000000000000000 AD7682_IN0
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:516    .data.CFG:0000000000000000 CFG
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:484    .data.AD7682_IN0:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:491    .data.AD7682_IN1:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:498    .data.AD7682_IN2:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:505    .data.AD7682_IN3:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:512    .data.CFG:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:519    .data.IDOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:526    .data.IZOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:533    .data.Resistor:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:540    .data.UDOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:547    .data.UZOUT:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\ccdxvlpF.s:554    .data.deltaADC:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:366    .text.configurationADC:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:373    .text.configurationADC:0000000000000000 configurationADC
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:459    .text.configurationADC:000000000000005c $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:488    .bss.tmp:0000000000000000 tmp
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:558    .data.UZOUT:0000000000000000 UZOUT
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:551    .data.UDOUT:0000000000000000 UDOUT
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:544    .data.Resistor:0000000000000000 Resistor
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:565    .data.deltaADC:0000000000000000 deltaADC
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:537    .data.IZOUT:0000000000000000 IZOUT
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:530    .data.IDOUT:0000000000000000 IDOUT
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:516    .data.AD7682_IN3:0000000000000000 AD7682_IN3
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:509    .data.AD7682_IN2:0000000000000000 AD7682_IN2
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:502    .data.AD7682_IN1:0000000000000000 AD7682_IN1
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:495    .data.AD7682_IN0:0000000000000000 AD7682_IN0
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:523    .data.CFG:0000000000000000 CFG
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:484    .bss.tmp:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:491    .data.AD7682_IN0:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:498    .data.AD7682_IN1:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:505    .data.AD7682_IN2:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:512    .data.AD7682_IN3:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:519    .data.CFG:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:526    .data.IDOUT:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:533    .data.IZOUT:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:540    .data.Resistor:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:547    .data.UDOUT:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:554    .data.UZOUT:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:561    .data.deltaADC:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 HAL_GPIO_WritePin

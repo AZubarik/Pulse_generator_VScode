@@ -24,7 +24,8 @@ build/mbrtu.o: Drivers/FreeModbus/rtu/mbrtu.c \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/spi.h \
+ Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h \
  Drivers/FreeModbus/include/mb.h Drivers/FreeModbus/include/mbport.h \
  Drivers/FreeModbus/include/mbproto.h Drivers/FreeModbus/rtu/mbrtu.h \
  Drivers/FreeModbus/include/mbframe.h Drivers/FreeModbus/rtu/mbcrc.h \
@@ -89,6 +90,16 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+
+Inc/spi.h:
+
+Inc/main.h:
+
+Inc/tim.h:
+
+Inc/usart.h:
+
+Inc/gpio.h:
 
 Drivers/FreeModbus/include/mb.h:
 

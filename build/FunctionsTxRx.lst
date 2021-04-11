@@ -1,0 +1,227 @@
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 1
+  10              		.eabi_attribute 18, 4
+  11              		.file	"FunctionsTxRx.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.dataReception,"ax",%progbits
+  16              		.align	1
+  17              		.global	dataReception
+  18              		.arch armv7-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu softvfp
+  24              	dataReception:
+  25              	.LVL0:
+  26              	.LFB65:
+  27              		.file 1 "Drivers/Middlewares/FunctionsTxRx.c"
+   1:Drivers/Middlewares/FunctionsTxRx.c **** #include "FunctionsTxRx.h"
+   2:Drivers/Middlewares/FunctionsTxRx.c **** 
+   3:Drivers/Middlewares/FunctionsTxRx.c **** extern uint16_t usSRegInBuf[];
+   4:Drivers/Middlewares/FunctionsTxRx.c **** extern uint16_t usSRegHoldBuf[];
+   5:Drivers/Middlewares/FunctionsTxRx.c **** 
+   6:Drivers/Middlewares/FunctionsTxRx.c **** uint16_t out;
+   7:Drivers/Middlewares/FunctionsTxRx.c **** uint16_t* tmpe = 0;
+   8:Drivers/Middlewares/FunctionsTxRx.c **** 
+   9:Drivers/Middlewares/FunctionsTxRx.c **** uint16_t RegisterValueOne,
+  10:Drivers/Middlewares/FunctionsTxRx.c ****          RegisterValueTwo = 0;
+  11:Drivers/Middlewares/FunctionsTxRx.c **** uint32_t result = 0;
+  12:Drivers/Middlewares/FunctionsTxRx.c **** float value;
+  13:Drivers/Middlewares/FunctionsTxRx.c **** 
+  14:Drivers/Middlewares/FunctionsTxRx.c **** float dataReception (int registr) {
+  28              		.loc 1 14 35 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  15:Drivers/Middlewares/FunctionsTxRx.c ****   RegisterValueOne = usSRegHoldBuf[registr];
+  33              		.loc 1 15 3 view .LVU1
+  34              		.loc 1 15 35 is_stmt 0 view .LVU2
+  35 0000 084A     		ldr	r2, .L2
+  36 0002 32F81030 		ldrh	r3, [r2, r0, lsl #1]
+  37              		.loc 1 15 20 view .LVU3
+  38 0006 0849     		ldr	r1, .L2+4
+  39 0008 0B80     		strh	r3, [r1]	@ movhi
+  16:Drivers/Middlewares/FunctionsTxRx.c ****   RegisterValueTwo = usSRegHoldBuf[registr + 1];
+  40              		.loc 1 16 3 is_stmt 1 view .LVU4
+  41              		.loc 1 16 44 is_stmt 0 view .LVU5
+  42 000a 0130     		adds	r0, r0, #1
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s 			page 2
+
+
+  43              	.LVL1:
+  44              		.loc 1 16 35 view .LVU6
+  45 000c 32F81000 		ldrh	r0, [r2, r0, lsl #1]
+  46              	.LVL2:
+  47              		.loc 1 16 20 view .LVU7
+  48 0010 064A     		ldr	r2, .L2+8
+  49 0012 1080     		strh	r0, [r2]	@ movhi
+  17:Drivers/Middlewares/FunctionsTxRx.c **** 
+  18:Drivers/Middlewares/FunctionsTxRx.c ****   result = (RegisterValueOne ) | (RegisterValueTwo << 16);
+  50              		.loc 1 18 3 is_stmt 1 view .LVU8
+  51              		.loc 1 18 32 is_stmt 0 view .LVU9
+  52 0014 43EA0040 		orr	r0, r3, r0, lsl #16
+  53              		.loc 1 18 10 view .LVU10
+  54 0018 054B     		ldr	r3, .L2+12
+  55 001a 1860     		str	r0, [r3]
+  19:Drivers/Middlewares/FunctionsTxRx.c **** 
+  20:Drivers/Middlewares/FunctionsTxRx.c ****   memcpy(&value, &result, sizeof(value));
+  56              		.loc 1 20 3 is_stmt 1 view .LVU11
+  57 001c 054B     		ldr	r3, .L2+16
+  58 001e 1860     		str	r0, [r3]
+  21:Drivers/Middlewares/FunctionsTxRx.c **** 
+  22:Drivers/Middlewares/FunctionsTxRx.c ****   return value;
+  59              		.loc 1 22 3 view .LVU12
+  23:Drivers/Middlewares/FunctionsTxRx.c **** }
+  60              		.loc 1 23 1 is_stmt 0 view .LVU13
+  61 0020 7047     		bx	lr
+  62              	.L3:
+  63 0022 00BF     		.align	2
+  64              	.L2:
+  65 0024 00000000 		.word	usSRegHoldBuf
+  66 0028 00000000 		.word	RegisterValueOne
+  67 002c 00000000 		.word	.LANCHOR0
+  68 0030 00000000 		.word	.LANCHOR1
+  69 0034 00000000 		.word	value
+  70              		.cfi_endproc
+  71              	.LFE65:
+  73              		.section	.text.dataTransfer,"ax",%progbits
+  74              		.align	1
+  75              		.global	dataTransfer
+  76              		.syntax unified
+  77              		.thumb
+  78              		.thumb_func
+  79              		.fpu softvfp
+  81              	dataTransfer:
+  82              	.LVL3:
+  83              	.LFB66:
+  24:Drivers/Middlewares/FunctionsTxRx.c **** 
+  25:Drivers/Middlewares/FunctionsTxRx.c **** void dataTransfer(int registr, float out) {
+  84              		.loc 1 25 43 is_stmt 1 view -0
+  85              		.cfi_startproc
+  86              		@ args = 0, pretend = 0, frame = 8
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		@ link register save eliminated.
+  89              		.loc 1 25 43 is_stmt 0 view .LVU15
+  90 0000 82B0     		sub	sp, sp, #8
+  91              	.LCFI0:
+  92              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s 			page 3
+
+
+  93 0002 0191     		str	r1, [sp, #4]	@ float
+  26:Drivers/Middlewares/FunctionsTxRx.c **** 	  tmpe = (uint16_t*) &out;
+  94              		.loc 1 26 4 is_stmt 1 view .LVU16
+  95              		.loc 1 26 9 is_stmt 0 view .LVU17
+  96 0004 074B     		ldr	r3, .L6
+  97 0006 01AA     		add	r2, sp, #4
+  98 0008 1A60     		str	r2, [r3]
+  27:Drivers/Middlewares/FunctionsTxRx.c ****     usSRegInBuf[registr] = *tmpe;
+  99              		.loc 1 27 5 is_stmt 1 view .LVU18
+ 100              		.loc 1 27 28 is_stmt 0 view .LVU19
+ 101 000a BDF80420 		ldrh	r2, [sp, #4]
+ 102              		.loc 1 27 26 view .LVU20
+ 103 000e 064B     		ldr	r3, .L6+4
+ 104 0010 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  28:Drivers/Middlewares/FunctionsTxRx.c ****     usSRegInBuf[registr + 1] = *(tmpe + 1);
+ 105              		.loc 1 28 5 is_stmt 1 view .LVU21
+ 106              		.loc 1 28 25 is_stmt 0 view .LVU22
+ 107 0014 0130     		adds	r0, r0, #1
+ 108              	.LVL4:
+ 109              		.loc 1 28 30 view .LVU23
+ 110 0016 BDF80620 		ldrh	r2, [sp, #6]
+ 111 001a 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  29:Drivers/Middlewares/FunctionsTxRx.c **** }...
+ 112              		.loc 1 29 1 view .LVU24
+ 113 001e 02B0     		add	sp, sp, #8
+ 114              	.LCFI1:
+ 115              		.cfi_def_cfa_offset 0
+ 116              		@ sp needed
+ 117 0020 7047     		bx	lr
+ 118              	.L7:
+ 119 0022 00BF     		.align	2
+ 120              	.L6:
+ 121 0024 00000000 		.word	.LANCHOR2
+ 122 0028 00000000 		.word	usSRegInBuf
+ 123              		.cfi_endproc
+ 124              	.LFE66:
+ 126              		.comm	value,4,4
+ 127              		.global	result
+ 128              		.global	RegisterValueTwo
+ 129              		.comm	RegisterValueOne,2,2
+ 130              		.global	tmpe
+ 131              		.comm	out,2,2
+ 132              		.section	.bss.RegisterValueTwo,"aw",%nobits
+ 133              		.align	1
+ 134              		.set	.LANCHOR0,. + 0
+ 137              	RegisterValueTwo:
+ 138 0000 0000     		.space	2
+ 139              		.section	.bss.result,"aw",%nobits
+ 140              		.align	2
+ 141              		.set	.LANCHOR1,. + 0
+ 144              	result:
+ 145 0000 00000000 		.space	4
+ 146              		.section	.bss.tmpe,"aw",%nobits
+ 147              		.align	2
+ 148              		.set	.LANCHOR2,. + 0
+ 151              	tmpe:
+ 152 0000 00000000 		.space	4
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s 			page 4
+
+
+ 153              		.text
+ 154              	.Letext0:
+ 155              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 156              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 157              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 158              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 159              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 160              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 161              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 162              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 163              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 164              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 165              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 166              		.file 13 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 167              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 168              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 169              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 170              		.file 17 "Inc/spi.h"
+ 171              		.file 18 "Inc/tim.h"
+ 172              		.file 19 "Inc/usart.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 FunctionsTxRx.c
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:16     .text.dataReception:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:24     .text.dataReception:0000000000000000 dataReception
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:65     .text.dataReception:0000000000000024 $d
+                            *COM*:0000000000000002 RegisterValueOne
+                            *COM*:0000000000000004 value
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:74     .text.dataTransfer:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:81     .text.dataTransfer:0000000000000000 dataTransfer
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:121    .text.dataTransfer:0000000000000024 $d
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:144    .bss.result:0000000000000000 result
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:137    .bss.RegisterValueTwo:0000000000000000 RegisterValueTwo
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:151    .bss.tmpe:0000000000000000 tmpe
+                            *COM*:0000000000000002 out
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:133    .bss.RegisterValueTwo:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:140    .bss.result:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccX3qnJa.s:147    .bss.tmpe:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+usSRegHoldBuf
+usSRegInBuf

@@ -30,7 +30,10 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/include/mbproto.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/app/user_mb_app.h \
  Drivers/FreeModbus/include/mb_m.h Drivers/FreeModbus/include/mbframe.h \
- Drivers/FreeModbus/include/mbutils.h
+ Drivers/FreeModbus/include/mbutils.h Drivers/Middlewares/FunctionsTxRx.h \
+ Drivers/Middlewares/Flash.h Drivers/Middlewares/mode.h \
+ Drivers/Middlewares/measuring_vd_vz.h \
+ Drivers/Middlewares/measuring_vd_vz.h
 
 Inc/main.h:
 
@@ -117,3 +120,13 @@ Drivers/FreeModbus/include/mb_m.h:
 Drivers/FreeModbus/include/mbframe.h:
 
 Drivers/FreeModbus/include/mbutils.h:
+
+Drivers/Middlewares/FunctionsTxRx.h:
+
+Drivers/Middlewares/Flash.h:
+
+Drivers/Middlewares/mode.h:
+
+Drivers/Middlewares/measuring_vd_vz.h:
+
+Drivers/Middlewares/measuring_vd_vz.h:

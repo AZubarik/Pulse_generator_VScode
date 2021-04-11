@@ -25,7 +25,8 @@ build/user_mb_app_m.o: Drivers/FreeModbus/app/user_mb_app_m.c \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
- Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/spi.h \
+ Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/include/mbproto.h \
  Drivers/FreeModbus/include/mb_m.h Drivers/FreeModbus/include/mbframe.h \
  Drivers/FreeModbus/include/mbutils.h
@@ -93,6 +94,16 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h:
 
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
+
+Inc/spi.h:
+
+Inc/main.h:
+
+Inc/tim.h:
+
+Inc/usart.h:
+
+Inc/gpio.h:
 
 Drivers/FreeModbus/include/mbport.h:
 

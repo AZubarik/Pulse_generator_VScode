@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
   29:Drivers/FreeModbus/functions/mbutils.c ****  */
   30:Drivers/FreeModbus/functions/mbutils.c **** 
   31:Drivers/FreeModbus/functions/mbutils.c **** /* ----------------------- System includes ----------------------------------*/
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 2
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 2
 
 
   32:Drivers/FreeModbus/functions/mbutils.c **** #include "stdlib.h"
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
   62:Drivers/FreeModbus/functions/mbutils.c **** 
   63:Drivers/FreeModbus/functions/mbutils.c ****     /* How many bits precede our bits to set. */
   64:Drivers/FreeModbus/functions/mbutils.c ****     usNPreBits = ( USHORT )( usBitOffset - usByteOffset * BITS_UCHAR );
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 3
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 3
 
 
   52              		.loc 1 64 5 is_stmt 1 view .LVU11
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
   92              		.loc 1 78 5 is_stmt 1 view .LVU28
   93              		.loc 1 78 41 is_stmt 0 view .LVU29
   94 002c 23EA0103 		bic	r3, r3, r1
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 4
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 4
 
 
   95              	.LVL12:
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
  142              		.cfi_def_cfa_offset 4
  143              		.cfi_offset 4, -4
   88:Drivers/FreeModbus/functions/mbutils.c ****     USHORT          usWordBuf;
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 5
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 5
 
 
  144              		.loc 1 88 5 is_stmt 1 view .LVU41
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
  178              	.LVL22:
  179              		.loc 1 108 15 view .LVU60
  180 001a 0841     		asrs	r0, r0, r1
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 6
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 6
 
 
  181              	.LVL23:
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
  224 0004 0728     		cmp	r0, #7
  225 0006 05D0     		beq	.L8
  226 0008 08B1     		cbz	r0, .L10
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 7
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 7
 
 
  122:Drivers/FreeModbus/functions/mbutils.c ****     {
@@ -412,33 +412,42 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 1
  251              	.LFE67:
  253              		.text
  254              	.Letext0:
- 255              		.file 2 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
- 256              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\lock.h"
- 257              		.file 4 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_types.h"
- 258              		.file 5 "c:\\program files\\microsoft vs code\\gcc_arm\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\s
- 259              		.file 6 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\reent.h"
- 260              		.file 7 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\stdlib.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 8
+ 255              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 256              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 257              		.file 4 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 258              		.file 5 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 259              		.file 6 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 260              		.file 7 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\stdlib.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 8
 
 
- 261              		.file 8 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 261              		.file 8 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
  262              		.file 9 "Drivers/CMSIS/Include/core_cm3.h"
  263              		.file 10 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 264              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 265              		.file 12 "Drivers/FreeModbus/port/port.h"
- 266              		.file 13 "Drivers/FreeModbus/include/mbport.h"
- 267              		.file 14 "Drivers/FreeModbus/include/mbproto.h"
- 268              		.file 15 "Drivers/FreeModbus/include/mb.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s 			page 9
+ 264              		.file 11 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 265              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 266              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 267              		.file 14 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 268              		.file 15 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 269              		.file 16 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 270              		.file 17 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 271              		.file 18 "Inc/spi.h"
+ 272              		.file 19 "Inc/tim.h"
+ 273              		.file 20 "Inc/usart.h"
+ 274              		.file 21 "Drivers/FreeModbus/port/port.h"
+ 275              		.file 22 "Drivers/FreeModbus/include/mbport.h"
+ 276              		.file 23 "Drivers/FreeModbus/include/mbproto.h"
+ 277              		.file 24 "Drivers/FreeModbus/include/mb.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 mbutils.c
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:16     .text.xMBUtilSetBits:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:24     .text.xMBUtilSetBits:0000000000000000 xMBUtilSetBits
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:124    .text.xMBUtilGetBits:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:131    .text.xMBUtilGetBits:0000000000000000 xMBUtilGetBits
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:205    .text.prveMBError2Exception:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\ccQkpKUr.s:212    .text.prveMBError2Exception:0000000000000000 prveMBError2Exception
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:16     .text.xMBUtilSetBits:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:24     .text.xMBUtilSetBits:0000000000000000 xMBUtilSetBits
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:124    .text.xMBUtilGetBits:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:131    .text.xMBUtilGetBits:0000000000000000 xMBUtilGetBits
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:205    .text.prveMBError2Exception:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccTJ7IY1.s:212    .text.prveMBError2Exception:0000000000000000 prveMBError2Exception
 
 NO UNDEFINED SYMBOLS

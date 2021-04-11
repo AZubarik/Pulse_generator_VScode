@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
   13:Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
   14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
   15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 2
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 2
 
 
   16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
   70:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
   71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 3
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 3
 
 
   73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
  127:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  128:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  129:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 4
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 4
 
 
  130:Drivers/CMSIS/Include/cmsis_gcc.h **** {
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
   74              		@ args = 0, pretend = 0, frame = 0
   75              		@ frame_needed = 0, uses_anonymous_args = 0
   76              		@ link register save eliminated.
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 5
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 5
 
 
   14:Drivers/FreeModbus/port/portcritical.c **** 	lock_count--;
@@ -286,23 +286,39 @@ ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 1
  116 0000 00000000 		.space	4
  117              		.text
  118              	.Letext0:
- 119              		.file 3 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\machine\\_default_
- 120              		.file 4 "c:\\program files\\microsoft vs code\\gcc_arm\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 119              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 120              		.file 4 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
  121              		.file 5 "Drivers/CMSIS/Include/core_cm3.h"
  122              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 123              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
-ARM GAS  C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s 			page 6
+ 123              		.file 7 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 124              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 125              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 126              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 127              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 128              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 129              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 130              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 6
+
+
+ 131              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 132              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 133              		.file 17 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 134              		.file 18 "Inc/spi.h"
+ 135              		.file 19 "Inc/tim.h"
+ 136              		.file 20 "Inc/usart.h"
+ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 portcritical.c
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:16     .text.__critical_enter:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:24     .text.__critical_enter:0000000000000000 __critical_enter
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:58     .text.__critical_enter:000000000000000c $d
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:63     .text.__critical_exit:0000000000000000 $t
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:70     .text.__critical_exit:0000000000000000 __critical_exit
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:106    .text.__critical_exit:0000000000000010 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:111    .bss.lock_count:0000000000000000 $d
-C:\Users\QUALIT~1\AppData\Local\Temp\cc3Ozpb1.s:115    .bss.lock_count:0000000000000000 lock_count
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:16     .text.__critical_enter:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:24     .text.__critical_enter:0000000000000000 __critical_enter
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:58     .text.__critical_enter:000000000000000c $d
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:63     .text.__critical_exit:0000000000000000 $t
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:70     .text.__critical_exit:0000000000000000 __critical_exit
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:106    .text.__critical_exit:0000000000000010 $d
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:111    .bss.lock_count:0000000000000000 $d
+C:\Users\Andre\AppData\Local\Temp\ccTYlsPd.s:115    .bss.lock_count:0000000000000000 lock_count
 
 NO UNDEFINED SYMBOLS

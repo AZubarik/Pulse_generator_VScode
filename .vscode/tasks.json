@@ -9,18 +9,13 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			},
-			"problemMatcher": [
-				"$msCompile"
-			]
+			}
 		},
 		{
 			"label": "Make Clean",
@@ -30,9 +25,7 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
 			},
 			"group": {
@@ -49,11 +42,9 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "test",
 				"isDefault": true
@@ -68,11 +59,9 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "test",
 				"isDefault": true
@@ -87,11 +76,9 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "test",
 				"isDefault": true
@@ -106,11 +93,9 @@
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "test",
 				"isDefault": true
@@ -120,16 +105,14 @@
 		{
 			"label": "Start GDB Server (Cortex-M3)",
 			"type": "shell",
-			"command": "start JLinkGDBServer.exe -select USB -device Cortex-M4 -if SWD -speed 1000 -ir",
+			"command": "start JLinkGDBServer.exe -select USB -device Cortex-M3 -if SWD -speed 1000 -ir",
 			"options": {
 				"cwd": "${workspaceRoot}",
 				"shell": {
 					"executable": "cmd.exe",
-					"args": [
-						"/C"
-					]
+					"args": ["/C"]
 				}
-			},
+			}, 
 			"group": {
 				"kind": "test",
 				"isDefault": true
