@@ -23,16 +23,16 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/spi.h \
- Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h \
- Drivers/FreeModbus/include/mb.h Drivers/FreeModbus/port/port.h \
- Drivers/FreeModbus/include/mbconfig.h \
+ Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h Inc/spi.h Inc/tim.h \
+ Inc/usart.h Inc/gpio.h Drivers/FreeModbus/include/mb.h \
+ Drivers/FreeModbus/port/port.h Drivers/FreeModbus/include/mbconfig.h \
  Drivers/FreeModbus/port/portcritical.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/include/mbproto.h \
  Drivers/FreeModbus/include/mbport.h Drivers/FreeModbus/app/user_mb_app.h \
  Drivers/FreeModbus/include/mb_m.h Drivers/FreeModbus/include/mbframe.h \
  Drivers/FreeModbus/include/mbutils.h Drivers/Middlewares/FunctionsTxRx.h \
  Drivers/Middlewares/Flash.h Drivers/Middlewares/mode.h \
- Drivers/Middlewares/measuring_vd_vz.h \
+ Drivers/Middlewares/measuring_vd_vz.h Drivers/Middlewares/mode.h \
  Drivers/Middlewares/measuring_vd_vz.h
 
 Inc/main.h:
@@ -99,6 +99,14 @@ Inc/usart.h:
 
 Inc/gpio.h:
 
+Inc/spi.h:
+
+Inc/tim.h:
+
+Inc/usart.h:
+
+Inc/gpio.h:
+
 Drivers/FreeModbus/include/mb.h:
 
 Drivers/FreeModbus/port/port.h:
@@ -128,5 +136,7 @@ Drivers/Middlewares/Flash.h:
 Drivers/Middlewares/mode.h:
 
 Drivers/Middlewares/measuring_vd_vz.h:
+
+Drivers/Middlewares/mode.h:
 
 Drivers/Middlewares/measuring_vd_vz.h:

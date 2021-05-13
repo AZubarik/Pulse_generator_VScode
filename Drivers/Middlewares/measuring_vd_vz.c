@@ -1,32 +1,46 @@
 #include "measuring_vd_vz.h"
-
-uint16_t		CFG = 0x39FF << 2,
-         AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
+    // Setting the ADC(AD7682) and gain of operational amplifiers(AD8273)
+uint16_t AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
                     
-float   IDOUT = 0.5,                        //coef usilenia po toky
+float   IDOUT = 0.5,                        // coef usilenia po toky
 	    IZOUT = 0.5,  
-	    deltaADC = 0.0000625,               //delta ADC
-	    Resistor = 0.25;                    //tokovi resistor dla zener diod R = 4 Om
+	    deltaADC = 0.0000625,               // delta ADC
+	    Resistor = 0.25;                    // tokovi resistor dla zener diod R = 4 Om
 
-int   UDOUT = 2,
+int   UDOUT = 2,                            // coef usilenia po napryazheniyu
       UZOUT = 2;
-uint16_t out;
-uint16_t* tmp = 0;
+
 float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
+int AverageADC;
+uint16_t out;
+uint16_t MassifADC[16];
+
+uint16_t* tmp = 0;
+
 extern uint16_t usSRegInBuf[];
 
-int setConfigADC(uint16_t value) {
-	    for (int i = 0; i <= 15; i++) {
-	    CNV_OFF;
+void setConfigADC (uint16_t value) {
+    for (int i = 0; i < 16; i++) {
+        CNV_OFF;
 	    HAL_Delay(2);
         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
         HAL_Delay(2);	
         CNV_ON;
+        
+        MassifADC[i] = out;
+        AverageCalculationADC();
     }
-    return out;
+}
+
+float AverageCalculationADC (void) {
+    AverageADC = 0;
+        for (int j = 4; j < 16; j++) {
+            AverageADC += MassifADC[j];
+        }
+    return out = AverageADC / 12;
 }
 
 void dataTransferADC(int registr, float out) {
@@ -37,7 +51,7 @@ void dataTransferADC(int registr, float out) {
 
 void measuringVD(void) { 
     setConfigADC(AD7682_IN3);
-    voltageADC_vd = out * deltaADC  * UDOUT ;
+    voltageADC_vd = out * deltaADC  * UDOUT;
     dataTransferADC(0, voltageADC_vd);
     
     setConfigADC(AD7682_IN2);  
@@ -54,18 +68,3 @@ void measuringVZ(void) {
     currentADC_vz = out * deltaADC * IZOUT * Resistor;  
     dataTransferADC(6, currentADC_vz);
 }
-
-void configurationADC(void) {
-	
-    for (int i = 0; i <= 3; i++) {
-        CNV_ON;
-        HAL_Delay(20);
-        
-        CNV_OFF;
-        HAL_Delay(2);
-        HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&CFG, (uint8_t*)&out, 1, 10);
-        HAL_Delay(2);
-        CNV_ON;
-    }
-}
-

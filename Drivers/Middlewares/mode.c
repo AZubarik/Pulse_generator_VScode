@@ -19,14 +19,16 @@ void StaticMeasurementMode_VD (void) {
 	ISTD_ON;
 }
 
-void modeVD_pulse (void) {
+void PulseMeasurementMode_VD (void) {
 	HAL_Delay(250);
-	id30min = 0; id30max = 0;
+	id30min = 0; //id30max = 0;
 
-	HAL_TIM_Base_Start_IT(&htim2);
+//	HAL_TIM_Base_Start_IT(&htim2);
 	PWMN_Start(&htim1, TIM_CHANNEL_2);
 	HAL_Delay(500);
 	HAL_TIM_Base_Stop_IT(&htim2);
+	usSRegInBuf[8] = id30min;
+	usSRegInBuf[9] = id30max;
 	PWMN_Stop(&htim1, TIM_CHANNEL_2);
 	
 	ISTD_OFF;
@@ -47,10 +49,10 @@ void StaticMeasurementMode_VZ (void) {
 	ISTZ_ON;
 }
 
-void modeVZ_pulse(void) {
+void PulseMeasurementMode_VZ (void) {
 	HAL_Delay(250);
 	iz30min = 0, iz30max = 0;
-	
+		
 	HAL_TIM_Base_Start_IT(&htim3);
 	PWMN_Start(&htim1, TIM_CHANNEL_3);	  
 	HAL_Delay(500);

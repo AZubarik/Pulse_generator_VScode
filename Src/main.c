@@ -19,6 +19,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "spi.h"
+#include "tim.h"
+#include "usart.h"
+#include "gpio.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mb.h"
@@ -39,6 +44,21 @@ extern uint16_t usSRegHoldBuf[];
 int operatingMode, Start, RecordFlash = 0;
 float add1 = 0;
 /* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+
+/* USER CODE BEGIN PV */
+
+/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
@@ -75,7 +95,6 @@ int main(void)
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
-  /* USER CODE BEGIN 2 */
   MX_GPIO_Init();
   MX_SPI2_Init();
   MX_TIM1_Init();
@@ -83,6 +102,7 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   MX_TIM3_Init();
+  /* USER CODE BEGIN 2 */
 
   ISTD_ON;	ISTZ_ON;
   
@@ -104,13 +124,13 @@ int main(void)
 		  
 		  case 1:
 		  LED_Cathode_VZ_OFF; LED_VZ_OFF;
-      LED_Cathode_VD_ON;  LED_VD_ON;          //Светодиод режима диода //Светодиод катода диода
+      LED_Cathode_VD_ON;  LED_VD_ON;          //Светодиод режима диода //Светодиод катод диода
 			  
 			  if (Start == 1) {
           StaticMeasurementMode_VD(); 
 			  }
 			  if (Start == 2) {
-				  modeVD_pulse();
+				  PulseMeasurementMode_VD();
 			  }
 		  break;
 		  
@@ -122,7 +142,7 @@ int main(void)
 				  StaticMeasurementMode_VZ();
 			  }
 			  if (Start == 4) {
-				  modeVZ_pulse();
+				  PulseMeasurementMode_VZ();
 			  } 
 		  break;
 		  
@@ -145,6 +165,7 @@ int main(void)
 	  HAL_Delay(20);
 	  eMBPoll();
     /* USER CODE END WHILE */
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -152,7 +173,7 @@ int main(void)
 
 /**
   * @brief System Clock Configuration
-  * @retval 
+  * @retval None
   */
 void SystemClock_Config(void)
 {

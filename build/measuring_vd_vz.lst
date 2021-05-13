@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 1
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -15,710 +15,732 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 1
   12              		.text
   13              	.Ltext0:
   14              		.cfi_sections	.debug_frame
-  15              		.section	.text.setConfigADC,"ax",%progbits
-  16              		.align	1
-  17              		.global	setConfigADC
-  18              		.arch armv7-m
-  19              		.syntax unified
-  20              		.thumb
-  21              		.thumb_func
-  22              		.fpu softvfp
-  24              	setConfigADC:
-  25              	.LVL0:
-  26              	.LFB65:
+  15              		.global	__aeabi_ui2f
+  16              		.section	.text.AverageCalculationADC,"ax",%progbits
+  17              		.align	1
+  18              		.global	AverageCalculationADC
+  19              		.arch armv7-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu softvfp
+  25              	AverageCalculationADC:
+  26              	.LFB66:
   27              		.file 1 "Drivers/Middlewares/measuring_vd_vz.c"
    1:Drivers/Middlewares/measuring_vd_vz.c **** #include "measuring_vd_vz.h"
-   2:Drivers/Middlewares/measuring_vd_vz.c **** 
-   3:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t		CFG = 0x39FF << 2,
-   4:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
-   5:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
-   6:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
-   7:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
-   8:Drivers/Middlewares/measuring_vd_vz.c ****                     
-   9:Drivers/Middlewares/measuring_vd_vz.c **** float   IDOUT = 0.5,                        //coef usilenia po toky
-  10:Drivers/Middlewares/measuring_vd_vz.c **** 	    IZOUT = 0.5,  
-  11:Drivers/Middlewares/measuring_vd_vz.c **** 	    deltaADC = 0.0000625,               //delta ADC
-  12:Drivers/Middlewares/measuring_vd_vz.c **** 	    Resistor = 0.25;                    //tokovi resistor dla zener diod R = 4 Om
-  13:Drivers/Middlewares/measuring_vd_vz.c **** 
-  14:Drivers/Middlewares/measuring_vd_vz.c **** int   UDOUT = 2,
-  15:Drivers/Middlewares/measuring_vd_vz.c ****       UZOUT = 2;
-  16:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t out;
-  17:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t* tmp = 0;
-  18:Drivers/Middlewares/measuring_vd_vz.c **** float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
-  19:Drivers/Middlewares/measuring_vd_vz.c **** extern uint16_t usSRegInBuf[];
+   2:Drivers/Middlewares/measuring_vd_vz.c ****     // Setting the ADC(AD7682) and gain of operational amplifiers(AD8273)
+   3:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
+   4:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
+   5:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
+   6:Drivers/Middlewares/measuring_vd_vz.c ****          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
+   7:Drivers/Middlewares/measuring_vd_vz.c ****                     
+   8:Drivers/Middlewares/measuring_vd_vz.c **** float   IDOUT = 0.5,                        // coef usilenia po toky
+   9:Drivers/Middlewares/measuring_vd_vz.c **** 	    IZOUT = 0.5,  
+  10:Drivers/Middlewares/measuring_vd_vz.c **** 	    deltaADC = 0.0000625,               // delta ADC
+  11:Drivers/Middlewares/measuring_vd_vz.c **** 	    Resistor = 0.25;                    // tokovi resistor dla zener diod R = 4 Om
+  12:Drivers/Middlewares/measuring_vd_vz.c **** 
+  13:Drivers/Middlewares/measuring_vd_vz.c **** int   UDOUT = 2,                            // coef usilenia po napryazheniyu
+  14:Drivers/Middlewares/measuring_vd_vz.c ****       UZOUT = 2;
+  15:Drivers/Middlewares/measuring_vd_vz.c **** 
+  16:Drivers/Middlewares/measuring_vd_vz.c **** float currentADC_vd, voltageADC_vd, currentADC_vz, voltageADC_vz;
+  17:Drivers/Middlewares/measuring_vd_vz.c **** int AverageADC;
+  18:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t out;
+  19:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t MassifADC[16];
   20:Drivers/Middlewares/measuring_vd_vz.c **** 
-  21:Drivers/Middlewares/measuring_vd_vz.c **** int setConfigADC(uint16_t value) {
-  28              		.loc 1 21 34 view -0
-  29              		.cfi_startproc
-  30              		@ args = 0, pretend = 0, frame = 8
-  31              		@ frame_needed = 0, uses_anonymous_args = 0
-  32              		.loc 1 21 34 is_stmt 0 view .LVU1
-  33 0000 30B5     		push	{r4, r5, lr}
-  34              	.LCFI0:
-  35              		.cfi_def_cfa_offset 12
-  36              		.cfi_offset 4, -12
-  37              		.cfi_offset 5, -8
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 2
+  21:Drivers/Middlewares/measuring_vd_vz.c **** uint16_t* tmp = 0;
+  22:Drivers/Middlewares/measuring_vd_vz.c **** 
+  23:Drivers/Middlewares/measuring_vd_vz.c **** extern uint16_t usSRegInBuf[];
+  24:Drivers/Middlewares/measuring_vd_vz.c **** 
+  25:Drivers/Middlewares/measuring_vd_vz.c **** void setConfigADC (uint16_t value) {
+  26:Drivers/Middlewares/measuring_vd_vz.c ****     for (int i = 0; i < 16; i++) {
+  27:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+  28:Drivers/Middlewares/measuring_vd_vz.c **** 	    HAL_Delay(2);
+  29:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
+  30:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);	
+  31:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 2
 
 
-  38              		.cfi_offset 14, -4
-  39 0002 85B0     		sub	sp, sp, #20
-  40              	.LCFI1:
-  41              		.cfi_def_cfa_offset 32
-  42 0004 ADF80E00 		strh	r0, [sp, #14]	@ movhi
-  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    for (int i = 0; i <= 15; i++) {
-  43              		.loc 1 22 6 is_stmt 1 view .LVU2
-  44              	.LBB2:
-  45              		.loc 1 22 11 view .LVU3
-  46              	.LVL1:
-  47              		.loc 1 22 15 is_stmt 0 view .LVU4
-  48 0008 0024     		movs	r4, #0
-  49              	.LVL2:
-  50              	.L2:
-  51              		.loc 1 22 22 is_stmt 1 discriminator 1 view .LVU5
-  52              		.loc 1 22 6 is_stmt 0 discriminator 1 view .LVU6
-  53 000a 0F2C     		cmp	r4, #15
-  54 000c 1DDC     		bgt	.L5
-  23:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
-  55              		.loc 1 23 6 is_stmt 1 discriminator 3 view .LVU7
-  56 000e 114D     		ldr	r5, .L6
-  57 0010 0022     		movs	r2, #0
-  58 0012 4FF48051 		mov	r1, #4096
-  59 0016 2846     		mov	r0, r5
-  60 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  61              	.LVL3:
-  24:Drivers/Middlewares/measuring_vd_vz.c **** 	    HAL_Delay(2);
-  62              		.loc 1 24 6 discriminator 3 view .LVU8
-  63 001c 0220     		movs	r0, #2
-  64 001e FFF7FEFF 		bl	HAL_Delay
-  65              	.LVL4:
-  25:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
-  66              		.loc 1 25 9 discriminator 3 view .LVU9
-  67 0022 0A23     		movs	r3, #10
-  68 0024 0093     		str	r3, [sp]
-  69 0026 0123     		movs	r3, #1
-  70 0028 0B4A     		ldr	r2, .L6+4
-  71 002a 0DF10E01 		add	r1, sp, #14
-  72 002e 0B48     		ldr	r0, .L6+8
-  73 0030 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
-  74              	.LVL5:
-  26:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);	
-  75              		.loc 1 26 9 discriminator 3 view .LVU10
-  76 0034 0220     		movs	r0, #2
-  77 0036 FFF7FEFF 		bl	HAL_Delay
-  78              	.LVL6:
-  27:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
-  79              		.loc 1 27 9 discriminator 3 view .LVU11
-  80 003a 0122     		movs	r2, #1
-  81 003c 4FF48051 		mov	r1, #4096
-  82 0040 2846     		mov	r0, r5
-  83 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  84              	.LVL7:
-  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
-  85              		.loc 1 22 31 discriminator 3 view .LVU12
-  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
-  86              		.loc 1 22 32 is_stmt 0 discriminator 3 view .LVU13
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 3
-
-
-  87 0046 0134     		adds	r4, r4, #1
-  88              	.LVL8:
-  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
-  89              		.loc 1 22 32 discriminator 3 view .LVU14
-  90 0048 DFE7     		b	.L2
-  91              	.L5:
-  22:Drivers/Middlewares/measuring_vd_vz.c **** 	    CNV_OFF;
-  92              		.loc 1 22 32 discriminator 3 view .LVU15
-  93              	.LBE2:
-  28:Drivers/Middlewares/measuring_vd_vz.c ****     }
-  29:Drivers/Middlewares/measuring_vd_vz.c ****     return out;
-  94              		.loc 1 29 5 is_stmt 1 view .LVU16
-  30:Drivers/Middlewares/measuring_vd_vz.c **** }
-  95              		.loc 1 30 1 is_stmt 0 view .LVU17
-  96 004a 034B     		ldr	r3, .L6+4
-  97 004c 1888     		ldrh	r0, [r3]
-  98 004e 05B0     		add	sp, sp, #20
-  99              	.LCFI2:
- 100              		.cfi_def_cfa_offset 12
- 101              		@ sp needed
- 102 0050 30BD     		pop	{r4, r5, pc}
- 103              	.LVL9:
- 104              	.L7:
- 105              		.loc 1 30 1 view .LVU18
- 106 0052 00BF     		.align	2
- 107              	.L6:
- 108 0054 000C0140 		.word	1073810432
- 109 0058 00000000 		.word	out
- 110 005c 00000000 		.word	hspi2
- 111              		.cfi_endproc
- 112              	.LFE65:
- 114              		.section	.text.dataTransferADC,"ax",%progbits
- 115              		.align	1
- 116              		.global	dataTransferADC
- 117              		.syntax unified
- 118              		.thumb
- 119              		.thumb_func
- 120              		.fpu softvfp
- 122              	dataTransferADC:
- 123              	.LVL10:
- 124              	.LFB66:
-  31:Drivers/Middlewares/measuring_vd_vz.c **** 
-  32:Drivers/Middlewares/measuring_vd_vz.c **** void dataTransferADC(int registr, float out) {
- 125              		.loc 1 32 46 is_stmt 1 view -0
- 126              		.cfi_startproc
- 127              		@ args = 0, pretend = 0, frame = 8
- 128              		@ frame_needed = 0, uses_anonymous_args = 0
- 129              		@ link register save eliminated.
- 130              		.loc 1 32 46 is_stmt 0 view .LVU20
- 131 0000 82B0     		sub	sp, sp, #8
- 132              	.LCFI3:
- 133              		.cfi_def_cfa_offset 8
- 134 0002 0191     		str	r1, [sp, #4]	@ float
-  33:Drivers/Middlewares/measuring_vd_vz.c **** 	tmp = (uint16_t*) &out;
- 135              		.loc 1 33 2 is_stmt 1 view .LVU21
- 136              		.loc 1 33 6 is_stmt 0 view .LVU22
- 137 0004 074B     		ldr	r3, .L10
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 4
-
-
- 138 0006 01AA     		add	r2, sp, #4
- 139 0008 1A60     		str	r2, [r3]
-  34:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr] = *tmp;
- 140              		.loc 1 34 5 is_stmt 1 view .LVU23
- 141              		.loc 1 34 28 is_stmt 0 view .LVU24
- 142 000a BDF80420 		ldrh	r2, [sp, #4]
- 143              		.loc 1 34 26 view .LVU25
- 144 000e 064B     		ldr	r3, .L10+4
- 145 0010 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
-  35:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr + 1] = *(tmp + 1);
- 146              		.loc 1 35 5 is_stmt 1 view .LVU26
- 147              		.loc 1 35 25 is_stmt 0 view .LVU27
- 148 0014 0130     		adds	r0, r0, #1
- 149              	.LVL11:
- 150              		.loc 1 35 30 view .LVU28
- 151 0016 BDF80620 		ldrh	r2, [sp, #6]
- 152 001a 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  32:Drivers/Middlewares/measuring_vd_vz.c ****         
+  33:Drivers/Middlewares/measuring_vd_vz.c ****         MassifADC[i] = out;
+  34:Drivers/Middlewares/measuring_vd_vz.c ****         AverageCalculationADC();
+  35:Drivers/Middlewares/measuring_vd_vz.c ****     }
   36:Drivers/Middlewares/measuring_vd_vz.c **** }
- 153              		.loc 1 36 1 view .LVU29
- 154 001e 02B0     		add	sp, sp, #8
- 155              	.LCFI4:
- 156              		.cfi_def_cfa_offset 0
- 157              		@ sp needed
- 158 0020 7047     		bx	lr
- 159              	.L11:
- 160 0022 00BF     		.align	2
- 161              	.L10:
- 162 0024 00000000 		.word	.LANCHOR0
- 163 0028 00000000 		.word	usSRegInBuf
- 164              		.cfi_endproc
- 165              	.LFE66:
- 167              		.global	__aeabi_i2f
- 168              		.global	__aeabi_fmul
- 169              		.section	.text.measuringVD,"ax",%progbits
- 170              		.align	1
- 171              		.global	measuringVD
- 172              		.syntax unified
- 173              		.thumb
- 174              		.thumb_func
- 175              		.fpu softvfp
- 177              	measuringVD:
- 178              	.LFB67:
   37:Drivers/Middlewares/measuring_vd_vz.c **** 
-  38:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVD(void) { 
- 179              		.loc 1 38 24 is_stmt 1 view -0
- 180              		.cfi_startproc
- 181              		@ args = 0, pretend = 0, frame = 0
- 182              		@ frame_needed = 0, uses_anonymous_args = 0
- 183 0000 70B5     		push	{r4, r5, r6, lr}
- 184              	.LCFI5:
- 185              		.cfi_def_cfa_offset 16
- 186              		.cfi_offset 4, -16
- 187              		.cfi_offset 5, -12
- 188              		.cfi_offset 6, -8
- 189              		.cfi_offset 14, -4
-  39:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN3);
- 190              		.loc 1 39 5 view .LVU31
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 5
+  38:Drivers/Middlewares/measuring_vd_vz.c **** float AverageCalculationADC (void) {
+  28              		.loc 1 38 36 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 08B5     		push	{r3, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 3, -8
+  36              		.cfi_offset 14, -4
+  39:Drivers/Middlewares/measuring_vd_vz.c ****     AverageADC = 0;
+  37              		.loc 1 39 5 view .LVU1
+  38              		.loc 1 39 16 is_stmt 0 view .LVU2
+  39 0002 0E4B     		ldr	r3, .L6
+  40 0004 0022     		movs	r2, #0
+  41 0006 1A60     		str	r2, [r3]
+  40:Drivers/Middlewares/measuring_vd_vz.c ****         for (int j = 4; j < 16; j++) {
+  42              		.loc 1 40 9 is_stmt 1 view .LVU3
+  43              	.LBB2:
+  44              		.loc 1 40 14 view .LVU4
+  45              	.LVL0:
+  46              		.loc 1 40 18 is_stmt 0 view .LVU5
+  47 0008 0423     		movs	r3, #4
+  48              	.LVL1:
+  49              	.L2:
+  50              		.loc 1 40 25 is_stmt 1 discriminator 1 view .LVU6
+  51              		.loc 1 40 9 is_stmt 0 discriminator 1 view .LVU7
+  52 000a 0F2B     		cmp	r3, #15
+  53 000c 08DC     		bgt	.L5
+  41:Drivers/Middlewares/measuring_vd_vz.c ****             AverageADC += MassifADC[j];
+  54              		.loc 1 41 13 is_stmt 1 discriminator 3 view .LVU8
+  55              		.loc 1 41 36 is_stmt 0 discriminator 3 view .LVU9
+  56 000e 0C4A     		ldr	r2, .L6+4
+  57 0010 32F81300 		ldrh	r0, [r2, r3, lsl #1]
+  58              		.loc 1 41 24 discriminator 3 view .LVU10
+  59 0014 0949     		ldr	r1, .L6
+  60 0016 0A68     		ldr	r2, [r1]
+  61 0018 0244     		add	r2, r2, r0
+  62 001a 0A60     		str	r2, [r1]
+  40:Drivers/Middlewares/measuring_vd_vz.c ****         for (int j = 4; j < 16; j++) {
+  63              		.loc 1 40 33 is_stmt 1 discriminator 3 view .LVU11
+  40:Drivers/Middlewares/measuring_vd_vz.c ****         for (int j = 4; j < 16; j++) {
+  64              		.loc 1 40 34 is_stmt 0 discriminator 3 view .LVU12
+  65 001c 0133     		adds	r3, r3, #1
+  66              	.LVL2:
+  40:Drivers/Middlewares/measuring_vd_vz.c ****         for (int j = 4; j < 16; j++) {
+  67              		.loc 1 40 34 discriminator 3 view .LVU13
+  68 001e F4E7     		b	.L2
+  69              	.L5:
+  40:Drivers/Middlewares/measuring_vd_vz.c ****         for (int j = 4; j < 16; j++) {
+  70              		.loc 1 40 34 discriminator 3 view .LVU14
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 3
 
 
- 191 0002 174B     		ldr	r3, .L14
- 192 0004 1888     		ldrh	r0, [r3]
- 193 0006 FFF7FEFF 		bl	setConfigADC
- 194              	.LVL12:
-  40:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vd = out * deltaADC  * UDOUT ;
- 195              		.loc 1 40 5 view .LVU32
- 196              		.loc 1 40 25 is_stmt 0 view .LVU33
- 197 000a 164E     		ldr	r6, .L14+4
- 198 000c 3088     		ldrh	r0, [r6]
- 199 000e FFF7FEFF 		bl	__aeabi_i2f
- 200              	.LVL13:
- 201 0012 154D     		ldr	r5, .L14+8
- 202 0014 2968     		ldr	r1, [r5]	@ float
- 203 0016 FFF7FEFF 		bl	__aeabi_fmul
- 204              	.LVL14:
- 205 001a 0446     		mov	r4, r0
- 206              		.loc 1 40 37 view .LVU34
- 207 001c 134B     		ldr	r3, .L14+12
- 208 001e 1868     		ldr	r0, [r3]
- 209 0020 FFF7FEFF 		bl	__aeabi_i2f
- 210              	.LVL15:
- 211 0024 2146     		mov	r1, r4
- 212 0026 FFF7FEFF 		bl	__aeabi_fmul
- 213              	.LVL16:
- 214 002a 0146     		mov	r1, r0
- 215              		.loc 1 40 19 view .LVU35
- 216 002c 104B     		ldr	r3, .L14+16
- 217 002e 1860     		str	r0, [r3]	@ float
-  41:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(0, voltageADC_vd);
- 218              		.loc 1 41 5 is_stmt 1 view .LVU36
- 219 0030 0020     		movs	r0, #0
- 220 0032 FFF7FEFF 		bl	dataTransferADC
- 221              	.LVL17:
-  42:Drivers/Middlewares/measuring_vd_vz.c ****     
-  43:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN2);  
- 222              		.loc 1 43 5 view .LVU37
- 223 0036 0F4B     		ldr	r3, .L14+20
- 224 0038 1888     		ldrh	r0, [r3]
- 225 003a FFF7FEFF 		bl	setConfigADC
- 226              	.LVL18:
-  44:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vd = out * deltaADC * IDOUT; 
- 227              		.loc 1 44 5 view .LVU38
- 228              		.loc 1 44 25 is_stmt 0 view .LVU39
- 229 003e 3088     		ldrh	r0, [r6]
- 230 0040 FFF7FEFF 		bl	__aeabi_i2f
- 231              	.LVL19:
- 232 0044 2968     		ldr	r1, [r5]	@ float
- 233 0046 FFF7FEFF 		bl	__aeabi_fmul
- 234              	.LVL20:
- 235              		.loc 1 44 36 view .LVU40
- 236 004a 0B4B     		ldr	r3, .L14+24
- 237 004c 1968     		ldr	r1, [r3]	@ float
- 238 004e FFF7FEFF 		bl	__aeabi_fmul
- 239              	.LVL21:
- 240 0052 0146     		mov	r1, r0
- 241              		.loc 1 44 19 view .LVU41
- 242 0054 094B     		ldr	r3, .L14+28
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 6
+  71              	.LBE2:
+  42:Drivers/Middlewares/measuring_vd_vz.c ****         }
+  43:Drivers/Middlewares/measuring_vd_vz.c ****     return out = AverageADC / 12;
+  72              		.loc 1 43 5 is_stmt 1 view .LVU15
+  73              		.loc 1 43 29 is_stmt 0 view .LVU16
+  74 0020 064B     		ldr	r3, .L6
+  75              	.LVL3:
+  76              		.loc 1 43 29 view .LVU17
+  77 0022 1B68     		ldr	r3, [r3]
+  78 0024 074A     		ldr	r2, .L6+8
+  79 0026 82FB0312 		smull	r1, r2, r2, r3
+  80 002a D817     		asrs	r0, r3, #31
+  81 002c C0EB6200 		rsb	r0, r0, r2, asr #1
+  82              		.loc 1 43 16 view .LVU18
+  83 0030 80B2     		uxth	r0, r0
+  84 0032 054B     		ldr	r3, .L6+12
+  85 0034 1880     		strh	r0, [r3]	@ movhi
+  86 0036 FFF7FEFF 		bl	__aeabi_ui2f
+  87              	.LVL4:
+  44:Drivers/Middlewares/measuring_vd_vz.c **** }
+  88              		.loc 1 44 1 view .LVU19
+  89 003a 08BD     		pop	{r3, pc}
+  90              	.L7:
+  91              		.align	2
+  92              	.L6:
+  93 003c 00000000 		.word	AverageADC
+  94 0040 00000000 		.word	MassifADC
+  95 0044 ABAAAA2A 		.word	715827883
+  96 0048 00000000 		.word	out
+  97              		.cfi_endproc
+  98              	.LFE66:
+ 100              		.section	.text.setConfigADC,"ax",%progbits
+ 101              		.align	1
+ 102              		.global	setConfigADC
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.fpu softvfp
+ 108              	setConfigADC:
+ 109              	.LVL5:
+ 110              	.LFB65:
+  25:Drivers/Middlewares/measuring_vd_vz.c ****     for (int i = 0; i < 16; i++) {
+ 111              		.loc 1 25 36 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 8
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+  25:Drivers/Middlewares/measuring_vd_vz.c ****     for (int i = 0; i < 16; i++) {
+ 115              		.loc 1 25 36 is_stmt 0 view .LVU21
+ 116 0000 70B5     		push	{r4, r5, r6, lr}
+ 117              	.LCFI1:
+ 118              		.cfi_def_cfa_offset 16
+ 119              		.cfi_offset 4, -16
+ 120              		.cfi_offset 5, -12
+ 121              		.cfi_offset 6, -8
+ 122              		.cfi_offset 14, -4
+ 123 0002 84B0     		sub	sp, sp, #16
+ 124              	.LCFI2:
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 4
 
 
- 243 0056 1860     		str	r0, [r3]	@ float
-  45:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(2, currentADC_vd);
- 244              		.loc 1 45 5 is_stmt 1 view .LVU42
- 245 0058 0220     		movs	r0, #2
- 246 005a FFF7FEFF 		bl	dataTransferADC
- 247              	.LVL22:
-  46:Drivers/Middlewares/measuring_vd_vz.c **** }
- 248              		.loc 1 46 1 is_stmt 0 view .LVU43
- 249 005e 70BD     		pop	{r4, r5, r6, pc}
- 250              	.L15:
- 251              		.align	2
- 252              	.L14:
- 253 0060 00000000 		.word	.LANCHOR1
- 254 0064 00000000 		.word	out
- 255 0068 00000000 		.word	.LANCHOR2
- 256 006c 00000000 		.word	.LANCHOR3
- 257 0070 00000000 		.word	voltageADC_vd
- 258 0074 00000000 		.word	.LANCHOR4
- 259 0078 00000000 		.word	.LANCHOR5
- 260 007c 00000000 		.word	currentADC_vd
- 261              		.cfi_endproc
- 262              	.LFE67:
- 264              		.section	.text.measuringVZ,"ax",%progbits
- 265              		.align	1
- 266              		.global	measuringVZ
- 267              		.syntax unified
- 268              		.thumb
- 269              		.thumb_func
- 270              		.fpu softvfp
- 272              	measuringVZ:
- 273              	.LFB68:
-  47:Drivers/Middlewares/measuring_vd_vz.c **** 
-  48:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVZ(void) {
- 274              		.loc 1 48 24 is_stmt 1 view -0
- 275              		.cfi_startproc
- 276              		@ args = 0, pretend = 0, frame = 0
- 277              		@ frame_needed = 0, uses_anonymous_args = 0
- 278 0000 70B5     		push	{r4, r5, r6, lr}
- 279              	.LCFI6:
- 280              		.cfi_def_cfa_offset 16
- 281              		.cfi_offset 4, -16
- 282              		.cfi_offset 5, -12
- 283              		.cfi_offset 6, -8
- 284              		.cfi_offset 14, -4
-  49:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN1);
- 285              		.loc 1 49 5 view .LVU45
- 286 0002 194B     		ldr	r3, .L18
- 287 0004 1888     		ldrh	r0, [r3]
- 288 0006 FFF7FEFF 		bl	setConfigADC
- 289              	.LVL23:
-  50:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vz = out * deltaADC * UZOUT;
- 290              		.loc 1 50 5 view .LVU46
- 291              		.loc 1 50 25 is_stmt 0 view .LVU47
- 292 000a 184E     		ldr	r6, .L18+4
- 293 000c 3088     		ldrh	r0, [r6]
- 294 000e FFF7FEFF 		bl	__aeabi_i2f
- 295              	.LVL24:
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 7
+ 125              		.cfi_def_cfa_offset 32
+ 126 0004 ADF80E00 		strh	r0, [sp, #14]	@ movhi
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 127              		.loc 1 26 5 is_stmt 1 view .LVU22
+ 128              	.LBB3:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 129              		.loc 1 26 10 view .LVU23
+ 130              	.LVL6:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 131              		.loc 1 26 14 is_stmt 0 view .LVU24
+ 132 0008 0024     		movs	r4, #0
+ 133              	.LVL7:
+ 134              	.L9:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 135              		.loc 1 26 21 is_stmt 1 discriminator 1 view .LVU25
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 136              		.loc 1 26 5 is_stmt 0 discriminator 1 view .LVU26
+ 137 000a 0F2C     		cmp	r4, #15
+ 138 000c 24DC     		bgt	.L12
+  27:Drivers/Middlewares/measuring_vd_vz.c **** 	    HAL_Delay(2);
+ 139              		.loc 1 27 9 is_stmt 1 discriminator 3 view .LVU27
+ 140 000e 134E     		ldr	r6, .L13
+ 141 0010 0022     		movs	r2, #0
+ 142 0012 4FF48051 		mov	r1, #4096
+ 143 0016 3046     		mov	r0, r6
+ 144 0018 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 145              	.LVL8:
+  28:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&value, (uint8_t*)&out, 1, 10);
+ 146              		.loc 1 28 6 discriminator 3 view .LVU28
+ 147 001c 0220     		movs	r0, #2
+ 148 001e FFF7FEFF 		bl	HAL_Delay
+ 149              	.LVL9:
+  29:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);	
+ 150              		.loc 1 29 9 discriminator 3 view .LVU29
+ 151 0022 0F4D     		ldr	r5, .L13+4
+ 152 0024 0A23     		movs	r3, #10
+ 153 0026 0093     		str	r3, [sp]
+ 154 0028 0123     		movs	r3, #1
+ 155 002a 2A46     		mov	r2, r5
+ 156 002c 0DF10E01 		add	r1, sp, #14
+ 157 0030 0C48     		ldr	r0, .L13+8
+ 158 0032 FFF7FEFF 		bl	HAL_SPI_TransmitReceive
+ 159              	.LVL10:
+  30:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
+ 160              		.loc 1 30 9 discriminator 3 view .LVU30
+ 161 0036 0220     		movs	r0, #2
+ 162 0038 FFF7FEFF 		bl	HAL_Delay
+ 163              	.LVL11:
+  31:Drivers/Middlewares/measuring_vd_vz.c ****         
+ 164              		.loc 1 31 9 discriminator 3 view .LVU31
+ 165 003c 0122     		movs	r2, #1
+ 166 003e 4FF48051 		mov	r1, #4096
+ 167 0042 3046     		mov	r0, r6
+ 168 0044 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 169              	.LVL12:
+  33:Drivers/Middlewares/measuring_vd_vz.c ****         AverageCalculationADC();
+ 170              		.loc 1 33 9 discriminator 3 view .LVU32
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 5
 
 
- 296 0012 174D     		ldr	r5, .L18+8
- 297 0014 2968     		ldr	r1, [r5]	@ float
- 298 0016 FFF7FEFF 		bl	__aeabi_fmul
- 299              	.LVL25:
- 300 001a 0446     		mov	r4, r0
- 301              		.loc 1 50 36 view .LVU48
- 302 001c 154B     		ldr	r3, .L18+12
- 303 001e 1868     		ldr	r0, [r3]
- 304 0020 FFF7FEFF 		bl	__aeabi_i2f
- 305              	.LVL26:
- 306 0024 2146     		mov	r1, r4
- 307 0026 FFF7FEFF 		bl	__aeabi_fmul
- 308              	.LVL27:
- 309 002a 0146     		mov	r1, r0
- 310              		.loc 1 50 19 view .LVU49
- 311 002c 124B     		ldr	r3, .L18+16
- 312 002e 1860     		str	r0, [r3]	@ float
-  51:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(4, voltageADC_vz);
- 313              		.loc 1 51 5 is_stmt 1 view .LVU50
- 314 0030 0420     		movs	r0, #4
- 315 0032 FFF7FEFF 		bl	dataTransferADC
- 316              	.LVL28:
-  52:Drivers/Middlewares/measuring_vd_vz.c **** 
-  53:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN0); 
- 317              		.loc 1 53 5 view .LVU51
- 318 0036 114B     		ldr	r3, .L18+20
- 319 0038 1888     		ldrh	r0, [r3]
- 320 003a FFF7FEFF 		bl	setConfigADC
- 321              	.LVL29:
-  54:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vz = out * deltaADC * IZOUT * Resistor;  
- 322              		.loc 1 54 5 view .LVU52
- 323              		.loc 1 54 25 is_stmt 0 view .LVU53
- 324 003e 3088     		ldrh	r0, [r6]
- 325 0040 FFF7FEFF 		bl	__aeabi_i2f
- 326              	.LVL30:
- 327 0044 2968     		ldr	r1, [r5]	@ float
- 328 0046 FFF7FEFF 		bl	__aeabi_fmul
- 329              	.LVL31:
- 330              		.loc 1 54 36 view .LVU54
- 331 004a 0D4B     		ldr	r3, .L18+24
- 332 004c 1968     		ldr	r1, [r3]	@ float
- 333 004e FFF7FEFF 		bl	__aeabi_fmul
- 334              	.LVL32:
- 335              		.loc 1 54 44 view .LVU55
- 336 0052 0C4B     		ldr	r3, .L18+28
- 337 0054 1968     		ldr	r1, [r3]	@ float
- 338 0056 FFF7FEFF 		bl	__aeabi_fmul
- 339              	.LVL33:
- 340 005a 0146     		mov	r1, r0
- 341              		.loc 1 54 19 view .LVU56
- 342 005c 0A4B     		ldr	r3, .L18+32
- 343 005e 1860     		str	r0, [r3]	@ float
-  55:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(6, currentADC_vz);
- 344              		.loc 1 55 5 is_stmt 1 view .LVU57
- 345 0060 0620     		movs	r0, #6
- 346 0062 FFF7FEFF 		bl	dataTransferADC
- 347              	.LVL34:
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 8
+  33:Drivers/Middlewares/measuring_vd_vz.c ****         AverageCalculationADC();
+ 171              		.loc 1 33 22 is_stmt 0 discriminator 3 view .LVU33
+ 172 0048 2A88     		ldrh	r2, [r5]
+ 173 004a 074B     		ldr	r3, .L13+12
+ 174 004c 23F81420 		strh	r2, [r3, r4, lsl #1]	@ movhi
+  34:Drivers/Middlewares/measuring_vd_vz.c ****     }
+ 175              		.loc 1 34 9 is_stmt 1 discriminator 3 view .LVU34
+ 176 0050 FFF7FEFF 		bl	AverageCalculationADC
+ 177              	.LVL13:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 178              		.loc 1 26 29 discriminator 3 view .LVU35
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 179              		.loc 1 26 30 is_stmt 0 discriminator 3 view .LVU36
+ 180 0054 0134     		adds	r4, r4, #1
+ 181              	.LVL14:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 182              		.loc 1 26 30 discriminator 3 view .LVU37
+ 183 0056 D8E7     		b	.L9
+ 184              	.L12:
+  26:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
+ 185              		.loc 1 26 30 discriminator 3 view .LVU38
+ 186              	.LBE3:
+  36:Drivers/Middlewares/measuring_vd_vz.c **** 
+ 187              		.loc 1 36 1 view .LVU39
+ 188 0058 04B0     		add	sp, sp, #16
+ 189              	.LCFI3:
+ 190              		.cfi_def_cfa_offset 16
+ 191              		@ sp needed
+ 192 005a 70BD     		pop	{r4, r5, r6, pc}
+ 193              	.LVL15:
+ 194              	.L14:
+  36:Drivers/Middlewares/measuring_vd_vz.c **** 
+ 195              		.loc 1 36 1 view .LVU40
+ 196              		.align	2
+ 197              	.L13:
+ 198 005c 000C0140 		.word	1073810432
+ 199 0060 00000000 		.word	out
+ 200 0064 00000000 		.word	hspi2
+ 201 0068 00000000 		.word	MassifADC
+ 202              		.cfi_endproc
+ 203              	.LFE65:
+ 205              		.section	.text.dataTransferADC,"ax",%progbits
+ 206              		.align	1
+ 207              		.global	dataTransferADC
+ 208              		.syntax unified
+ 209              		.thumb
+ 210              		.thumb_func
+ 211              		.fpu softvfp
+ 213              	dataTransferADC:
+ 214              	.LVL16:
+ 215              	.LFB67:
+  45:Drivers/Middlewares/measuring_vd_vz.c **** 
+  46:Drivers/Middlewares/measuring_vd_vz.c **** void dataTransferADC(int registr, float out) {
+ 216              		.loc 1 46 46 is_stmt 1 view -0
+ 217              		.cfi_startproc
+ 218              		@ args = 0, pretend = 0, frame = 8
+ 219              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 6
 
 
-  56:Drivers/Middlewares/measuring_vd_vz.c **** }
- 348              		.loc 1 56 1 is_stmt 0 view .LVU58
- 349 0066 70BD     		pop	{r4, r5, r6, pc}
- 350              	.L19:
- 351              		.align	2
- 352              	.L18:
- 353 0068 00000000 		.word	.LANCHOR6
- 354 006c 00000000 		.word	out
- 355 0070 00000000 		.word	.LANCHOR2
- 356 0074 00000000 		.word	.LANCHOR7
- 357 0078 00000000 		.word	voltageADC_vz
- 358 007c 00000000 		.word	.LANCHOR8
- 359 0080 00000000 		.word	.LANCHOR9
- 360 0084 00000000 		.word	.LANCHOR10
- 361 0088 00000000 		.word	currentADC_vz
- 362              		.cfi_endproc
- 363              	.LFE68:
- 365              		.section	.text.configurationADC,"ax",%progbits
- 366              		.align	1
- 367              		.global	configurationADC
- 368              		.syntax unified
- 369              		.thumb
- 370              		.thumb_func
- 371              		.fpu softvfp
- 373              	configurationADC:
- 374              	.LFB69:
-  57:Drivers/Middlewares/measuring_vd_vz.c **** 
-  58:Drivers/Middlewares/measuring_vd_vz.c **** void configurationADC(void) {
- 375              		.loc 1 58 29 is_stmt 1 view -0
- 376              		.cfi_startproc
- 377              		@ args = 0, pretend = 0, frame = 0
- 378              		@ frame_needed = 0, uses_anonymous_args = 0
- 379 0000 30B5     		push	{r4, r5, lr}
- 380              	.LCFI7:
- 381              		.cfi_def_cfa_offset 12
- 382              		.cfi_offset 4, -12
- 383              		.cfi_offset 5, -8
- 384              		.cfi_offset 14, -4
- 385 0002 83B0     		sub	sp, sp, #12
- 386              	.LCFI8:
- 387              		.cfi_def_cfa_offset 24
-  59:Drivers/Middlewares/measuring_vd_vz.c **** 	
-  60:Drivers/Middlewares/measuring_vd_vz.c ****     for (int i = 0; i <= 3; i++) {
- 388              		.loc 1 60 5 view .LVU60
- 389              	.LBB3:
- 390              		.loc 1 60 10 view .LVU61
- 391              	.LVL35:
- 392              		.loc 1 60 14 is_stmt 0 view .LVU62
- 393 0004 0025     		movs	r5, #0
- 394              		.loc 1 60 5 view .LVU63
- 395 0006 24E0     		b	.L21
- 396              	.LVL36:
- 397              	.L22:
-  61:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 398              		.loc 1 61 9 is_stmt 1 discriminator 3 view .LVU64
- 399 0008 144C     		ldr	r4, .L24
- 400 000a 0122     		movs	r2, #1
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 9
+ 220              		@ link register save eliminated.
+ 221              		.loc 1 46 46 is_stmt 0 view .LVU42
+ 222 0000 82B0     		sub	sp, sp, #8
+ 223              	.LCFI4:
+ 224              		.cfi_def_cfa_offset 8
+ 225 0002 0191     		str	r1, [sp, #4]	@ float
+  47:Drivers/Middlewares/measuring_vd_vz.c **** 	tmp = (uint16_t*) &out;
+ 226              		.loc 1 47 2 is_stmt 1 view .LVU43
+ 227              		.loc 1 47 6 is_stmt 0 view .LVU44
+ 228 0004 074B     		ldr	r3, .L17
+ 229 0006 01AA     		add	r2, sp, #4
+ 230 0008 1A60     		str	r2, [r3]
+  48:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr] = *tmp;
+ 231              		.loc 1 48 5 is_stmt 1 view .LVU45
+ 232              		.loc 1 48 28 is_stmt 0 view .LVU46
+ 233 000a BDF80420 		ldrh	r2, [sp, #4]
+ 234              		.loc 1 48 26 view .LVU47
+ 235 000e 064B     		ldr	r3, .L17+4
+ 236 0010 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  49:Drivers/Middlewares/measuring_vd_vz.c ****     usSRegInBuf[registr + 1] = *(tmp + 1);
+ 237              		.loc 1 49 5 is_stmt 1 view .LVU48
+ 238              		.loc 1 49 25 is_stmt 0 view .LVU49
+ 239 0014 0130     		adds	r0, r0, #1
+ 240              	.LVL17:
+ 241              		.loc 1 49 30 view .LVU50
+ 242 0016 BDF80620 		ldrh	r2, [sp, #6]
+ 243 001a 23F81020 		strh	r2, [r3, r0, lsl #1]	@ movhi
+  50:Drivers/Middlewares/measuring_vd_vz.c **** }
+ 244              		.loc 1 50 1 view .LVU51
+ 245 001e 02B0     		add	sp, sp, #8
+ 246              	.LCFI5:
+ 247              		.cfi_def_cfa_offset 0
+ 248              		@ sp needed
+ 249 0020 7047     		bx	lr
+ 250              	.L18:
+ 251 0022 00BF     		.align	2
+ 252              	.L17:
+ 253 0024 00000000 		.word	.LANCHOR0
+ 254 0028 00000000 		.word	usSRegInBuf
+ 255              		.cfi_endproc
+ 256              	.LFE67:
+ 258              		.global	__aeabi_i2f
+ 259              		.global	__aeabi_fmul
+ 260              		.section	.text.measuringVD,"ax",%progbits
+ 261              		.align	1
+ 262              		.global	measuringVD
+ 263              		.syntax unified
+ 264              		.thumb
+ 265              		.thumb_func
+ 266              		.fpu softvfp
+ 268              	measuringVD:
+ 269              	.LFB68:
+  51:Drivers/Middlewares/measuring_vd_vz.c **** 
+  52:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVD(void) { 
+ 270              		.loc 1 52 24 is_stmt 1 view -0
+ 271              		.cfi_startproc
+ 272              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 7
 
 
- 401 000c 4FF48051 		mov	r1, #4096
- 402 0010 2046     		mov	r0, r4
- 403 0012 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 404              	.LVL37:
-  62:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(20);
- 405              		.loc 1 62 9 discriminator 3 view .LVU65
- 406 0016 1420     		movs	r0, #20
- 407 0018 FFF7FEFF 		bl	HAL_Delay
- 408              	.LVL38:
-  63:Drivers/Middlewares/measuring_vd_vz.c ****         
-  64:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_OFF;
- 409              		.loc 1 64 9 discriminator 3 view .LVU66
- 410 001c 0022     		movs	r2, #0
- 411 001e 4FF48051 		mov	r1, #4096
- 412 0022 2046     		mov	r0, r4
- 413 0024 FFF7FEFF 		bl	HAL_GPIO_WritePin
- 414              	.LVL39:
-  65:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);
- 415              		.loc 1 65 9 discriminator 3 view .LVU67
- 416 0028 0220     		movs	r0, #2
- 417 002a FFF7FEFF 		bl	HAL_Delay
- 418              	.LVL40:
-  66:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_SPI_TransmitReceive(&hspi2, (uint8_t*)&CFG, (uint8_t*)&out, 1, 10);
- 419              		.loc 1 66 9 discriminator 3 view .LVU68
- 420 002e 0A23     		movs	r3, #10
- 421 0030 0093     		str	r3, [sp]
- 422 0032 0123     		movs	r3, #1
- 423 0034 0A4A     		ldr	r2, .L24+4
- 424 0036 0B49     		ldr	r1, .L24+8
- 425 0038 0B48     		ldr	r0, .L24+12
- 426 003a FFF7FEFF 		bl	HAL_SPI_TransmitReceive
- 427              	.LVL41:
-  67:Drivers/Middlewares/measuring_vd_vz.c ****         HAL_Delay(2);
- 428              		.loc 1 67 9 discriminator 3 view .LVU69
- 429 003e 0220     		movs	r0, #2
- 430 0040 FFF7FEFF 		bl	HAL_Delay
- 431              	.LVL42:
-  68:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 432              		.loc 1 68 9 discriminator 3 view .LVU70
- 433 0044 0122     		movs	r2, #1
- 434 0046 4FF48051 		mov	r1, #4096
- 435 004a 2046     		mov	r0, r4
- 436 004c FFF7FEFF 		bl	HAL_GPIO_WritePin
- 437              	.LVL43:
-  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 438              		.loc 1 60 29 discriminator 3 view .LVU71
-  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 439              		.loc 1 60 30 is_stmt 0 discriminator 3 view .LVU72
- 440 0050 0135     		adds	r5, r5, #1
- 441              	.LVL44:
- 442              	.L21:
-  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 443              		.loc 1 60 21 is_stmt 1 discriminator 1 view .LVU73
-  60:Drivers/Middlewares/measuring_vd_vz.c ****         CNV_ON;
- 444              		.loc 1 60 5 is_stmt 0 discriminator 1 view .LVU74
- 445 0052 032D     		cmp	r5, #3
- 446 0054 D8DD     		ble	.L22
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 10
+ 273              		@ frame_needed = 0, uses_anonymous_args = 0
+ 274 0000 70B5     		push	{r4, r5, r6, lr}
+ 275              	.LCFI6:
+ 276              		.cfi_def_cfa_offset 16
+ 277              		.cfi_offset 4, -16
+ 278              		.cfi_offset 5, -12
+ 279              		.cfi_offset 6, -8
+ 280              		.cfi_offset 14, -4
+  53:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN3);
+ 281              		.loc 1 53 5 view .LVU53
+ 282 0002 174B     		ldr	r3, .L21
+ 283 0004 1888     		ldrh	r0, [r3]
+ 284 0006 FFF7FEFF 		bl	setConfigADC
+ 285              	.LVL18:
+  54:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vd = out * deltaADC  * UDOUT;
+ 286              		.loc 1 54 5 view .LVU54
+ 287              		.loc 1 54 25 is_stmt 0 view .LVU55
+ 288 000a 164E     		ldr	r6, .L21+4
+ 289 000c 3088     		ldrh	r0, [r6]
+ 290 000e FFF7FEFF 		bl	__aeabi_i2f
+ 291              	.LVL19:
+ 292 0012 154D     		ldr	r5, .L21+8
+ 293 0014 2968     		ldr	r1, [r5]	@ float
+ 294 0016 FFF7FEFF 		bl	__aeabi_fmul
+ 295              	.LVL20:
+ 296 001a 0446     		mov	r4, r0
+ 297              		.loc 1 54 37 view .LVU56
+ 298 001c 134B     		ldr	r3, .L21+12
+ 299 001e 1868     		ldr	r0, [r3]
+ 300 0020 FFF7FEFF 		bl	__aeabi_i2f
+ 301              	.LVL21:
+ 302 0024 2146     		mov	r1, r4
+ 303 0026 FFF7FEFF 		bl	__aeabi_fmul
+ 304              	.LVL22:
+ 305 002a 0146     		mov	r1, r0
+ 306              		.loc 1 54 19 view .LVU57
+ 307 002c 104B     		ldr	r3, .L21+16
+ 308 002e 1860     		str	r0, [r3]	@ float
+  55:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(0, voltageADC_vd);
+ 309              		.loc 1 55 5 is_stmt 1 view .LVU58
+ 310 0030 0020     		movs	r0, #0
+ 311 0032 FFF7FEFF 		bl	dataTransferADC
+ 312              	.LVL23:
+  56:Drivers/Middlewares/measuring_vd_vz.c ****     
+  57:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN2);  
+ 313              		.loc 1 57 5 view .LVU59
+ 314 0036 0F4B     		ldr	r3, .L21+20
+ 315 0038 1888     		ldrh	r0, [r3]
+ 316 003a FFF7FEFF 		bl	setConfigADC
+ 317              	.LVL24:
+  58:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vd = out * deltaADC * IDOUT; 
+ 318              		.loc 1 58 5 view .LVU60
+ 319              		.loc 1 58 25 is_stmt 0 view .LVU61
+ 320 003e 3088     		ldrh	r0, [r6]
+ 321 0040 FFF7FEFF 		bl	__aeabi_i2f
+ 322              	.LVL25:
+ 323 0044 2968     		ldr	r1, [r5]	@ float
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 8
 
 
- 447              	.LBE3:
-  69:Drivers/Middlewares/measuring_vd_vz.c ****     }
-  70:Drivers/Middlewares/measuring_vd_vz.c **** }
- 448              		.loc 1 70 1 view .LVU75
- 449 0056 03B0     		add	sp, sp, #12
- 450              	.LCFI9:
- 451              		.cfi_def_cfa_offset 12
- 452              		@ sp needed
- 453 0058 30BD     		pop	{r4, r5, pc}
- 454              	.LVL45:
- 455              	.L25:
- 456              		.loc 1 70 1 view .LVU76
- 457 005a 00BF     		.align	2
- 458              	.L24:
- 459 005c 000C0140 		.word	1073810432
- 460 0060 00000000 		.word	out
- 461 0064 00000000 		.word	.LANCHOR11
- 462 0068 00000000 		.word	hspi2
- 463              		.cfi_endproc
- 464              	.LFE69:
- 466              		.comm	voltageADC_vz,4,4
- 467              		.comm	currentADC_vz,4,4
- 468              		.comm	voltageADC_vd,4,4
- 469              		.comm	currentADC_vd,4,4
- 470              		.global	tmp
- 471              		.comm	out,2,2
- 472              		.global	UZOUT
- 473              		.global	UDOUT
- 474              		.global	Resistor
- 475              		.global	deltaADC
- 476              		.global	IZOUT
- 477              		.global	IDOUT
- 478              		.global	AD7682_IN3
- 479              		.global	AD7682_IN2
- 480              		.global	AD7682_IN1
- 481              		.global	AD7682_IN0
- 482              		.global	CFG
- 483              		.section	.bss.tmp,"aw",%nobits
- 484              		.align	2
- 485              		.set	.LANCHOR0,. + 0
- 488              	tmp:
- 489 0000 00000000 		.space	4
- 490              		.section	.data.AD7682_IN0,"aw"
- 491              		.align	1
- 492              		.set	.LANCHOR8,. + 0
- 495              	AD7682_IN0:
- 496 0000 24F1     		.short	-3804
- 497              		.section	.data.AD7682_IN1,"aw"
- 498              		.align	1
- 499              		.set	.LANCHOR6,. + 0
- 502              	AD7682_IN1:
- 503 0000 24F3     		.short	-3292
- 504              		.section	.data.AD7682_IN2,"aw"
- 505              		.align	1
- 506              		.set	.LANCHOR4,. + 0
- 509              	AD7682_IN2:
- 510 0000 24F5     		.short	-2780
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 11
+ 324 0046 FFF7FEFF 		bl	__aeabi_fmul
+ 325              	.LVL26:
+ 326              		.loc 1 58 36 view .LVU62
+ 327 004a 0B4B     		ldr	r3, .L21+24
+ 328 004c 1968     		ldr	r1, [r3]	@ float
+ 329 004e FFF7FEFF 		bl	__aeabi_fmul
+ 330              	.LVL27:
+ 331 0052 0146     		mov	r1, r0
+ 332              		.loc 1 58 19 view .LVU63
+ 333 0054 094B     		ldr	r3, .L21+28
+ 334 0056 1860     		str	r0, [r3]	@ float
+  59:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(2, currentADC_vd);
+ 335              		.loc 1 59 5 is_stmt 1 view .LVU64
+ 336 0058 0220     		movs	r0, #2
+ 337 005a FFF7FEFF 		bl	dataTransferADC
+ 338              	.LVL28:
+  60:Drivers/Middlewares/measuring_vd_vz.c **** }
+ 339              		.loc 1 60 1 is_stmt 0 view .LVU65
+ 340 005e 70BD     		pop	{r4, r5, r6, pc}
+ 341              	.L22:
+ 342              		.align	2
+ 343              	.L21:
+ 344 0060 00000000 		.word	.LANCHOR1
+ 345 0064 00000000 		.word	out
+ 346 0068 00000000 		.word	.LANCHOR2
+ 347 006c 00000000 		.word	.LANCHOR3
+ 348 0070 00000000 		.word	voltageADC_vd
+ 349 0074 00000000 		.word	.LANCHOR4
+ 350 0078 00000000 		.word	.LANCHOR5
+ 351 007c 00000000 		.word	currentADC_vd
+ 352              		.cfi_endproc
+ 353              	.LFE68:
+ 355              		.section	.text.measuringVZ,"ax",%progbits
+ 356              		.align	1
+ 357              		.global	measuringVZ
+ 358              		.syntax unified
+ 359              		.thumb
+ 360              		.thumb_func
+ 361              		.fpu softvfp
+ 363              	measuringVZ:
+ 364              	.LFB69:
+  61:Drivers/Middlewares/measuring_vd_vz.c **** 
+  62:Drivers/Middlewares/measuring_vd_vz.c **** void measuringVZ(void) {
+ 365              		.loc 1 62 24 is_stmt 1 view -0
+ 366              		.cfi_startproc
+ 367              		@ args = 0, pretend = 0, frame = 0
+ 368              		@ frame_needed = 0, uses_anonymous_args = 0
+ 369 0000 70B5     		push	{r4, r5, r6, lr}
+ 370              	.LCFI7:
+ 371              		.cfi_def_cfa_offset 16
+ 372              		.cfi_offset 4, -16
+ 373              		.cfi_offset 5, -12
+ 374              		.cfi_offset 6, -8
+ 375              		.cfi_offset 14, -4
+  63:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN1);
+ 376              		.loc 1 63 5 view .LVU67
+ 377 0002 194B     		ldr	r3, .L25
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 9
 
 
- 511              		.section	.data.AD7682_IN3,"aw"
- 512              		.align	1
- 513              		.set	.LANCHOR1,. + 0
- 516              	AD7682_IN3:
- 517 0000 24F7     		.short	-2268
- 518              		.section	.data.CFG,"aw"
- 519              		.align	1
- 520              		.set	.LANCHOR11,. + 0
- 523              	CFG:
- 524 0000 FCE7     		.short	-6148
- 525              		.section	.data.IDOUT,"aw"
- 526              		.align	2
- 527              		.set	.LANCHOR5,. + 0
- 530              	IDOUT:
- 531 0000 0000003F 		.word	1056964608
- 532              		.section	.data.IZOUT,"aw"
- 533              		.align	2
- 534              		.set	.LANCHOR9,. + 0
- 537              	IZOUT:
- 538 0000 0000003F 		.word	1056964608
- 539              		.section	.data.Resistor,"aw"
- 540              		.align	2
- 541              		.set	.LANCHOR10,. + 0
- 544              	Resistor:
- 545 0000 0000803E 		.word	1048576000
- 546              		.section	.data.UDOUT,"aw"
- 547              		.align	2
- 548              		.set	.LANCHOR3,. + 0
- 551              	UDOUT:
- 552 0000 02000000 		.word	2
- 553              		.section	.data.UZOUT,"aw"
- 554              		.align	2
- 555              		.set	.LANCHOR7,. + 0
- 558              	UZOUT:
- 559 0000 02000000 		.word	2
- 560              		.section	.data.deltaADC,"aw"
- 561              		.align	2
- 562              		.set	.LANCHOR2,. + 0
- 565              	deltaADC:
- 566 0000 6F128338 		.word	948114031
- 567              		.text
- 568              	.Letext0:
- 569              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
- 570              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
- 571              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
- 572              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
- 573              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
- 574              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
- 575              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
- 576              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
- 577              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
- 578              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
- 579              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
- 580              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
- 581              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
- 582              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
- 583              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 12
+ 378 0004 1888     		ldrh	r0, [r3]
+ 379 0006 FFF7FEFF 		bl	setConfigADC
+ 380              	.LVL29:
+  64:Drivers/Middlewares/measuring_vd_vz.c ****     voltageADC_vz = out * deltaADC * UZOUT;
+ 381              		.loc 1 64 5 view .LVU68
+ 382              		.loc 1 64 25 is_stmt 0 view .LVU69
+ 383 000a 184E     		ldr	r6, .L25+4
+ 384 000c 3088     		ldrh	r0, [r6]
+ 385 000e FFF7FEFF 		bl	__aeabi_i2f
+ 386              	.LVL30:
+ 387 0012 174D     		ldr	r5, .L25+8
+ 388 0014 2968     		ldr	r1, [r5]	@ float
+ 389 0016 FFF7FEFF 		bl	__aeabi_fmul
+ 390              	.LVL31:
+ 391 001a 0446     		mov	r4, r0
+ 392              		.loc 1 64 36 view .LVU70
+ 393 001c 154B     		ldr	r3, .L25+12
+ 394 001e 1868     		ldr	r0, [r3]
+ 395 0020 FFF7FEFF 		bl	__aeabi_i2f
+ 396              	.LVL32:
+ 397 0024 2146     		mov	r1, r4
+ 398 0026 FFF7FEFF 		bl	__aeabi_fmul
+ 399              	.LVL33:
+ 400 002a 0146     		mov	r1, r0
+ 401              		.loc 1 64 19 view .LVU71
+ 402 002c 124B     		ldr	r3, .L25+16
+ 403 002e 1860     		str	r0, [r3]	@ float
+  65:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(4, voltageADC_vz);
+ 404              		.loc 1 65 5 is_stmt 1 view .LVU72
+ 405 0030 0420     		movs	r0, #4
+ 406 0032 FFF7FEFF 		bl	dataTransferADC
+ 407              	.LVL34:
+  66:Drivers/Middlewares/measuring_vd_vz.c **** 
+  67:Drivers/Middlewares/measuring_vd_vz.c ****     setConfigADC(AD7682_IN0); 
+ 408              		.loc 1 67 5 view .LVU73
+ 409 0036 114B     		ldr	r3, .L25+20
+ 410 0038 1888     		ldrh	r0, [r3]
+ 411 003a FFF7FEFF 		bl	setConfigADC
+ 412              	.LVL35:
+  68:Drivers/Middlewares/measuring_vd_vz.c ****     currentADC_vz = out * deltaADC * IZOUT * Resistor;  
+ 413              		.loc 1 68 5 view .LVU74
+ 414              		.loc 1 68 25 is_stmt 0 view .LVU75
+ 415 003e 3088     		ldrh	r0, [r6]
+ 416 0040 FFF7FEFF 		bl	__aeabi_i2f
+ 417              	.LVL36:
+ 418 0044 2968     		ldr	r1, [r5]	@ float
+ 419 0046 FFF7FEFF 		bl	__aeabi_fmul
+ 420              	.LVL37:
+ 421              		.loc 1 68 36 view .LVU76
+ 422 004a 0D4B     		ldr	r3, .L25+24
+ 423 004c 1968     		ldr	r1, [r3]	@ float
+ 424 004e FFF7FEFF 		bl	__aeabi_fmul
+ 425              	.LVL38:
+ 426              		.loc 1 68 44 view .LVU77
+ 427 0052 0C4B     		ldr	r3, .L25+28
+ 428 0054 1968     		ldr	r1, [r3]	@ float
+ 429 0056 FFF7FEFF 		bl	__aeabi_fmul
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 10
 
 
- 584              		.file 17 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
- 585              		.file 18 "Inc/spi.h"
- 586              		.file 19 "Inc/tim.h"
- 587              		.file 20 "Inc/usart.h"
- 588              		.file 21 "Drivers/FreeModbus/port/port.h"
- 589              		.file 22 "Drivers/FreeModbus/include/mbport.h"
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s 			page 13
+ 430              	.LVL39:
+ 431 005a 0146     		mov	r1, r0
+ 432              		.loc 1 68 19 view .LVU78
+ 433 005c 0A4B     		ldr	r3, .L25+32
+ 434 005e 1860     		str	r0, [r3]	@ float
+  69:Drivers/Middlewares/measuring_vd_vz.c ****     dataTransferADC(6, currentADC_vz);
+ 435              		.loc 1 69 5 is_stmt 1 view .LVU79
+ 436 0060 0620     		movs	r0, #6
+ 437 0062 FFF7FEFF 		bl	dataTransferADC
+ 438              	.LVL40:
+  70:Drivers/Middlewares/measuring_vd_vz.c **** }...
+ 439              		.loc 1 70 1 is_stmt 0 view .LVU80
+ 440 0066 70BD     		pop	{r4, r5, r6, pc}
+ 441              	.L26:
+ 442              		.align	2
+ 443              	.L25:
+ 444 0068 00000000 		.word	.LANCHOR6
+ 445 006c 00000000 		.word	out
+ 446 0070 00000000 		.word	.LANCHOR2
+ 447 0074 00000000 		.word	.LANCHOR7
+ 448 0078 00000000 		.word	voltageADC_vz
+ 449 007c 00000000 		.word	.LANCHOR8
+ 450 0080 00000000 		.word	.LANCHOR9
+ 451 0084 00000000 		.word	.LANCHOR10
+ 452 0088 00000000 		.word	currentADC_vz
+ 453              		.cfi_endproc
+ 454              	.LFE69:
+ 456              		.global	tmp
+ 457              		.comm	MassifADC,32,4
+ 458              		.comm	out,2,2
+ 459              		.comm	AverageADC,4,4
+ 460              		.comm	voltageADC_vz,4,4
+ 461              		.comm	currentADC_vz,4,4
+ 462              		.comm	voltageADC_vd,4,4
+ 463              		.comm	currentADC_vd,4,4
+ 464              		.global	UZOUT
+ 465              		.global	UDOUT
+ 466              		.global	Resistor
+ 467              		.global	deltaADC
+ 468              		.global	IZOUT
+ 469              		.global	IDOUT
+ 470              		.global	AD7682_IN3
+ 471              		.global	AD7682_IN2
+ 472              		.global	AD7682_IN1
+ 473              		.global	AD7682_IN0
+ 474              		.comm	eventDiagnostic,4,4
+ 475              		.comm	eventVZ,4,4
+ 476              		.comm	eventVD,4,4
+ 477              		.comm	iz30max,4,4
+ 478              		.comm	iz30min,4,4
+ 479              		.comm	id30max,4,4
+ 480              		.comm	id30min,4,4
+ 481              		.section	.bss.tmp,"aw",%nobits
+ 482              		.align	2
+ 483              		.set	.LANCHOR0,. + 0
+ 486              	tmp:
+ 487 0000 00000000 		.space	4
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 11
+
+
+ 488              		.section	.data.AD7682_IN0,"aw"
+ 489              		.align	1
+ 490              		.set	.LANCHOR8,. + 0
+ 493              	AD7682_IN0:
+ 494 0000 24F1     		.short	-3804
+ 495              		.section	.data.AD7682_IN1,"aw"
+ 496              		.align	1
+ 497              		.set	.LANCHOR6,. + 0
+ 500              	AD7682_IN1:
+ 501 0000 24F3     		.short	-3292
+ 502              		.section	.data.AD7682_IN2,"aw"
+ 503              		.align	1
+ 504              		.set	.LANCHOR4,. + 0
+ 507              	AD7682_IN2:
+ 508 0000 24F5     		.short	-2780
+ 509              		.section	.data.AD7682_IN3,"aw"
+ 510              		.align	1
+ 511              		.set	.LANCHOR1,. + 0
+ 514              	AD7682_IN3:
+ 515 0000 24F7     		.short	-2268
+ 516              		.section	.data.IDOUT,"aw"
+ 517              		.align	2
+ 518              		.set	.LANCHOR5,. + 0
+ 521              	IDOUT:
+ 522 0000 0000003F 		.word	1056964608
+ 523              		.section	.data.IZOUT,"aw"
+ 524              		.align	2
+ 525              		.set	.LANCHOR9,. + 0
+ 528              	IZOUT:
+ 529 0000 0000003F 		.word	1056964608
+ 530              		.section	.data.Resistor,"aw"
+ 531              		.align	2
+ 532              		.set	.LANCHOR10,. + 0
+ 535              	Resistor:
+ 536 0000 0000803E 		.word	1048576000
+ 537              		.section	.data.UDOUT,"aw"
+ 538              		.align	2
+ 539              		.set	.LANCHOR3,. + 0
+ 542              	UDOUT:
+ 543 0000 02000000 		.word	2
+ 544              		.section	.data.UZOUT,"aw"
+ 545              		.align	2
+ 546              		.set	.LANCHOR7,. + 0
+ 549              	UZOUT:
+ 550 0000 02000000 		.word	2
+ 551              		.section	.data.deltaADC,"aw"
+ 552              		.align	2
+ 553              		.set	.LANCHOR2,. + 0
+ 556              	deltaADC:
+ 557 0000 6F128338 		.word	948114031
+ 558              		.text
+ 559              	.Letext0:
+ 560              		.file 2 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\machine\\_default_types.h"
+ 561              		.file 3 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_stdint.h"
+ 562              		.file 4 "Drivers/CMSIS/Include/core_cm3.h"
+ 563              		.file 5 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h"
+ 564              		.file 6 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 12
+
+
+ 565              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 566              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 567              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 568              		.file 10 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_spi.h"
+ 569              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h"
+ 570              		.file 12 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h"
+ 571              		.file 13 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ 572              		.file 14 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\lock.h"
+ 573              		.file 15 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\_types.h"
+ 574              		.file 16 "c:\\vscodeproject\\software\\arm_gcc\\lib\\gcc\\arm-none-eabi\\9.2.1\\include\\stddef.h"
+ 575              		.file 17 "c:\\vscodeproject\\software\\arm_gcc\\arm-none-eabi\\include\\sys\\reent.h"
+ 576              		.file 18 "Inc/spi.h"
+ 577              		.file 19 "Inc/tim.h"
+ 578              		.file 20 "Inc/usart.h"
+ 579              		.file 21 "Drivers/FreeModbus/port/port.h"
+ 580              		.file 22 "Drivers/FreeModbus/include/mbport.h"
+ 581              		.file 23 "Drivers/Middlewares/mode.h"
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 measuring_vd_vz.c
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:16     .text.setConfigADC:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:24     .text.setConfigADC:0000000000000000 setConfigADC
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:108    .text.setConfigADC:0000000000000054 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:17     .text.AverageCalculationADC:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:25     .text.AverageCalculationADC:0000000000000000 AverageCalculationADC
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:93     .text.AverageCalculationADC:000000000000003c $d
+                            *COM*:0000000000000004 AverageADC
+                            *COM*:0000000000000020 MassifADC
                             *COM*:0000000000000002 out
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:115    .text.dataTransferADC:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:122    .text.dataTransferADC:0000000000000000 dataTransferADC
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:162    .text.dataTransferADC:0000000000000024 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:170    .text.measuringVD:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:177    .text.measuringVD:0000000000000000 measuringVD
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:253    .text.measuringVD:0000000000000060 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:101    .text.setConfigADC:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:108    .text.setConfigADC:0000000000000000 setConfigADC
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:198    .text.setConfigADC:000000000000005c $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:206    .text.dataTransferADC:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:213    .text.dataTransferADC:0000000000000000 dataTransferADC
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:253    .text.dataTransferADC:0000000000000024 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:261    .text.measuringVD:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:268    .text.measuringVD:0000000000000000 measuringVD
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:344    .text.measuringVD:0000000000000060 $d
                             *COM*:0000000000000004 voltageADC_vd
                             *COM*:0000000000000004 currentADC_vd
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:265    .text.measuringVZ:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:272    .text.measuringVZ:0000000000000000 measuringVZ
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:353    .text.measuringVZ:0000000000000068 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:356    .text.measuringVZ:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:363    .text.measuringVZ:0000000000000000 measuringVZ
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:444    .text.measuringVZ:0000000000000068 $d
                             *COM*:0000000000000004 voltageADC_vz
                             *COM*:0000000000000004 currentADC_vz
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:366    .text.configurationADC:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:373    .text.configurationADC:0000000000000000 configurationADC
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:459    .text.configurationADC:000000000000005c $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:488    .bss.tmp:0000000000000000 tmp
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:558    .data.UZOUT:0000000000000000 UZOUT
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:551    .data.UDOUT:0000000000000000 UDOUT
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:544    .data.Resistor:0000000000000000 Resistor
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:565    .data.deltaADC:0000000000000000 deltaADC
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:537    .data.IZOUT:0000000000000000 IZOUT
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:530    .data.IDOUT:0000000000000000 IDOUT
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:516    .data.AD7682_IN3:0000000000000000 AD7682_IN3
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:509    .data.AD7682_IN2:0000000000000000 AD7682_IN2
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:502    .data.AD7682_IN1:0000000000000000 AD7682_IN1
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:495    .data.AD7682_IN0:0000000000000000 AD7682_IN0
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:523    .data.CFG:0000000000000000 CFG
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:484    .bss.tmp:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:491    .data.AD7682_IN0:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:498    .data.AD7682_IN1:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:505    .data.AD7682_IN2:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:512    .data.AD7682_IN3:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:519    .data.CFG:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:526    .data.IDOUT:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:533    .data.IZOUT:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:540    .data.Resistor:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:547    .data.UDOUT:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:554    .data.UZOUT:0000000000000000 $d
-C:\Users\Andre\AppData\Local\Temp\cc3sFywp.s:561    .data.deltaADC:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:486    .bss.tmp:0000000000000000 tmp
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:549    .data.UZOUT:0000000000000000 UZOUT
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:542    .data.UDOUT:0000000000000000 UDOUT
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:535    .data.Resistor:0000000000000000 Resistor
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:556    .data.deltaADC:0000000000000000 deltaADC
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:528    .data.IZOUT:0000000000000000 IZOUT
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:521    .data.IDOUT:0000000000000000 IDOUT
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:514    .data.AD7682_IN3:0000000000000000 AD7682_IN3
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:507    .data.AD7682_IN2:0000000000000000 AD7682_IN2
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:500    .data.AD7682_IN1:0000000000000000 AD7682_IN1
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:493    .data.AD7682_IN0:0000000000000000 AD7682_IN0
+                            *COM*:0000000000000004 eventDiagnostic
+                            *COM*:0000000000000004 eventVZ
+                            *COM*:0000000000000004 eventVD
+                            *COM*:0000000000000004 iz30max
+                            *COM*:0000000000000004 iz30min
+                            *COM*:0000000000000004 id30max
+                            *COM*:0000000000000004 id30min
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:482    .bss.tmp:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:489    .data.AD7682_IN0:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:496    .data.AD7682_IN1:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:503    .data.AD7682_IN2:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:510    .data.AD7682_IN3:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:517    .data.IDOUT:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:524    .data.IZOUT:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:531    .data.Resistor:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:538    .data.UDOUT:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:545    .data.UZOUT:0000000000000000 $d
+C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s:552    .data.deltaADC:0000000000000000 $d
 
 UNDEFINED SYMBOLS
+__aeabi_ui2f
 HAL_GPIO_WritePin
+ARM GAS  C:\Users\du4\AppData\Local\Temp\ccSTEZbF.s 			page 14
+
+
 HAL_Delay
 HAL_SPI_TransmitReceive
 hspi2

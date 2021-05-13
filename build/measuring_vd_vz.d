@@ -24,7 +24,7 @@ build/measuring_vd_vz.o: Drivers/Middlewares/measuring_vd_vz.c \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h Inc/spi.h \
- Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h \
+ Inc/main.h Inc/tim.h Inc/usart.h Inc/gpio.h Drivers/Middlewares/mode.h \
  Drivers/FreeModbus/include/mb.h Drivers/FreeModbus/port/port.h \
  Drivers/FreeModbus/include/mbconfig.h \
  Drivers/FreeModbus/port/portcritical.h \
@@ -98,6 +98,8 @@ Inc/tim.h:
 Inc/usart.h:
 
 Inc/gpio.h:
+
+Drivers/Middlewares/mode.h:
 
 Drivers/FreeModbus/include/mb.h:
 

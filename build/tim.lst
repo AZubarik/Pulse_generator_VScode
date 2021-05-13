@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
   30:Src/tim.c     **** TIM_HandleTypeDef htim4;
   31:Src/tim.c     **** 
   32:Src/tim.c     **** /* TIM1 init function */
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 2
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 2
 
 
   33:Src/tim.c     **** void MX_TIM1_Init(void)
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
   87:Src/tim.c     **** 
   88:Src/tim.c     **** }
   89:Src/tim.c     **** /* TIM2 init function */
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 3
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 3
 
 
   90:Src/tim.c     **** void MX_TIM2_Init(void)
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
   70 0026 8361     		str	r3, [r0, #24]
  101:Src/tim.c     ****   if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
   71              		.loc 1 101 3 is_stmt 1 view .LVU17
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 4
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 4
 
 
   72              		.loc 1 101 7 is_stmt 0 view .LVU18
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  110              		.cfi_remember_state
  111              		.cfi_def_cfa_offset 4
  112              		@ sp needed
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 5
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 5
 
 
  113 0050 5DF804FB 		ldr	pc, [sp], #4
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  162 0004 0023     		movs	r3, #0
  163 0006 0293     		str	r3, [sp, #8]
  164 0008 0393     		str	r3, [sp, #12]
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 6
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 6
 
 
  165 000a 0493     		str	r3, [sp, #16]
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  205              		.loc 1 135 7 is_stmt 0 view .LVU60
  206 0032 02A9     		add	r1, sp, #8
  207 0034 0B48     		ldr	r0, .L19
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 7
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 7
 
 
  208 0036 FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  143:Src/tim.c     ****   }
  249              		.loc 1 143 5 view .LVU72
  250 005e FFF7FEFF 		bl	Error_Handler
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 8
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 8
 
 
  251              	.LVL11:
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  299              		.loc 1 154 3 is_stmt 1 view .LVU81
  300              		.loc 1 154 24 is_stmt 0 view .LVU82
  301 0018 1722     		movs	r2, #23
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 9
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 9
 
 
  302 001a 4260     		str	r2, [r0, #4]
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  341              		.loc 1 169 33 is_stmt 0 view .LVU102
  342 0040 0193     		str	r3, [sp, #4]
  170:Src/tim.c     ****   if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 10
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 10
 
 
  343              		.loc 1 170 3 is_stmt 1 view .LVU103
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  390              		.thumb_func
  391              		.fpu softvfp
  393              	HAL_TIM_PWM_MspInit:
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 11
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 11
 
 
  394              	.LVL18:
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  431 0022 02B0     		add	sp, sp, #8
  432              	.LCFI13:
  433              		.cfi_def_cfa_offset 0
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 12
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 12
 
 
  434              		@ sp needed
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  210:Src/tim.c     ****   }
  211:Src/tim.c     ****   else if(tim_baseHandle->Instance==TIM3)
  472              		.loc 1 211 8 is_stmt 1 view .LVU128
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 13
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 13
 
 
  473              		.loc 1 211 10 is_stmt 0 view .LVU129
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  496              	.LBB3:
  202:Src/tim.c     **** 
  497              		.loc 1 202 5 view .LVU134
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 14
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 14
 
 
  202:Src/tim.c     **** 
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  540              	.LBE4:
  217:Src/tim.c     **** 
  541              		.loc 1 217 5 view .LVU147
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 15
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 15
 
 
  220:Src/tim.c     ****     HAL_NVIC_EnableIRQ(TIM3_IRQn);
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  584              	.LVL32:
  585              		.loc 1 241 1 is_stmt 0 view .LVU160
  586 0090 C2E7     		b	.L40
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 16
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 16
 
 
  587              	.L49:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  250:Src/tim.c     ****   /* USER CODE END TIM1_MspPostInit 0 */
  251:Src/tim.c     **** 
  252:Src/tim.c     ****     __HAL_RCC_GPIOB_CLK_ENABLE();
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 17
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 17
 
 
  253:Src/tim.c     ****     /**TIM1 GPIO Configuration
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  664 0032 0323     		movs	r3, #3
  665 0034 0293     		str	r3, [sp, #8]
  258:Src/tim.c     ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 18
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 18
 
 
  666              		.loc 1 258 5 is_stmt 1 view .LVU177
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  707 0060 00000140 		.word	1073807360
  708              		.cfi_endproc
  709              	.LFE71:
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 19
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 19
 
 
  711              		.section	.text.MX_TIM1_Init,"ax",%progbits
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  757 0024 2E4B     		ldr	r3, .L70+4
  758 0026 0360     		str	r3, [r0]
   40:Src/tim.c     ****   htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 20
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 20
 
 
  759              		.loc 1 40 3 is_stmt 1 view .LVU201
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  796 004e 36D1     		bne	.L65
  797              	.L58:
   54:Src/tim.c     ****   sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 21
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 21
 
 
  798              		.loc 1 54 3 is_stmt 1 view .LVU219
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  834              		.loc 1 65 25 is_stmt 0 view .LVU237
  835 0074 0E93     		str	r3, [sp, #56]
   66:Src/tim.c     ****   if (HAL_TIM_PWM_ConfigChannel(&htim1, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 22
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 22
 
 
  836              		.loc 1 66 3 is_stmt 1 view .LVU238
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  873              		.loc 1 79 35 is_stmt 0 view .LVU255
  874 009a 0593     		str	r3, [sp, #20]
   80:Src/tim.c     ****   sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE;
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 23
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 23
 
 
  875              		.loc 1 80 3 is_stmt 1 view .LVU256
@@ -1378,7 +1378,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  918 00c8 CBE7     		b	.L59
  919              	.L67:
   69:Src/tim.c     ****   }
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 24
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 24
 
 
  920              		.loc 1 69 5 view .LVU268
@@ -1438,7 +1438,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  278:Src/tim.c     ****   /* USER CODE END TIM1_MspDeInit 0 */
  279:Src/tim.c     ****     /* Peripheral clock disable */
  280:Src/tim.c     ****     __HAL_RCC_TIM1_CLK_DISABLE();
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 25
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 25
 
 
  281:Src/tim.c     ****   /* USER CODE BEGIN TIM1_MspDeInit 1 */
@@ -1498,7 +1498,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  291:Src/tim.c     ****   {
  292:Src/tim.c     ****   /* USER CODE BEGIN TIM2_MspDeInit 0 */
  293:Src/tim.c     **** 
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 26
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 26
 
 
  294:Src/tim.c     ****   /* USER CODE END TIM2_MspDeInit 0 */
@@ -1558,7 +1558,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  1026              	.L82:
  296:Src/tim.c     **** 
  1027              		.loc 1 296 5 is_stmt 1 view .LVU288
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 27
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 27
 
 
  1028 0018 104A     		ldr	r2, .L85+8
@@ -1618,7 +1618,7 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  1074              		.cfi_endproc
  1075              	.LFE73:
  1077              		.comm	htim4,72,4
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 28
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 28
 
 
  1078              		.comm	htim3,72,4
@@ -1649,42 +1649,42 @@ ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 1
  1103              		.file 22 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h"
  1104              		.file 23 "Inc/main.h"
  1105              		.file 24 "<built-in>"
-ARM GAS  C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s 			page 29
+ARM GAS  C:\Users\du4\AppData\Local\Temp\cctaPKfh.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 tim.c
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:16     .text.MX_TIM2_Init:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:24     .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:135    .text.MX_TIM2_Init:0000000000000068 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:16     .text.MX_TIM2_Init:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:24     .text.MX_TIM2_Init:0000000000000000 MX_TIM2_Init
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:135    .text.MX_TIM2_Init:0000000000000068 $d
                             *COM*:0000000000000048 htim2
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:140    .text.MX_TIM3_Init:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:147    .text.MX_TIM3_Init:0000000000000000 MX_TIM3_Init
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:257    .text.MX_TIM3_Init:0000000000000064 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:140    .text.MX_TIM3_Init:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:147    .text.MX_TIM3_Init:0000000000000000 MX_TIM3_Init
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:257    .text.MX_TIM3_Init:0000000000000064 $d
                             *COM*:0000000000000048 htim3
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:263    .text.MX_TIM4_Init:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:270    .text.MX_TIM4_Init:0000000000000000 MX_TIM4_Init
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:380    .text.MX_TIM4_Init:0000000000000064 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:263    .text.MX_TIM4_Init:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:270    .text.MX_TIM4_Init:0000000000000000 MX_TIM4_Init
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:380    .text.MX_TIM4_Init:0000000000000064 $d
                             *COM*:0000000000000048 htim4
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:386    .text.HAL_TIM_PWM_MspInit:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:393    .text.HAL_TIM_PWM_MspInit:0000000000000000 HAL_TIM_PWM_MspInit
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:439    .text.HAL_TIM_PWM_MspInit:0000000000000028 $d
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:444    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:451    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:590    .text.HAL_TIM_Base_MspInit:0000000000000094 $d
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:597    .text.HAL_TIM_MspPostInit:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:604    .text.HAL_TIM_MspPostInit:0000000000000000 HAL_TIM_MspPostInit
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:705    .text.HAL_TIM_MspPostInit:0000000000000058 $d
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:712    .text.MX_TIM1_Init:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:719    .text.MX_TIM1_Init:0000000000000000 MX_TIM1_Init
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:937    .text.MX_TIM1_Init:00000000000000dc $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:386    .text.HAL_TIM_PWM_MspInit:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:393    .text.HAL_TIM_PWM_MspInit:0000000000000000 HAL_TIM_PWM_MspInit
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:439    .text.HAL_TIM_PWM_MspInit:0000000000000028 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:444    .text.HAL_TIM_Base_MspInit:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:451    .text.HAL_TIM_Base_MspInit:0000000000000000 HAL_TIM_Base_MspInit
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:590    .text.HAL_TIM_Base_MspInit:0000000000000094 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:597    .text.HAL_TIM_MspPostInit:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:604    .text.HAL_TIM_MspPostInit:0000000000000000 HAL_TIM_MspPostInit
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:705    .text.HAL_TIM_MspPostInit:0000000000000058 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:712    .text.MX_TIM1_Init:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:719    .text.MX_TIM1_Init:0000000000000000 MX_TIM1_Init
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:937    .text.MX_TIM1_Init:00000000000000dc $d
                             *COM*:0000000000000048 htim1
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:943    .text.HAL_TIM_PWM_MspDeInit:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:950    .text.HAL_TIM_PWM_MspDeInit:0000000000000000 HAL_TIM_PWM_MspDeInit
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:979    .text.HAL_TIM_PWM_MspDeInit:0000000000000018 $d
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:985    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:992    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
-C:\Users\Andre\AppData\Local\Temp\ccJvRHmG.s:1071   .text.HAL_TIM_Base_MspDeInit:0000000000000054 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:943    .text.HAL_TIM_PWM_MspDeInit:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:950    .text.HAL_TIM_PWM_MspDeInit:0000000000000000 HAL_TIM_PWM_MspDeInit
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:979    .text.HAL_TIM_PWM_MspDeInit:0000000000000018 $d
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:985    .text.HAL_TIM_Base_MspDeInit:0000000000000000 $t
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:992    .text.HAL_TIM_Base_MspDeInit:0000000000000000 HAL_TIM_Base_MspDeInit
+C:\Users\du4\AppData\Local\Temp\cctaPKfh.s:1071   .text.HAL_TIM_Base_MspDeInit:0000000000000054 $d
 
 UNDEFINED SYMBOLS
 HAL_TIM_Base_Init

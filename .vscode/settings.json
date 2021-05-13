@@ -7,6 +7,7 @@
 		"user_mb_app.h": "c",
 		"mb.h": "c",
 		"flash.h": "c",
-		"functionstxrx.h": "c"
+		"functionstxrx.h": "c",
+		"measuring_vd_vz.h": "c"
 	}
 }

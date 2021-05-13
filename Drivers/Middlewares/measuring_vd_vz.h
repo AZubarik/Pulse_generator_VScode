@@ -6,14 +6,18 @@ extern "C" {
 #endif
 
 #include "main.h"
+#include "mode.h"
 
 #include "mb.h"
 #include "mbport.h"
 #include "user_mb_app.h"
 
-void measuringVD(void);
-void measuringVZ(void);
-void configurationADC(void);
+void setConfigADC(uint16_t );
+float AverageCalculationADC(void);
+//void configurationADC(void);
+
+void MeasuringVD(void);
+void MeasuringVZ(void);
 
 #ifdef __cplusplus
 }
