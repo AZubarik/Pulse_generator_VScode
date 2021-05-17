@@ -25,7 +25,8 @@ void StaticMeasurementMode_VD (void);
 void StaticMeasurementMode_VZ (void);
 
 void PulseMeasurementMode_VD (void);
-void PulseMeasurementMode_VZ (void);	
+void PulseMeasurementMode_VZ (void);
+	
 void diagnostic (void);
 
 #ifdef __cplusplus

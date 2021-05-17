@@ -1,10 +1,10 @@
 #include "measuring_vd_vz.h"
-    // Setting the ADC(AD7682) and gain of operational amplifiers(AD8273)
+// Setting the ADC(AD7682) 
 uint16_t AD7682_IN0 = 0x3C49 << 2,          // 0x3C49   // 0x3849
          AD7682_IN1 = 0x3CC9 << 2,          // 0x3CC9   // 0x38C9
          AD7682_IN2 = 0x3D49 << 2,          // 0x3D49   // 0x3949
          AD7682_IN3 = 0x3DC9 << 2;          // 0x3DC9   // 0x39C9   
-                    
+// Operational amplifier gain(AD8273)                   
 float   IDOUT = 0.5,                        // coef usilenia po toky
 	    IZOUT = 0.5,  
 	    deltaADC = 0.0000625,               // delta ADC
@@ -49,7 +49,7 @@ void dataTransferADC(int registr, float out) {
     usSRegInBuf[registr + 1] = *(tmp + 1);
 }
 
-void measuringVD(void) { 
+void MeasuringVD(void) { 
     setConfigADC(AD7682_IN3);
     voltageADC_vd = out * deltaADC  * UDOUT;
     dataTransferADC(0, voltageADC_vd);
@@ -59,7 +59,7 @@ void measuringVD(void) {
     dataTransferADC(2, currentADC_vd);
 }
 
-void measuringVZ(void) {
+void MeasuringVZ(void) {
     setConfigADC(AD7682_IN1);
     voltageADC_vz = out * deltaADC * UZOUT;
     dataTransferADC(4, voltageADC_vz);
