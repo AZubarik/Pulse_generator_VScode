@@ -37,7 +37,7 @@ extern "C" {
 #include "gpio.h"
 
 #define ON              GPIO_PIN_SET
-#define OFF					    GPIO_PIN_RESET GPIO_PIN_RESET GPIO_PIN_RESET
+#define OFF					    GPIO_PIN_RESET
 
 /* SPI2 ---------------------------------------------------------------------*/	
 
