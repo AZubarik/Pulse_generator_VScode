@@ -38,7 +38,7 @@ extern "C" {
 
 #define ON              GPIO_PIN_SET
 #define OFF					    GPIO_PIN_RESET
-#define ON              GPIO_PIN_SET
+
 /* SPI2 ---------------------------------------------------------------------*/	
 
 #define CNV_ON				  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, ON)
